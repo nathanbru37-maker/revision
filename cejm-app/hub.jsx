@@ -6,7 +6,7 @@ function CejmHub({ state, setMode, setAspect }) {
     { id: 'themes',   icon: '🗺️', label: 'Cours & Thèmes',    desc: 'Explore les 3 aspects en détail', color: ASPECT_COLORS.indigo.solid },
     { id: 'flash',    icon: '⚡', label: 'Flashcards',        desc: 'Révise les notions clés',         color: ASPECT_COLORS.amber.solid  },
     { id: 'quiz',     icon: '🧠', label: 'Quiz',              desc: 'QCM sur les 3 aspects',           color: 'oklch(0.55 0.16 300)'    },
-    { id: 'matching', icon: '🔗', label: 'Associer auteurs',  desc: 'Qui a dit quoi ?',                color: ASPECT_COLORS.forest.solid },
+    { id: 'matching', icon: '🔗', label: 'Vocabulaire',       desc: 'Associe chaque terme à sa définition', color: ASPECT_COLORS.forest.solid },
     { id: 'essai',    icon: '✍️', label: 'Sujet du jour',     desc: 'Tire un sujet aléatoire',         color: 'oklch(0.52 0.14 30)'     },
     { id: 'docs',     icon: '📂', label: 'Mes documents',     desc: 'Fiches, PDFs et cartes mentales', color: 'oklch(0.45 0.10 280)'    },
   ];

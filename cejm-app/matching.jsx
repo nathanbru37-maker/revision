@@ -1,6 +1,6 @@
-// Matching auteurs ↔ théories — CEJM
+// Matching termes ↔ définitions — CEJM
 function CejmMatchingView({ state, updateState, back }) {
-  const pairs = window.CEJM_DATA.auteurs;
+  const pairs = window.CEJM_DATA.matching;
 
   function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
 
@@ -46,7 +46,7 @@ function CejmMatchingView({ state, updateState, back }) {
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 20px 80px' }}>
-      <CejmTopNav back={back} title="Associer les auteurs" subtitle="Clique sur un auteur puis sur sa théorie" />
+      <CejmTopNav back={back} title="Vocabulaire — Associe les termes" subtitle="Clique sur un terme à gauche, puis sur sa définition à droite" />
 
       <CejmPaperCard style={{ padding: '12px 20px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 14 }}>
         <CejmProgressBar value={progress} max={pairs.length} color={ASPECT_COLORS.forest.solid} />
@@ -59,7 +59,7 @@ function CejmMatchingView({ state, updateState, back }) {
         {/* Colonne gauche — auteurs */}
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: 'oklch(0.45 0.02 280)', textTransform: 'uppercase', marginBottom: 10 }}>
-            Auteurs
+            Termes
           </div>
           <div style={{ display: 'grid', gap: 8 }}>
             {pairs.map((p, i) => {
@@ -89,7 +89,7 @@ function CejmMatchingView({ state, updateState, back }) {
         {/* Colonne droite — théories */}
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: 'oklch(0.45 0.02 280)', textTransform: 'uppercase', marginBottom: 10 }}>
-            Théories &amp; contributions
+            Définitions
           </div>
           <div style={{ display: 'grid', gap: 8 }}>
             {shuffledR.map((p) => {
@@ -121,7 +121,7 @@ function CejmMatchingView({ state, updateState, back }) {
         <CejmPaperCard style={{ marginTop: 24, padding: 28, textAlign: 'center', background: 'linear-gradient(135deg, oklch(0.94 0.07 145), oklch(0.92 0.10 130))' }}>
           <div style={{ fontSize: 40 }}>🎉</div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, color: 'oklch(0.25 0.08 145)', marginTop: 8 }}>
-            Tous les auteurs associés !
+            Tous les termes associés !
           </div>
           <div style={{ marginTop: 16, display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <CejmBtn color={ASPECT_COLORS.forest.solid} onClick={reset}>Recommencer ↺</CejmBtn>
