@@ -3,76 +3,246 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Révision · L'Homme et l'Animal — BTS</title>
+<title>BTS · Révision</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
     --font-ui: 'Geist', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     --paper: oklch(0.97 0.012 85);
     --ink: oklch(0.22 0.02 280);
+    --ink-mid: oklch(0.45 0.02 280);
   }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
   body {
     font-family: var(--font-ui);
     background:
-      radial-gradient(circle at 0% 0%, oklch(0.96 0.04 50) 0%, transparent 50%),
-      radial-gradient(circle at 100% 0%, oklch(0.96 0.04 250) 0%, transparent 45%),
-      radial-gradient(circle at 50% 100%, oklch(0.96 0.04 145) 0%, transparent 50%),
+      radial-gradient(circle at 15% 10%, oklch(0.95 0.05 50) 0%, transparent 45%),
+      radial-gradient(circle at 85% 10%, oklch(0.95 0.05 250) 0%, transparent 45%),
+      radial-gradient(circle at 50% 90%, oklch(0.95 0.05 145) 0%, transparent 50%),
       var(--paper);
     background-attachment: fixed;
     color: var(--ink);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
-  button { font-family: var(--font-ui); }
-  .hov-lift { transition: transform .15s ease, box-shadow .15s ease; }
-  .hov-lift:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(20,15,40,0.22); }
-  input.blank-input {
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header-label {
     display: inline-block;
-    border: none;
-    background: white;
-    border-bottom: 2px solid oklch(0.55 0.16 320);
-    padding: 4px 8px;
-    font: inherit;
+    font-size: 11px;
     font-weight: 600;
-    color: oklch(0.22 0.02 280);
-    border-radius: 6px 6px 0 0;
-    min-width: 90px;
-    margin: 0 2px;
-    outline: none;
-    transition: border-color .15s ease, background .15s ease;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    background: oklch(0.92 0.02 85);
+    border: 1px solid oklch(0.88 0.03 85);
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
   }
-  input.blank-input:focus { border-color: oklch(0.55 0.16 250); background: oklch(0.97 0.02 250); }
-  input.blank-input:disabled { cursor: default; }
-  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-  ::selection { background: oklch(0.85 0.16 75); color: oklch(0.22 0.02 280); }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .header p {
+    font-size: 1rem;
+    color: var(--ink-mid);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .card {
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px 28px;
+    border: 1.5px solid oklch(0.90 0.02 85);
+    box-shadow: 0 2px 8px -2px rgba(30,20,50,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .18s ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px -12px rgba(30,20,50,0.18);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card.cugex { border-color: oklch(0.82 0.08 55); }
+  .card.cugex::before { background: radial-gradient(circle at 80% 20%, oklch(0.97 0.06 55) 0%, transparent 60%); }
+  .card.cugex:hover { border-color: oklch(0.68 0.14 45); }
+
+  .card.cejm { border-color: oklch(0.82 0.08 250); }
+  .card.cejm::before { background: radial-gradient(circle at 80% 20%, oklch(0.97 0.06 250) 0%, transparent 60%); }
+  .card.cejm:hover { border-color: oklch(0.55 0.18 250); }
+
+  .card-pill {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+  .cugex .card-pill {
+    background: oklch(0.93 0.06 55);
+    color: oklch(0.42 0.14 45);
+  }
+  .cejm .card-pill {
+    background: oklch(0.92 0.06 250);
+    color: oklch(0.40 0.18 250);
+  }
+
+  .card-icon { font-size: 2.6rem; line-height: 1; }
+
+  .card-body { flex: 1; }
+  .card-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    margin-bottom: 6px;
+  }
+  .card-body p {
+    font-size: .875rem;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  .card-modes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .mode-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: oklch(0.94 0.015 85);
+    color: var(--ink-mid);
+    border: 1px solid oklch(0.88 0.02 85);
+  }
+
+  .card-cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .875rem;
+    font-weight: 600;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .cugex .card-cta { color: oklch(0.42 0.14 45); }
+  .cejm  .card-cta { color: oklch(0.40 0.18 250); }
+
+  .arrow { transition: transform .18s ease; }
+  .card:hover .arrow { transform: translateX(4px); }
+
+  .footer {
+    margin-top: 40px;
+    font-size: .8rem;
+    color: var(--ink-mid);
+    opacity: .6;
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    .cards { grid-template-columns: 1fr; max-width: 400px; }
+    .header { margin-bottom: 32px; }
+  }
 </style>
 </head>
 <body>
-<div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<div class="header">
+  <div class="header-label">BTS · 2025 – 2026</div>
+  <h1>Espace de Révision</h1>
+  <p>Choisissez votre matière pour commencer</p>
+</div>
 
-<script src="app/data.js"></script>
-<script src="app/resources-data.js"></script>
-<script src="app/illustrations.js"></script>
-<script src="app/store.js"></script>
-<script type="text/babel" src="app/ui.jsx"></script>
-<script type="text/babel" src="app/hub.jsx"></script>
-<script type="text/babel" src="app/axes.jsx"></script>
-<script type="text/babel" src="app/chrono.jsx"></script>
-<script type="text/babel" src="app/matching.jsx"></script>
-<script type="text/babel" src="app/fill.jsx"></script>
-<script type="text/babel" src="app/flash.jsx"></script>
-<script type="text/babel" src="app/resources.jsx"></script>
-<script type="text/babel" src="app/main.jsx"></script>
+<div class="cards">
+
+  <a href="Révision.html" class="card cugex">
+    <span class="card-pill">CG&amp;E</span>
+    <div class="card-icon">📚</div>
+    <div class="card-body">
+      <h2>Culture Générale &amp; Expression</h2>
+      <p>L'Homme et l'Animal — 7 modes de révision interactifs avec XP et badges</p>
+      <div class="card-modes">
+        <span class="mode-tag">Carte mentale</span>
+        <span class="mode-tag">Chronologie</span>
+        <span class="mode-tag">Flashcards</span>
+        <span class="mode-tag">Textes à trous</span>
+        <span class="mode-tag">Matching</span>
+        <span class="mode-tag">Dissertations</span>
+      </div>
+    </div>
+    <div class="card-cta">
+      Commencer <span class="arrow">→</span>
+    </div>
+  </a>
+
+  <a href="cejm.html" class="card cejm">
+    <span class="card-pill">CEJM</span>
+    <div class="card-icon">📊</div>
+    <div class="card-body">
+      <h2>Culture Éco, Juridique &amp; Managériale</h2>
+      <p>Fiches de cours manuscrites, cartes mentales par thème et documents de révision</p>
+      <div class="card-modes">
+        <span class="mode-tag">Cartes mentales</span>
+        <span class="mode-tag">Fiches de cours</span>
+        <span class="mode-tag">Méthode</span>
+        <span class="mode-tag">Documents PDF</span>
+      </div>
+    </div>
+    <div class="card-cta">
+      Commencer <span class="arrow">→</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="footer">BTS · 2025–2026</div>
+
 </body>
 </html>
