@@ -9,7 +9,10 @@
       "Bash(Sort-Object FullName)",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\natha\\\\Downloads\\\\CEJM\" | ForEach-Object { if \\($_.PSIsContainer -eq $false\\) { Write-Host \"$\\($_.Name\\) \\($\\($_.Length\\) bytes\\)\" } })",
       "Bash(Get-ChildItem \"C:\\\\Users\\\\natha\\\\Downloads\\\\CEJM\\\\\" -File *)",
-      "PowerShell(python -c \"import PyPDF2; print\\('PyPDF2 available'\\)\" 2>&1)"
+      "PowerShell(python -c \"import PyPDF2; print\\('PyPDF2 available'\\)\" 2>&1)",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\natha\\\\Downloads\\\\CEJM\" -Recurse)",
+      "Bash(Select-Object FullName, Length, LastWriteTime)",
+      "Bash(python3 *)"
     ]
   }
 }
