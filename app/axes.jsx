@@ -59,6 +59,69 @@ function AxesView({ state, updateState, axe, setAxe, back }) {
   );
 }
 
+// Detect type of a point from its text content
+function getPointMeta(text) {
+  // Stats / chiffres
+  if (/\d+\s*(milliards?|millions?|%|kg|m²)|\b8\s?600\s*L|¾|~\d+/.test(text))
+    return { type: 'Chiffre', icon: '📊', h: 145, c: 0.14 };
+  // Droit / juridique
+  if (/(code civil|code rural|article\s+\d|interdit en|loi du)/i.test(text))
+    return { type: 'Droit', icon: '⚖️', h: 250, c: 0.13 };
+  // Science / éthologie
+  if (/(lorenz|goodall|fossey|de waal|baratay|grandgorge|éthologie|cambridge)/i.test(text))
+    return { type: 'Science', icon: '🔬', h: 200, c: 0.13 };
+  // Pop / anecdote contemporaine
+  if (/(pikachu|sonic|godzilla|pokémon|disney|clona|mariage|pyjama|crémation|singapour|etsy|viagen|NAC|télérama|célébrités)/i.test(text))
+    return { type: 'Anecdote', icon: '✨', h: 55, c: 0.14 };
+  // Œuvres (titre + année)
+  if (/\(\d{3,4}[^)]*\)|\(-\d|Fables|Maus|Odyssée|Métamorphoses|Belle et|Steinbeck|Spiegelman|La Fontaine|Géricault|Bonheur|Kahler|Rousseau|Pompon|Bourgeois|Chauvet|Brueghel|Longhi|Dürer|Gozzoli|Millions d'Amis/i.test(text))
+    return { type: 'Œuvre', icon: '🎨', h: 30, c: 0.14 };
+  // Concept (défaut)
+  return { type: 'Concept', icon: '💡', h: 290, c: 0.10 };
+}
+
+function PointCard({ text }) {
+  const meta = getPointMeta(text);
+  const accent  = `oklch(0.46 ${meta.c} ${meta.h})`;
+  const accentBg  = `oklch(0.96 0.03 ${meta.h})`;
+  const accentBdr = `oklch(0.88 0.06 ${meta.h})`;
+
+  return (
+    <div style={{
+      padding: '12px 14px',
+      background: 'white',
+      border: `1px solid ${accentBdr}`,
+      borderLeft: `3px solid ${accent}`,
+      borderRadius: 12,
+      display: 'flex',
+      gap: 11,
+      alignItems: 'flex-start',
+    }}>
+      {/* Type icon */}
+      <div style={{
+        width: 34, height: 34, borderRadius: 8, flexShrink: 0, marginTop: 2,
+        background: accentBg,
+        display: 'grid', placeItems: 'center', fontSize: 17,
+      }}>{meta.icon}</div>
+
+      <div style={{ flex: 1, minWidth: 0 }}>
+        {/* Type badge */}
+        <span style={{
+          display: 'inline-block', marginBottom: 5,
+          padding: '2px 7px', borderRadius: 999,
+          fontSize: 9.5, fontWeight: 700, fontFamily: 'var(--font-mono)',
+          letterSpacing: 1, textTransform: 'uppercase',
+          background: accentBg, color: accent,
+          border: `1px solid ${accentBdr}`,
+        }}>{meta.type}</span>
+        {/* Point text */}
+        <div style={{ fontSize: 13.5, lineHeight: 1.6, color: 'oklch(0.28 0.02 280)' }}
+          dangerouslySetInnerHTML={{ __html: text }} />
+      </div>
+    </div>
+  );
+}
+
 function ChapterNode({ chapter, index, color }) {
   const [open, setOpen] = React.useState(index === 0);
   return (
@@ -78,14 +141,16 @@ function ChapterNode({ chapter, index, color }) {
         </div>
         <div style={{ fontSize: 18, color: color.solid, transform: open ? 'rotate(90deg)' : 'rotate(0)', transition: 'transform .2s ease' }}>›</div>
       </button>
+
       {open && (
-        <div style={{ padding: '0 20px 20px 70px', display: 'grid', gap: 10 }}>
+        <div style={{
+          padding: '0 16px 16px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: 8,
+        }}>
           {chapter.points.map((pt, j) => (
-            <div key={j} style={{
-              padding: '10px 14px', borderLeft: `3px solid ${color.solid}`,
-              background: color.soft, borderRadius: '4px 10px 10px 4px',
-              fontSize: 14.5, lineHeight: 1.5, color: 'oklch(0.30 0.02 280)',
-            }} dangerouslySetInnerHTML={{ __html: pt }} />
+            <PointCard key={j} text={pt} />
           ))}
         </div>
       )}
