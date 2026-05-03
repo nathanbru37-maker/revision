@@ -11,7 +11,7 @@ window.CEJM_THEMES = [
         titre:'Agents économiques',
         points:[
           { titre:'Les 5 agents économiques', contenu:"Toute économie repose sur 5 catégories d'agents qui échangent entre eux : les <b>entreprises</b> (production marchande), les <b>ménages</b> (consommation et offre de travail), les <b>banques</b> (intermédiation financière : crédits, dépôts, moyens de paiement), les <b>administrations publiques</b> (production non marchande financée par l'impôt) et le <b>reste du monde</b> (échanges extérieurs).", memo:'EMBRA : Entreprises · Ménages · Banques · Reste du monde · Administrations' },
-          { titre:'Les flux économiques', contenu:"Les échanges entre agents génèrent deux types de flux : <b>flux réels</b> (biens, services, travail fourni) et <b>flux monétaires</b> (salaires, paiements, impôts, dividendes). Ces flux forment le circuit économique. La monnaie peut être fiduciaire (billets/pièces) ou scripturale (virement, carte).", memo:'Réel = ce qu'on échange / Monétaire = ce qu'on paye' },
+          { titre:'Les flux économiques', contenu:"Les échanges entre agents génèrent deux types de flux : <b>flux réels</b> (biens, services, travail fourni) et <b>flux monétaires</b> (salaires, paiements, impôts, dividendes). Ces flux forment le circuit économique. La monnaie peut être fiduciaire (billets/pièces) ou scripturale (virement, carte).", memo:'Réel = ce qu\'on échange / Monétaire = ce qu\'on paye' },
         ]
       },
       {
