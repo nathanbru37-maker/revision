@@ -67,10 +67,10 @@
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
-    max-width: 760px;
+    max-width: 1080px;
   }
 
   .card {
@@ -78,12 +78,12 @@
     color: inherit;
     background: white;
     border-radius: 20px;
-    padding: 32px 28px 28px;
+    padding: 28px 24px 24px;
     border: 1.5px solid oklch(0.90 0.02 85);
     box-shadow: 0 2px 8px -2px rgba(30,20,50,0.08);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     position: relative;
     overflow: hidden;
@@ -102,13 +102,20 @@
   }
   .card:hover::before { opacity: 1; }
 
+  /* CG&E */
   .card.cugex { border-color: oklch(0.82 0.08 55); }
   .card.cugex::before { background: radial-gradient(circle at 80% 20%, oklch(0.97 0.06 55) 0%, transparent 60%); }
   .card.cugex:hover { border-color: oklch(0.68 0.14 45); }
 
+  /* CEJM */
   .card.cejm { border-color: oklch(0.82 0.08 250); }
   .card.cejm::before { background: radial-gradient(circle at 80% 20%, oklch(0.97 0.06 250) 0%, transparent 60%); }
   .card.cejm:hover { border-color: oklch(0.55 0.18 250); }
+
+  /* E5A */
+  .card.e5a { border-color: oklch(0.80 0.08 175); }
+  .card.e5a::before { background: radial-gradient(circle at 80% 20%, oklch(0.97 0.06 175) 0%, transparent 60%); }
+  .card.e5a:hover { border-color: oklch(0.55 0.16 175); }
 
   .card-pill {
     display: inline-flex;
@@ -128,32 +135,59 @@
     background: oklch(0.92 0.06 250);
     color: oklch(0.40 0.18 250);
   }
+  .e5a .card-pill {
+    background: oklch(0.92 0.06 175);
+    color: oklch(0.38 0.14 175);
+  }
 
-  .card-icon { font-size: 2.6rem; line-height: 1; }
+  .card-icon { font-size: 2.4rem; line-height: 1; }
 
   .card-body { flex: 1; }
   .card-body h2 {
     font-family: var(--font-display);
-    font-size: 1.45rem;
+    font-size: 1.3rem;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -.01em;
     margin-bottom: 6px;
   }
   .card-body p {
-    font-size: .875rem;
+    font-size: .85rem;
     color: var(--ink-mid);
     line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .stat-value {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-size: .7rem;
+    color: var(--ink-mid);
+    text-transform: uppercase;
+    letter-spacing: .06em;
   }
 
   .card-modes {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    margin-top: 10px;
   }
   .mode-tag {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     padding: 3px 8px;
     border-radius: 6px;
@@ -174,6 +208,7 @@
   }
   .cugex .card-cta { color: oklch(0.42 0.14 45); }
   .cejm  .card-cta { color: oklch(0.40 0.18 250); }
+  .e5a   .card-cta { color: oklch(0.38 0.14 175); }
 
   .arrow { transition: transform .18s ease; }
   .card:hover .arrow { transform: translateX(4px); }
@@ -186,7 +221,10 @@
     text-align: center;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 860px) {
+    .cards { grid-template-columns: repeat(2, 1fr); max-width: 620px; }
+  }
+  @media (max-width: 540px) {
     .cards { grid-template-columns: 1fr; max-width: 400px; }
     .header { margin-bottom: 32px; }
   }
@@ -207,7 +245,21 @@
     <div class="card-icon">📚</div>
     <div class="card-body">
       <h2>Culture Générale &amp; Expression</h2>
-      <p>L'Homme et l'Animal — 7 modes de révision interactifs avec XP et badges</p>
+      <p>L'Homme et l'Animal — 3 axes thématiques, 50+ œuvres de référence, gamification XP &amp; badges</p>
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="stat-value">7</span>
+          <span class="stat-label">modes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">50+</span>
+          <span class="stat-label">œuvres</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">XP</span>
+          <span class="stat-label">badges</span>
+        </div>
+      </div>
       <div class="card-modes">
         <span class="mode-tag">Carte mentale</span>
         <span class="mode-tag">Chronologie</span>
@@ -222,17 +274,65 @@
     </div>
   </a>
 
-  <a href="cejm.html" class="card cejm">
+  <a href="CEJM.html" class="card cejm">
     <span class="card-pill">CEJM</span>
     <div class="card-icon">📊</div>
     <div class="card-body">
       <h2>Culture Éco, Juridique &amp; Managériale</h2>
-      <p>Fiches de cours manuscrites, cartes mentales par thème et documents de révision</p>
+      <p>6 thèmes interactifs — cours complets, exercices, matching et sujets de synthèse</p>
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="stat-value">6</span>
+          <span class="stat-label">thèmes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">40</span>
+          <span class="stat-label">flashcards</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">28</span>
+          <span class="stat-label">exercices</span>
+        </div>
+      </div>
       <div class="card-modes">
-        <span class="mode-tag">Cartes mentales</span>
-        <span class="mode-tag">Fiches de cours</span>
-        <span class="mode-tag">Méthode</span>
-        <span class="mode-tag">Documents PDF</span>
+        <span class="mode-tag">Flashcards</span>
+        <span class="mode-tag">Exercices à trous</span>
+        <span class="mode-tag">Matching</span>
+        <span class="mode-tag">Cours détaillés</span>
+        <span class="mode-tag">Sujets synthèse</span>
+      </div>
+    </div>
+    <div class="card-cta">
+      Commencer <span class="arrow">→</span>
+    </div>
+  </a>
+
+  <a href="E5A.html" class="card e5a">
+    <span class="card-pill">E5A</span>
+    <div class="card-icon">📞</div>
+    <div class="card-body">
+      <h2>Relation Client à Distance &amp; Digitalisation</h2>
+      <p>BTS NDRC — 3 compétences + méthodologie, KPIs, e-commerce et communication digitale</p>
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="stat-value">4</span>
+          <span class="stat-label">compétences</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">27</span>
+          <span class="stat-label">flashcards</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">18</span>
+          <span class="stat-label">formules</span>
+        </div>
+      </div>
+      <div class="card-modes">
+        <span class="mode-tag">Flashcards</span>
+        <span class="mode-tag">Exercices à trous</span>
+        <span class="mode-tag">Matching</span>
+        <span class="mode-tag">Calculs KPIs</span>
+        <span class="mode-tag">Argumentation</span>
       </div>
     </div>
     <div class="card-cta">

@@ -12,7 +12,10 @@
       "PowerShell(python -c \"import PyPDF2; print\\('PyPDF2 available'\\)\" 2>&1)",
       "Bash(Get-ChildItem \"C:\\\\Users\\\\natha\\\\Downloads\\\\CEJM\" -Recurse)",
       "Bash(Select-Object FullName, Length, LastWriteTime)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(Get-ChildItem C:\\\\Users\\\\natha\\\\Documents\\\\WEB\\\\revision\\\\app *)",
+      "Bash(Test-Path *)",
+      "WebFetch(domain:cours-ndrc.fr)"
     ]
   }
 }

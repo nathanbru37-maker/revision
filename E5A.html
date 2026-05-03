@@ -3,34 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEJM — Révision BTS</title>
+<title>E5A — Révision BTS NDRC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{--paper:#FAFAF8;--ink:#1C1917;--muted:#78716C;--border:#E7E5E4;--r:10px;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Geist',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;}
   h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;}
   button{cursor:pointer;font-family:'Geist',sans-serif;}
-  .page{max-width:860px;margin:0 auto;padding:24px 16px 80px;}
+  .page{max-width:880px;margin:0 auto;padding:24px 16px 80px;}
   nav{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;}
   .nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.05em;}
-  .xp-badge{background:#F5F3FF;color:#7C3AED;border-radius:20px;padding:4px 12px;font-size:.85em;font-weight:600;}
+  .xp-badge{background:#F0FDFA;color:#0D9488;border-radius:20px;padding:4px 12px;font-size:.85em;font-weight:600;}
   .btn-back{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:.88em;color:var(--ink);}
   .btn-back:hover{background:var(--border);}
   .hub-header{text-align:center;padding:40px 0 28px;}
   .hub-header h1{font-size:2.2em;font-weight:800;margin-bottom:8px;}
   .hub-header p{color:var(--muted);font-size:.95em;}
-  .themes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:24px;}
-  .theme-card{border-radius:var(--r);border:2px solid transparent;padding:20px;cursor:pointer;transition:transform .15s,box-shadow .15s;}
-  .theme-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);}
+  .comps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:24px;}
+  .comp-card{border-radius:var(--r);border:2px solid transparent;padding:20px;cursor:pointer;transition:transform .15s,box-shadow .15s;}
+  .comp-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);}
   .chip{border-radius:20px;padding:2px 8px;font-size:.75em;font-weight:500;display:inline-block;}
   .mode-bar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;}
   .mode-btn{border:none;border-radius:8px;padding:10px 18px;font-size:.9em;font-weight:600;transition:opacity .15s;}
   .mode-btn:hover{opacity:.85;}
-  .theme-hero{border-radius:var(--r);padding:28px;margin-bottom:24px;}
-  .chapitre-block{margin-bottom:24px;}
-  .chapitre-block h4{font-size:1em;font-weight:700;padding:8px 14px;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .comp-hero{border-radius:var(--r);padding:28px;margin-bottom:24px;}
+  .bloc-block{margin-bottom:24px;}
+  .bloc-block h4{font-size:1em;font-weight:700;padding:8px 14px;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
   .point-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:10px;}
   .point-card h5{font-size:.95em;font-weight:700;margin-bottom:6px;}
   .point-card p{font-size:.88em;line-height:1.65;color:#3C3836;}
@@ -50,15 +50,15 @@
   .fill-question{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px;}
   .fill-sentence{font-size:1em;line-height:2.4;margin-bottom:8px;}
   .fill-input{border:2px solid var(--border);border-radius:6px;padding:6px 12px;font-size:.95em;font-family:'Geist',sans-serif;min-width:180px;transition:border-color .2s;}
-  .fill-input:focus{outline:none;border-color:#7C3AED;}
+  .fill-input:focus{outline:none;border-color:#0D9488;}
   .fill-input.correct{border-color:#16A34A;background:#F0FDF4;}
   .fill-input.wrong{border-color:#E11D48;background:#FFF1F2;}
   .match-game{display:flex;gap:16px;margin-bottom:20px;}
   .match-col{flex:1;display:flex;flex-direction:column;gap:8px;}
   .match-col h5{font-size:.82em;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
   .match-item{background:#fff;border:2px solid var(--border);border-radius:8px;padding:12px 14px;font-size:.85em;cursor:pointer;transition:all .15s;line-height:1.4;}
-  .match-item:hover{border-color:#7C3AED;background:#F5F3FF;}
-  .match-item.selected{border-color:#7C3AED;background:#EDE9FE;}
+  .match-item:hover{border-color:#0D9488;background:#F0FDFA;}
+  .match-item.selected{border-color:#0D9488;background:#CCFBF1;}
   .match-item.matched{border-color:#16A34A;background:#F0FDF4;opacity:.6;cursor:default;}
   .match-item.wrong-anim{border-color:#E11D48;background:#FFF1F2;animation:shake .35s;}
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -67,27 +67,42 @@
   .essai-pistes{list-style:none;}
   .essai-pistes li{font-size:.88em;padding:5px 0;border-bottom:1px solid var(--border);color:#57534E;}
   .essai-pistes li:last-child{border:none;}
-  .essai-pistes li::before{content:'→  ';color:#CA8A04;font-weight:700;}
+  .essai-pistes li::before{content:'→  ';color:#0D9488;font-weight:700;}
   .score-box{text-align:center;padding:40px 20px;}
   .big-num{font-size:3em;font-weight:800;font-family:'Bricolage Grotesque',sans-serif;}
-  .btn-primary{border:none;border-radius:8px;padding:12px 28px;font-weight:700;font-size:.95em;background:#7C3AED;color:#fff;cursor:pointer;}
+  .btn-primary{border:none;border-radius:8px;padding:12px 28px;font-weight:700;font-size:.95em;background:#0D9488;color:#fff;cursor:pointer;}
   .btn-primary:hover{opacity:.9;}
   .btn-ghost{border:2px solid var(--border);border-radius:8px;padding:12px 28px;font-weight:600;font-size:.9em;background:none;cursor:pointer;}
   .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
   .filter-btn{border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.82em;font-weight:500;background:#fff;cursor:pointer;}
   .filter-btn.on{background:#1C1917;color:#fff;border-color:#1C1917;}
-  .modes-global{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;max-width:440px;margin-left:auto;margin-right:auto;}
-  .mode-tile{border-radius:10px;padding:18px 12px;text-align:center;cursor:pointer;border:2px solid #DDD6FE;background:#F5F3FF;transition:transform .15s;}
+  .modes-global{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto;}
+  .mode-tile{border-radius:10px;padding:16px 10px;text-align:center;cursor:pointer;border:2px solid #CCFBF1;background:#F0FDFA;transition:transform .15s;}
   .mode-tile:hover{transform:translateY(-2px);}
   .mode-tile .icon{font-size:1.8em;margin-bottom:6px;}
-  .mode-tile h4{font-size:.88em;font-weight:700;}
-  .mode-tile p{font-size:.72em;opacity:.65;margin-top:2px;}
-  @media(max-width:600px){.themes-grid{grid-template-columns:1fr;}.match-game{flex-direction:column;}.modes-global{grid-template-columns:1fr 1fr;}}
+  .mode-tile h4{font-size:.84em;font-weight:700;}
+  .mode-tile p{font-size:.7em;opacity:.65;margin-top:2px;}
+  /* Calculs mode */
+  .formule-section{margin-bottom:28px;}
+  .formule-header{border-radius:8px;padding:12px 16px;font-weight:700;font-size:.95em;margin-bottom:12px;}
+  .formule-table{width:100%;border-collapse:collapse;}
+  .formule-table th{font-size:.78em;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);}
+  .formule-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.88em;vertical-align:top;}
+  .formule-table tr:last-child td{border-bottom:none;}
+  .formule-name{font-weight:600;color:var(--ink);}
+  .formule-formula{font-family:'JetBrains Mono',monospace;font-size:.85em;color:#1D4ED8;background:#EFF6FF;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+  .formule-ex{font-size:.8em;color:var(--muted);font-style:italic;}
+  @media(max-width:600px){
+    .comps-grid{grid-template-columns:1fr;}
+    .match-game{flex-direction:column;}
+    .modes-global{grid-template-columns:1fr 1fr;}
+    .formule-table td:last-child{display:none;}
+  }
 </style>
 </head>
 <body>
 <nav>
-  <span class="nav-logo">📚 CEJM — Révision BTS</span>
+  <span class="nav-logo">📋 E5A — BTS NDRC</span>
   <div style="display:flex;gap:8px;align-items:center;">
     <span class="xp-badge" id="xp-display">0 XP</span>
     <button class="btn-back" id="btn-home" style="display:none">← Accueil</button>
@@ -97,15 +112,15 @@
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="app/cejm-data.js"></script>
+<script src="app/e5a-data.js"></script>
 <script type="text/babel">
 const {useState,useEffect,useRef,useCallback}=React;
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
-const getColor=id=>CEJM_THEMES.find(t=>t.id===id)?.color||{solid:'#7C3AED',bg:'#F5F3FF',ink:'#4C1D95',soft:'#EDE9FE',text:'#fff'};
-const TLabel=id=>{const t=CEJM_THEMES.find(x=>x.id===id);return t?`T${t.num}`:id;};
+const getComp=id=>E5A_COMP.find(c=>c.id===id);
+const getCol=id=>getComp(id)?.color||{solid:'#0D9488',bg:'#F0FDFA',ink:'#134E4A',soft:'#CCFBF1',text:'#fff'};
 
 function useStore(){
-  const KEY='cejm_v1';
+  const KEY='e5a_v1';
   const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{};}catch{return{};}};
   const [s,setS]=useState(load);
   const addXP=useCallback(n=>{setS(prev=>{const nx={...prev,xp:(prev.xp||0)+n};localStorage.setItem(KEY,JSON.stringify(nx));return nx;});},[]);
@@ -118,7 +133,7 @@ function Flash({cards,col,addXP,onBack}){
   const [flipped,setFlipped]=useState(false);
   const [done,setDone]=useState([]);
   const c=cards[i];
-  if(!c)return null;
+  if(!c)return <div className="score-box"><p style={{color:'var(--muted)'}}>Aucune flashcard disponible.</p><button className="btn-ghost" onClick={onBack}>Retour</button></div>;
   const pct=Math.round(done.length/cards.length*100);
   const next=knew=>{
     if(knew){addXP(2);setDone(d=>[...d,c.id]);}
@@ -180,11 +195,11 @@ function Fill({qs,addXP,onBack}){
   return(
     <div>
       {qs.map(q=>{
-        const col=getColor(q.theme);
+        const col=getCol(q.comp);
         const c=checked&&ok(q);const w=checked&&!ok(q);
         return(
           <div key={q.id} className="fill-question">
-            <span className="chip" style={{background:col.soft,color:col.ink,marginBottom:8}}>{TLabel(q.theme)} — {q.thematique}</span>
+            <span className="chip" style={{background:col.soft,color:col.ink,marginBottom:8}}>{q.comp} — {q.thematique}</span>
             <div className="fill-sentence">
               {q.avant}&nbsp;
               <input className={'fill-input'+(c?' correct':w?' wrong':'')}
@@ -283,23 +298,60 @@ function Match({game,col,addXP,onBack}){
   );
 }
 
-// STUDY VIEW
-function Study({theme}){
-  const col=theme.color;
+// CALCULS
+function Calculs({onBack}){
   return(
     <div>
-      <div className="theme-hero" style={{background:col.bg,color:col.ink}}>
-        <div style={{fontSize:'2.2em',marginBottom:8}}>{theme.icon}</div>
-        <h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,fontSize:'1.4em'}}>Thème {theme.num} — {theme.titre}</h2>
-        <p style={{opacity:.75,marginTop:4,fontSize:'.9em'}}>{theme.annee}</p>
+      <p style={{color:'var(--muted)',fontSize:'.9em',marginBottom:20}}>
+        Toutes les formules à maîtriser pour les calculs de KPIs en Dossier 2.
+      </p>
+      {E5A_FORMULES.map((sec,si)=>{
+        const c=sec.couleur;
+        return(
+          <div key={si} className="formule-section">
+            <div className="formule-header" style={{background:c.bg,color:c.ink}}>{sec.categorie}</div>
+            <table className="formule-table">
+              <thead>
+                <tr>
+                  <th>Indicateur</th>
+                  <th>Formule</th>
+                  <th>Exemple</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sec.formules.map((f,fi)=>(
+                  <tr key={fi} style={{background:fi%2===0?'#fff':c.bg+'44'}}>
+                    <td><span className="formule-name">{f.nom}</span></td>
+                    <td><span className="formule-formula">{f.formule}</span></td>
+                    <td><span className="formule-ex">{f.ex}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// STUDY VIEW
+function Study({comp}){
+  const col=comp.color;
+  return(
+    <div>
+      <div className="comp-hero" style={{background:col.bg,color:col.ink}}>
+        <div style={{fontSize:'2.2em',marginBottom:8}}>{comp.icon}</div>
+        <h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,fontSize:'1.4em'}}>C{comp.num} — {comp.titre}</h2>
+        <p style={{opacity:.75,marginTop:4,fontSize:'.9em'}}>{comp.blocs.length} bloc{comp.blocs.length>1?'s':''} · {comp.blocs.reduce((s,b)=>s+(b.points||[]).length,0)} points clés</p>
       </div>
-      {theme.chapitres.map((ch,ci)=>(
-        <div key={ci} className="chapitre-block">
+      {comp.blocs.map((bl,bi)=>(
+        <div key={bi} className="bloc-block">
           <h4 style={{background:col.soft,color:col.ink}}>
-            <span style={{background:col.solid,color:'#fff',borderRadius:'50%',width:22,height:22,display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:'.78em',flexShrink:0}}>{ci+1}</span>
-            {ch.titre}
+            <span style={{background:col.solid,color:'#fff',borderRadius:'50%',width:22,height:22,display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:'.78em',flexShrink:0}}>{bl.num||bi+1}</span>
+            Bloc {bl.num} — {bl.titre}
           </h4>
-          {(ch.points||[]).map((pt,pi)=>(
+          {(bl.points||[]).map((pt,pi)=>(
             <div key={pi} className="point-card">
               <h5>{pt.titre}</h5>
               <p dangerouslySetInnerHTML={{__html:pt.contenu}}/>
@@ -312,25 +364,28 @@ function Study({theme}){
   );
 }
 
-// THEME PAGE
-function ThemePage({theme,addXP,onBack}){
+// COMP PAGE
+function CompPage({comp,addXP,onBack}){
   const [sub,setSub]=useState('study');
-  const col=theme.color;
-  const flash=shuffle(CEJM_FLASH.filter(f=>f.theme===theme.id));
-  const fill=CEJM_FILL.filter(f=>f.theme===theme.id);
-  const matchG=CEJM_MATCH.find(m=>m.theme===theme.id);
+  const col=comp.color;
+  const flash=shuffle(E5A_FLASH.filter(f=>f.comp===comp.id));
+  const fill=E5A_FILL.filter(f=>f.comp===comp.id);
+  const matchGames=E5A_MATCH.filter(m=>m.comp===comp.id);
+  const [matchIdx,setMatchIdx]=useState(0);
+  const matchG=matchGames[matchIdx]||null;
+
   return(
     <div>
       <div style={{marginBottom:16}}>
-        <h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,fontSize:'1.25em'}}>{theme.icon} Thème {theme.num} — {theme.titre}</h2>
-        <p style={{color:'var(--muted)',fontSize:'.85em'}}>{theme.annee}</p>
+        <h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,fontSize:'1.25em'}}>{comp.icon} C{comp.num} — {comp.titre}</h2>
+        <p style={{color:'var(--muted)',fontSize:'.85em'}}>{comp.blocs.length} blocs de compétences</p>
       </div>
       <div className="mode-bar">
         {[
           {id:'study',label:'📖 Cours'},
           {id:'flash',label:`⚡ Flash (${flash.length})`},
           {id:'fill', label:`✏️ Exercices (${fill.length})`},
-          matchG?{id:'match',label:`🔗 Match (${matchG.paires.length})`}:null,
+          matchGames.length>0?{id:'match',label:`🔗 Match (${matchGames.length})`}:null,
         ].filter(Boolean).map(m=>(
           <button key={m.id} className="mode-btn"
             style={{background:sub===m.id?col.solid:col.bg,color:sub===m.id?col.text:col.ink,
@@ -339,10 +394,23 @@ function ThemePage({theme,addXP,onBack}){
           >{m.label}</button>
         ))}
       </div>
-      {sub==='study'&&<Study theme={theme}/>}
+      {sub==='study'&&<Study comp={comp}/>}
       {sub==='flash'&&<Flash cards={flash} col={col} addXP={addXP} onBack={()=>setSub('study')}/>}
       {sub==='fill' &&<Fill qs={fill} addXP={addXP} onBack={()=>setSub('study')}/>}
-      {sub==='match'&&matchG&&<Match game={matchG} col={col} addXP={addXP} onBack={()=>setSub('study')}/>}
+      {sub==='match'&&matchG&&(
+        <div>
+          {matchGames.length>1&&(
+            <div className="filter-bar">
+              {matchGames.map((g,i)=>(
+                <button key={g.id} className={'filter-btn'+(matchIdx===i?' on':'')} onClick={()=>setMatchIdx(i)}>
+                  {g.titre}
+                </button>
+              ))}
+            </div>
+          )}
+          <Match key={matchG.id} game={matchG} col={col} addXP={addXP} onBack={()=>setSub('study')}/>
+        </div>
+      )}
     </div>
   );
 }
@@ -350,18 +418,18 @@ function ThemePage({theme,addXP,onBack}){
 // GLOBAL FLASH
 function GlobalFlash({addXP,onBack}){
   const [f,setF]=useState('ALL');
-  const col={solid:'#7C3AED',bg:'#F5F3FF',ink:'#4C1D95',soft:'#EDE9FE',text:'#fff'};
-  const cards=shuffle(f==='ALL'?CEJM_FLASH:CEJM_FLASH.filter(x=>x.theme===f));
+  const col={solid:'#0D9488',bg:'#F0FDFA',ink:'#134E4A',soft:'#CCFBF1',text:'#fff'};
+  const cards=shuffle(f==='ALL'?E5A_FLASH:E5A_FLASH.filter(x=>x.comp===f));
   return(
     <div>
       <div className="filter-bar">
-        <button className={'filter-btn'+(f==='ALL'?' on':'')} onClick={()=>setF('ALL')}>Tous</button>
-        {CEJM_THEMES.map(t=>(
-          <button key={t.id}
-            className={'filter-btn'+(f===t.id?' on':'')}
-            style={f===t.id?{background:t.color.solid,color:'#fff',border:'none'}:{}}
-            onClick={()=>setF(t.id)}
-          >T{t.num}</button>
+        <button className={'filter-btn'+(f==='ALL'?' on':'')} onClick={()=>setF('ALL')}>Toutes</button>
+        {E5A_COMP.map(c=>(
+          <button key={c.id}
+            className={'filter-btn'+(f===c.id?' on':'')}
+            style={f===c.id?{background:c.color.solid,color:'#fff',border:'none'}:{}}
+            onClick={()=>setF(c.id)}
+          >{c.id}</button>
         ))}
       </div>
       <Flash cards={cards} col={col} addXP={addXP} onBack={onBack}/>
@@ -372,17 +440,17 @@ function GlobalFlash({addXP,onBack}){
 // GLOBAL FILL
 function GlobalFill({addXP,onBack}){
   const [f,setF]=useState('ALL');
-  const qs=shuffle(f==='ALL'?CEJM_FILL:CEJM_FILL.filter(x=>x.theme===f));
+  const qs=shuffle(f==='ALL'?E5A_FILL:E5A_FILL.filter(x=>x.comp===f));
   return(
     <div>
       <div className="filter-bar">
-        <button className={'filter-btn'+(f==='ALL'?' on':'')} onClick={()=>setF('ALL')}>Tous</button>
-        {CEJM_THEMES.map(t=>(
-          <button key={t.id}
-            className={'filter-btn'+(f===t.id?' on':'')}
-            style={f===t.id?{background:t.color.solid,color:'#fff',border:'none'}:{}}
-            onClick={()=>setF(t.id)}
-          >T{t.num}</button>
+        <button className={'filter-btn'+(f==='ALL'?' on':'')} onClick={()=>setF('ALL')}>Toutes</button>
+        {E5A_COMP.map(c=>(
+          <button key={c.id}
+            className={'filter-btn'+(f===c.id?' on':'')}
+            style={f===c.id?{background:c.color.solid,color:'#fff',border:'none'}:{}}
+            onClick={()=>setF(c.id)}
+          >{c.id}</button>
         ))}
       </div>
       <Fill qs={qs} addXP={addXP} onBack={onBack}/>
@@ -390,28 +458,28 @@ function GlobalFill({addXP,onBack}){
   );
 }
 
-// ESSAI
-function Essai({onBack}){
+// ARGUMENTATION (ESSAI)
+function Argumentation({onBack}){
   const [f,setF]=useState('ALL');
-  const list=f==='ALL'?CEJM_ESSAI:CEJM_ESSAI.filter(e=>e.themes.includes(f));
+  const list=f==='ALL'?E5A_ESSAI:E5A_ESSAI.filter(e=>e.comps.includes(f));
   return(
     <div>
       <div className="filter-bar">
         <button className={'filter-btn'+(f==='ALL'?' on':'')} onClick={()=>setF('ALL')}>Tous</button>
-        {CEJM_THEMES.map(t=>(
-          <button key={t.id}
-            className={'filter-btn'+(f===t.id?' on':'')}
-            style={f===t.id?{background:t.color.solid,color:'#fff',border:'none'}:{}}
-            onClick={()=>setF(t.id)}
-          >T{t.num}</button>
+        {E5A_COMP.map(c=>(
+          <button key={c.id}
+            className={'filter-btn'+(f===c.id?' on':'')}
+            style={f===c.id?{background:c.color.solid,color:'#fff',border:'none'}:{}}
+            onClick={()=>setF(c.id)}
+          >{c.id}</button>
         ))}
       </div>
       {list.map(e=>(
         <div key={e.id} className="essai-card">
           <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:10}}>
-            {e.themes.map(tid=>{const t=CEJM_THEMES.find(x=>x.id===tid);return t?<span key={tid} className="chip" style={{background:t.color.soft,color:t.color.ink}}>T{t.num}</span>:null;})}
+            {e.comps.map(cid=>{const c=getComp(cid);return c?<span key={cid} className="chip" style={{background:c.color.soft,color:c.color.ink}}>{cid}</span>:null;})}
           </div>
-          <h4>❓ {e.question}</h4>
+          <h4>❓ {e.q}</h4>
           <ul className="essai-pistes">{e.pistes.map((p,i)=><li key={i}>{p}</li>)}</ul>
         </div>
       ))}
@@ -420,20 +488,25 @@ function Essai({onBack}){
 }
 
 // HUB
-function Hub({onTheme,onMode}){
+function Hub({onComp,onMode}){
+  const totalFlash=E5A_FLASH.length;
+  const totalFill=E5A_FILL.length;
+  const totalEssai=E5A_ESSAI.length;
+  const totalFormules=E5A_FORMULES.reduce((s,sec)=>s+sec.formules.length,0);
   return(
     <div>
       <div className="hub-header">
-        <h1>BTS CEJM</h1>
-        <p>Commerce · Économie · Juridique · Management</p>
+        <h1>BTS NDRC — E5A</h1>
+        <p>Relation Client à Distance &amp; Digitalisation</p>
         <p style={{fontSize:'.85em',color:'var(--muted)',marginTop:4}}>
-          {CEJM_THEMES.length} thèmes · {CEJM_FLASH.length} flashcards · {CEJM_FILL.length} exercices · {CEJM_ESSAI.length} sujets
+          {E5A_COMP.length} compétences · {totalFlash} flashcards · {totalFill} exercices · {totalFormules} formules
         </p>
         <div className="modes-global">
           {[
-            {id:'flash-all',icon:'⚡',label:'Flashcards',sub:'Tous thèmes'},
-            {id:'fill-all', icon:'✏️',label:'Exercices',sub:'Trous à compléter'},
-            {id:'essai',    icon:'📝',label:'Sujets',sub:'Synthèse'},
+            {id:'flash-all',icon:'⚡',label:'Flashcards',sub:totalFlash+' cartes'},
+            {id:'fill-all', icon:'✏️',label:'Exercices',sub:'Textes à trous'},
+            {id:'calculs',  icon:'📐',label:'Calculs',sub:totalFormules+' formules'},
+            {id:'argumentation',icon:'📝',label:'Argumentation',sub:totalEssai+' sujets'},
           ].map(m=>(
             <div key={m.id} className="mode-tile" onClick={()=>onMode(m.id)}>
               <div className="icon">{m.icon}</div>
@@ -443,25 +516,27 @@ function Hub({onTheme,onMode}){
           ))}
         </div>
       </div>
-      <h3 style={{fontFamily:'Bricolage Grotesque',fontWeight:700,fontSize:'1.05em',marginBottom:14}}>Étudier par thème</h3>
-      <div className="themes-grid">
-        {CEJM_THEMES.map(t=>{
-          const col=t.color;
+      <h3 style={{fontFamily:'Bricolage Grotesque',fontWeight:700,fontSize:'1.05em',marginBottom:14}}>Étudier par compétence</h3>
+      <div className="comps-grid">
+        {E5A_COMP.map(c=>{
+          const col=c.color;
+          const cf=E5A_FLASH.filter(f=>f.comp===c.id).length;
+          const cfl=E5A_FILL.filter(f=>f.comp===c.id).length;
           return(
-            <div key={t.id} className="theme-card"
+            <div key={c.id} className="comp-card"
               style={{background:col.bg,borderColor:col.soft}}
-              onClick={()=>onTheme(t.id)}
+              onClick={()=>onComp(c.id)}
             >
-              <div style={{fontSize:'1.8em',marginBottom:6}}>{t.icon}</div>
-              <div style={{fontSize:'.72em',fontWeight:700,color:col.solid,marginBottom:3}}>{t.annee}</div>
-              <h3 style={{color:col.ink,fontSize:'1em',fontWeight:700,lineHeight:1.35,marginBottom:8}}>Thème {t.num} — {t.titre}</h3>
-              <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {t.chapitres.map((c,i)=>(
-                  <span key={i} className="chip" style={{background:col.soft,color:col.ink}}>{c.titre}</span>
+              <div style={{fontSize:'1.8em',marginBottom:6}}>{c.icon}</div>
+              <div style={{fontSize:'.72em',fontWeight:700,color:col.solid,marginBottom:3}}>Compétence {c.num}</div>
+              <h3 style={{color:col.ink,fontSize:'1em',fontWeight:700,lineHeight:1.35,marginBottom:8}}>{c.titre}</h3>
+              <div style={{display:'flex',flexWrap:'wrap',gap:4,marginBottom:10}}>
+                {c.blocs.map((bl,i)=>(
+                  <span key={i} className="chip" style={{background:col.soft,color:col.ink}}>Bloc {bl.num}</span>
                 ))}
               </div>
-              <div style={{marginTop:10,fontSize:'.78em',fontWeight:600,color:col.solid}}>
-                {CEJM_FLASH.filter(f=>f.theme===t.id).length} flash · {CEJM_FILL.filter(f=>f.theme===t.id).length} exercices
+              <div style={{fontSize:'.78em',fontWeight:600,color:col.solid}}>
+                {cf} flash · {cfl} exercices
               </div>
             </div>
           );
@@ -487,16 +562,28 @@ function App(){
     window.scrollTo(0,0);
   },[view]);
 
-  const tid=view.startsWith('t:')?view.slice(2):null;
-  const theme=tid?CEJM_THEMES.find(t=>t.id===tid):null;
+  const cid=view.startsWith('c:')?view.slice(2):null;
+  const comp=cid?E5A_COMP.find(c=>c.id===cid):null;
+
+  const titles={
+    'flash-all':'⚡ Flashcards — toutes compétences',
+    'fill-all':'✏️ Exercices à trous',
+    'calculs':'📐 Formules de calcul',
+    'argumentation':'📝 Sujets d\'argumentation',
+  };
 
   return(
     <>
-      {view==='hub'&&<Hub onTheme={id=>setView('t:'+id)} onMode={setView}/>}
-      {theme&&<ThemePage theme={theme} addXP={addXP} onBack={()=>setView('hub')}/>}
-      {view==='flash-all'&&<><h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,marginBottom:16}}>⚡ Flashcards — tous thèmes</h2><GlobalFlash addXP={addXP} onBack={()=>setView('hub')}/></>}
-      {view==='fill-all'&&<><h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,marginBottom:16}}>✏️ Exercices à trous</h2><GlobalFill addXP={addXP} onBack={()=>setView('hub')}/></>}
-      {view==='essai'&&<><h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,marginBottom:16}}>📝 Sujets de synthèse</h2><Essai onBack={()=>setView('hub')}/></>}
+      {view==='hub'&&<Hub onComp={id=>setView('c:'+id)} onMode={setView}/>}
+      {comp&&<CompPage comp={comp} addXP={addXP} onBack={()=>setView('hub')}/>}
+      {['flash-all','fill-all','calculs','argumentation'].includes(view)&&(
+        <><h2 style={{fontFamily:'Bricolage Grotesque',fontWeight:800,marginBottom:16}}>{titles[view]}</h2>
+        {view==='flash-all'&&<GlobalFlash addXP={addXP} onBack={()=>setView('hub')}/>}
+        {view==='fill-all'&&<GlobalFill addXP={addXP} onBack={()=>setView('hub')}/>}
+        {view==='calculs'&&<Calculs onBack={()=>setView('hub')}/>}
+        {view==='argumentation'&&<Argumentation onBack={()=>setView('hub')}/>}
+        </>
+      )}
     </>
   );
 }
