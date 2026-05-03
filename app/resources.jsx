@@ -78,9 +78,27 @@ function ResourcesView({ back }) {
                 </div>
               </div>
               <div style={{ fontSize: 13, color: 'oklch(0.40 0.02 280)', marginTop: 12, lineHeight: 1.5,
-                display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {r.summary}
               </div>
+              {r.useFor && r.useFor.length > 0 && (
+                <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid oklch(0.93 0.005 80)' }}>
+                  <div style={{ fontSize: 10.5, fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'oklch(0.55 0.02 280)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 6 }}>
+                    Utiliser pour
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                    {r.useFor.map((u, i) => (
+                      <span key={i} style={{
+                        padding: '3px 8px', borderRadius: 999, fontSize: 11, fontWeight: 600,
+                        background: `color-mix(in oklch, ${c} 10%, white)`,
+                        color: c,
+                        border: `1px solid color-mix(in oklch, ${c} 22%, transparent)`,
+                        lineHeight: 1.4,
+                      }}>{u}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </PaperCard>
           );
         })}
