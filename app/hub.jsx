@@ -4,13 +4,15 @@ function Hub({ state, setMode, setAxe }) {
   const I = window.SVGIllu;
 
   const modes = [
-    { id: 'axes', label: 'Carte mentale', desc: 'Explorer les 3 axes du cours', svg: I.spiral, color: 'oklch(0.55 0.13 165)' },
-    { id: 'resources', label: 'Bibliothèque', desc: 'Toutes les œuvres expliquées', svg: I.arch, color: 'oklch(0.55 0.13 320)' },
-    { id: 'chrono', label: 'Chronologie', desc: 'Replacer œuvres & événements', svg: I.sun, color: 'oklch(0.55 0.13 200)' },
-    { id: 'matching', label: 'Memory', desc: 'Associer œuvre, citation, auteur', svg: I.paw, color: 'oklch(0.52 0.14 275)' },
-    { id: 'fill', label: 'Texte à trous', desc: 'Compléter chiffres, dates, mots', svg: I.banner, color: 'oklch(0.55 0.13 30)' },
-    { id: 'flash', label: 'Révision rapide', desc: '5 min pour réviser l\'essentiel', svg: I.butterfly, color: 'oklch(0.62 0.13 75)' },
-    { id: 'essai', label: 'Sujets d\'essai', desc: 'Tirer un sujet aléatoire', svg: I.bird, color: 'oklch(0.45 0.10 280)' },
+    { id: 'axes',        label: 'Carte mentale',          desc: 'Explorer les 3 axes du cours',                svg: I.spiral,    color: 'oklch(0.55 0.13 165)' },
+    { id: 'resources',   label: 'Bibliothèque',           desc: 'Toutes les œuvres expliquées',                svg: I.arch,      color: 'oklch(0.55 0.13 320)' },
+    { id: 'chrono',      label: 'Chronologie',            desc: 'Replacer œuvres & événements',                svg: I.sun,       color: 'oklch(0.55 0.13 200)' },
+    { id: 'matching',    label: 'Memory',                 desc: 'Associer œuvre, citation, auteur',            svg: I.paw,       color: 'oklch(0.52 0.14 275)' },
+    { id: 'fill',        label: 'Texte à trous',          desc: 'Compléter chiffres, dates, mots',             svg: I.banner,    color: 'oklch(0.55 0.13 30)'  },
+    { id: 'flash',       label: 'Révision rapide',        desc: '5 min pour réviser l\'essentiel',             svg: I.butterfly, color: 'oklch(0.62 0.13 75)'  },
+    { id: 'essai',       label: 'Sujets d\'essai',        desc: 'Méthode CUGEX + indices + correction',        svg: I.bird,      color: 'oklch(0.45 0.10 280)' },
+    { id: 'cultureQuiz', label: 'Connaissances culturelles', desc: 'QCM + devinettes par sujet — par cœur !', svg: I.elephant,  color: 'oklch(0.55 0.13 30)'  },
+    { id: 'methodo',     label: 'Jeu de méthodologie',    desc: 'Reconstitue · Identifie · Vrai/Faux',         svg: I.spiral,    color: 'oklch(0.55 0.13 165)' },
   ];
 
   const axeAnimal = { axe1: I.elephant, axe2: I.cat, axe3: I.fish };

@@ -19,14 +19,16 @@ function App() {
 
   return (
     <>
-      {mode === 'hub' && <Hub state={state} setMode={setMode} setAxe={setAxe} />}
-      {mode === 'axes' && <AxesView state={state} updateState={updateState} axe={axe} setAxe={setAxe} back={back} />}
-      {mode === 'chrono' && <ChronoView state={state} updateState={updateState} back={back} />}
-      {mode === 'matching' && <MatchingView state={state} updateState={updateState} back={back} />}
-      {mode === 'fill' && <FillView state={state} updateState={updateState} back={back} />}
-      {mode === 'flash' && <FlashView state={state} updateState={updateState} back={back} />}
-      {mode === 'essai' && <EssaiView back={back} />}
-      {mode === 'resources' && <ResourcesView back={back} />}
+      {mode === 'hub'          && <Hub state={state} setMode={setMode} setAxe={setAxe} />}
+      {mode === 'axes'         && <AxesView state={state} updateState={updateState} axe={axe} setAxe={setAxe} back={back} />}
+      {mode === 'chrono'       && <ChronoView state={state} updateState={updateState} back={back} />}
+      {mode === 'matching'     && <MatchingView state={state} updateState={updateState} back={back} />}
+      {mode === 'fill'         && <FillView state={state} updateState={updateState} back={back} />}
+      {mode === 'flash'        && <FlashView state={state} updateState={updateState} back={back} />}
+      {mode === 'essai'        && <EssaiView back={back} />}
+      {mode === 'resources'    && <ResourcesView back={back} />}
+      {mode === 'cultureQuiz'  && <CultureQuizView state={state} updateState={updateState} back={back} />}
+      {mode === 'methodo'      && <MethodoGameView state={state} updateState={updateState} back={back} />}
       <Toast msg={toast?.msg} color={toast?.color} />
     </>
   );

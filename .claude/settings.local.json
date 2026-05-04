@@ -15,7 +15,8 @@
       "Bash(python3 *)",
       "Bash(Get-ChildItem C:\\\\Users\\\\natha\\\\Documents\\\\WEB\\\\revision\\\\app *)",
       "Bash(Test-Path *)",
-      "WebFetch(domain:cours-ndrc.fr)"
+      "WebFetch(domain:cours-ndrc.fr)",
+      "Bash(node -e ' *)"
     ]
   }
 }
