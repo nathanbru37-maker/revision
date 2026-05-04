@@ -8,9 +8,16 @@ window.CEJM_THEMES = [
     color:{ bg:'#EFF6FF', solid:'#2563EB', ink:'#1E40AF', soft:'#BFDBFE', text:'#fff' },
     chapitres:[
       {
+        titre:'Visions de l\'entreprise',
+        points:[
+          { titre:'Vision entrepreneuriale', contenu:"L'entreprise est vue comme le projet d'un <b>entrepreneur</b> qui prend des risques, mobilise des ressources et innove pour créer de la valeur. <b>Schumpeter</b> (1942) en fait le moteur de la <b>destruction créatrice</b> : l'entrepreneur innove et déstabilise les marchés existants pour créer de nouvelles activités. On distingue <b>l'innovation de produit</b> (nouveau bien/service), <b>de procédé</b> (nouveau process de production), <b>organisationnelle</b> (nouvelle façon de travailler) et <b>de marché</b> (accès à de nouveaux débouchés).", memo:'Entrepreneur = preneur de risque + innovateur — Schumpeter : destruction créatrice' },
+          { titre:'Vision managériale', contenu:"L'entreprise est vue comme une <b>organisation</b> pilotée par des <b>managers</b> qui coordonnent des ressources humaines, matérielles et financières pour atteindre des objectifs. Le manager planifie, organise, dirige et contrôle (PODC). Cette vision met en avant les <b>styles de direction</b> (autoritaire, participatif…), la <b>structure organisationnelle</b> (fonctionnelle, divisionnelle, matricielle) et les <b>mécanismes de coordination</b> (Mintzberg). Le manager n'est pas nécessairement le propriétaire de l'entreprise — c'est la <b>séparation entre propriété et pouvoir</b>.", memo:'Manager ≠ Propriétaire — PODC : Planifier · Organiser · Diriger · Contrôler' },
+        ]
+      },
+      {
         titre:'Agents économiques',
         points:[
-          { titre:'Les 5 agents économiques', contenu:"Toute économie repose sur 5 catégories d'agents qui échangent entre eux : les <b>entreprises</b> (production marchande), les <b>ménages</b> (consommation et offre de travail), les <b>banques</b> (intermédiation financière : crédits, dépôts, moyens de paiement), les <b>administrations publiques</b> (production non marchande financée par l'impôt) et le <b>reste du monde</b> (échanges extérieurs).", memo:'EMBRA : Entreprises · Ménages · Banques · Reste du monde · Administrations' },
+          { titre:'Les 6 agents économiques', contenu:"Toute économie repose sur 6 catégories d'agents qui échangent entre eux : les <b>ménages</b> (consomment, épargnent, offrent du travail), les <b>sociétés non financières (SNF)</b> (produisent des biens et services marchands), les <b>sociétés financières</b> (banques, assurances, intermédiaires financiers), les <b>administrations publiques</b> (État, collectivités locales, Sécurité sociale), les <b>ISBLSM</b> (Institutions Sans But Lucratif au Service des Ménages : associations, ONG, syndicats) et le <b>reste du monde</b> (tous les agents non-résidents, relations extérieures).", memo:'M · SNF · SF · AP · ISBLSM · RdM — les 6 agents du circuit économique' },
           { titre:'Les flux économiques', contenu:"Les échanges entre agents génèrent deux types de flux : <b>flux réels</b> (biens, services, travail fourni) et <b>flux monétaires</b> (salaires, paiements, impôts, dividendes). Ces flux forment le circuit économique. La monnaie peut être fiduciaire (billets/pièces) ou scripturale (virement, carte).", memo:'Réel = ce qu\'on échange / Monétaire = ce qu\'on paye' },
         ]
       },
@@ -278,7 +285,7 @@ window.CEJM_THEMES = [
 // ====== FLASHCARDS ======
 window.CEJM_FLASH = [
   // T1
-  { id:'f001', theme:'T1', q:'Qu\'est-ce qu\'un agent économique ?', r:'Un acteur qui prend des décisions économiques (consommer, produire, épargner). On distingue : entreprises, ménages, banques, administrations, reste du monde.', ex:'Les ménages achètent des biens, les entreprises les produisent.' },
+  { id:'f001', theme:'T1', q:'Qu\'est-ce qu\'un agent économique ?', r:'Un acteur qui prend des décisions économiques (consommer, produire, épargner). On distingue 6 catégories : ménages, sociétés non financières (SNF), sociétés financières, administrations publiques, ISBLSM et reste du monde.', ex:'Les ménages consomment, les SNF produisent des biens marchands, les sociétés financières prêtent.' },
   { id:'f002', theme:'T1', q:'Qu\'est-ce que la valeur ajoutée ?', r:'VA = Chiffre d\'affaires − Consommations intermédiaires. Elle mesure la richesse créée par l\'entreprise.', ex:'Une boulangerie achète de la farine (CI) et vend du pain (CA) : la VA est la différence.' },
   { id:'f003', theme:'T1', q:'Quelle est la différence entre une EI et une SARL ?', r:'L\'EI (Entreprise Individuelle) est une personne physique sans personnalité morale distincte. La SARL est une personne morale avec responsabilité limitée aux apports.', ex:'Un auto-entrepreneur = EI. Une pizzeria à plusieurs associés = souvent SARL.' },
   { id:'f004', theme:'T1', q:'Quelles sont les 3 conditions de validité d\'un contrat ?', r:'1. Consentement libre et non vicié (ni erreur, ni dol, ni violence). 2. Capacité juridique. 3. Contenu licite et certain.', ex:'Un contrat signé sous la menace est vicié par la violence → annulable.' },
