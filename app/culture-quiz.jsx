@@ -1,146 +1,309 @@
-// Jeu connaissances culturelles — 2 modes : QCM classique + "Qu'est-ce que cache ce sujet ?"
+// Jeu connaissances culturelles — 3 modes : QCM + "Qu'est-ce que cache ce sujet ?" + Méthodologie
+// primary:true = l'une des 28 références prioritaires (liste maître) — primary:false = secondaire
 
 const CULTURE_QCM = [
-  { q:"Qui est l'auteur de Maus ?", choices:["Art Spiegelman","George Orwell","Jack London","La Fontaine"], correct:0, expl:"Art Spiegelman a publié Maus en 1986 (tome 1) et 1992 (tome 2). C'est un roman graphique qui représente les Juifs en souris et les Nazis en chats pour raconter l'Holocauste." },
-  { q:"Dans Maus, quel animal représente les Juifs ?", choices:["Des souris","Des cochons","Des lapins","Des rats"], correct:0, expl:"Les Juifs = souris, les Nazis = chats, les Polonais = cochons. Spiegelman reprend la rhétorique nazie qui déshumanisait les Juifs en les animalisant — pour mieux la dénoncer." },
-  { q:"Quelle est la date approximative des peintures de la grotte Chauvet ?", choices:["-35 000 av. J.-C.","-17 000 av. J.-C.","-5 000 av. J.-C.","5 000 av. J.-C."], correct:0, expl:"La grotte Chauvet, en Ardèche, date d'environ -35 000 ans. C'est l'un des plus anciens témoignages d'art humain. Les peintures représentent essentiellement des animaux : lions, rhinocéros, mammouths." },
-  { q:"Qui est Anubis dans la mythologie égyptienne ?", choices:["Dieu à tête de chacal, gardien des morts","Dieu à tête de chat, gardien du foyer","Dieu à tête d'ibis, dieu du savoir","Dieu à tête d'éléphant, dieu de la chance"], correct:0, expl:"Anubis est représenté avec une tête de chacal. Il guide les âmes vers l'au-delà et veille sur les morts — c'est un animal psychopompe. Bastet (chat) protège le foyer, Thot (ibis) est le dieu du savoir." },
-  { q:"Quelle est la thèse centrale de Descartes sur les animaux ?", choices:["L'animal est une machine sans âme","L'animal est conscient comme l'homme","L'animal mérite des droits","L'animal est supérieur à l'homme"], correct:0, expl:"Dans le Discours de la méthode (1637), Descartes soutient que les animaux sont de simples automates — des machines complexes sans âme ni pensée. Leurs cris de douleur ne sont que des mécanismes, comme le bruit d'une horloge brisée." },
-  { q:"En quelle année a été signée la Déclaration de Cambridge sur la Conscience animale ?", choices:["2012","2015","2005","2000"], correct:0, expl:"En 2012, des neuroscientifiques de Cambridge ont signé une déclaration affirmant que les mammifères, oiseaux et céphalopodes possèdent les substrats neurologiques de la conscience. Une étape majeure dans la reconnaissance de la vie intérieure des animaux." },
-  { q:"Qui a publié 'La Libération animale' en 1975 ?", choices:["Peter Singer","Tom Regan","Jane Goodall","Donna Haraway"], correct:0, expl:"Peter Singer, philosophe australien, a fondé le mouvement de libération animale avec ce livre. Il y développe le concept de 'spécisme' — une discrimination arbitraire fondée sur l'appartenance à une espèce." },
-  { q:"Qu'est-ce qu'un animal psychopompe ?", choices:["Un animal qui guide les âmes vers l'au-delà","Un animal utilisé en zoothérapie","Un animal hybride mi-humain","Un animal totem en Afrique"], correct:0, expl:"Les animaux psychopompes (du grec 'guide d'âme') accompagnent les morts vers l'au-delà dans de nombreuses cultures. Ex : Anubis (chacal) en Égypte, le chameau dans 'Psyché psychopompe'." },
-  { q:"Quel est le nom du chien d'Ulysse dans l'Odyssée d'Homère ?", choices:["Argos","Cerbère","Achille","Priam"], correct:0, expl:"Argos est le chien d'Ulysse. Il le reconnaît après 20 ans d'absence — le seul à l'avoir reconnu — et meurt de joie aussitôt. C'est un des symboles les plus puissants de la fidélité animale dans la littérature." },
-  { q:"Quel article du Code civil français (2015) reconnaît les animaux comme êtres sensibles ?", choices:["Art. 515-14","Art. L214","Art. 3R","Art. 999-1"], correct:0, expl:"L'article 515-14 du Code civil, issu de la loi du 16 février 2015, reconnaît enfin les animaux comme 'êtres vivants doués de sensibilité'. Auparavant, ils étaient traités comme de simples 'biens meubles'." },
-  { q:"Que représentent les Polonais dans Maus de Spiegelman ?", choices:["Des cochons","Des renards","Des chiens","Des lapins"], correct:0, expl:"Dans Maus, les Polonais sont représentés en cochons — un choix qui ne flatte pas non plus les alliés potentiels des Juifs. Ce système de représentation animale reflète les hiérarchies raciales et les rapports de force de l'époque." },
-  { q:"En quelle année La Fontaine a-t-il publié ses Fables ?", choices:["1668","1789","1492","1848"], correct:0, expl:"Les Fables de La Fontaine ont été publiées en 1668 (livres I à VI). Elles utilisent l'anthropomorphisme animal pour critiquer indirectement la cour de Louis XIV — une satire sociale déguisée en littérature pour enfants." },
-  { q:"Depuis quand existe l'éthologie comme science à part entière ?", choices:["Depuis 1920","Depuis 1850","Depuis 1970","Depuis 2000"], correct:0, expl:"L'éthologie — science du comportement animal — s'est structurée dans les années 1920-1930 avec des pionniers comme Konrad Lorenz et Nikolaas Tinbergen (Prix Nobel 1973). Elle étudie les comportements animaux dans leur milieu naturel." },
-  { q:"Qui a publié 'De l'origine des espèces' en 1859 ?", choices:["Charles Darwin","Aristote","Descartes","Peter Singer"], correct:0, expl:"Charles Darwin, naturaliste britannique, a démontré dans cet ouvrage que les espèces évoluent par sélection naturelle et que l'homme et les grands singes descendent d'un ancêtre commun. Une révolution dans notre rapport à l'animal." },
-  { q:"Que signifient les '3R' dans l'expérimentation animale ?", choices:["Replace, Reduce, Refine","Rights, Rules, Reason","Research, Regulate, Respond","Rethink, Reform, Restrict"], correct:0, expl:"Les 3R (Replace, Reduce, Refine) encadrent l'expérimentation animale : remplacer l'animal par des alternatives quand c'est possible, réduire le nombre d'animaux utilisés, raffiner les procédures pour minimiser la souffrance." },
-  { q:"Quel est le titre de la sculpture de Louise Bourgeois représentant une araignée géante (1999) ?", choices:["Maman","Croc-Blanc","Méduse","Totem"], correct:0, expl:"'Maman' (1999) est une araignée de bronze monumentale de Louise Bourgeois, exposée dans plusieurs musées du monde. Elle incarne à la fois la peur que suscite l'araignée et la figure protectrice de la mère tisseuse." },
-  { q:"Qui est l'auteur de Croc-Blanc (1906) ?", choices:["Jack London","George Orwell","Victor Hugo","Émile Zola"], correct:0, expl:"Jack London (1906) raconte la vie d'un loup-chien entre la sauvagerie du Grand Nord canadien et la domestication humaine. Ce roman narrativise la subjectivité animale avec une précision comportementale remarquable." },
-  { q:"Qu'est-ce que le 'spécisme' ?", choices:["Discrimination fondée sur l'appartenance à une espèce","Respect de toutes les espèces","Étude scientifique des espèces","Protection des espèces menacées"], correct:0, expl:"Terme forgé par Peter Singer (1975), le spécisme désigne la discrimination arbitraire fondée sur l'appartenance à une espèce — traiter la souffrance animale comme moins importante que la souffrance humaine, sans justification rationnelle." },
-  { q:"Selon la FAO (2013), quel pourcentage des émissions mondiales de GES représente l'élevage ?", choices:["14,5 %","5 %","30 %","2 %"], correct:0, expl:"Selon le rapport 'Livestock's Long Shadow' de la FAO (2013), l'élevage représente 14,5% des émissions mondiales de gaz à effet de serre — davantage que tous les transports réunis. Un chiffre central dans le débat sur l'élevage industriel." },
-  { q:"Qui a dit : 'La grandeur d'une nation se juge à la façon dont elle traite ses animaux' ?", choices:["Gandhi","Kant","Schopenhauer","Anatole France"], correct:0, expl:"Cette citation est attribuée à Gandhi. Elle est très souvent utilisée comme accroche dans les essais sur le bien-être animal ou les droits des animaux — une phrase forte, courte et immédiatement évocatrice." },
-  { q:"Qui a peint 'Le Lièvre' en 1502 ?", choices:["Albrecht Dürer","Léonard de Vinci","Michel-Ange","Rembrandt"], correct:0, expl:"Albrecht Dürer (1471-1528), peintre et graveur allemand de la Renaissance, a peint ce lièvre aquarellé avec une précision quasi-scientifique. Chaque poil, chaque reflet dans l'œil est rendu avec un soin extrême — un hommage à la beauté de l'animal réel." },
-  { q:"Qu'est-ce que la zoothérapie ?", choices:["Utilisation thérapeutique des animaux","Étude scientifique des animaux","Protection juridique des animaux","Élevage biologique des animaux"], correct:0, expl:"La zoothérapie (ou thérapie assistée par l'animal) utilise des animaux — chiens, chevaux, dauphins — dans des contextes thérapeutiques. Les études montrent qu'elle réduit le stress, l'anxiété et améliore le bien-être des personnes âgées, autistes ou dépressives." },
-  { q:"Quel pourcentage d'ADN partageons-nous avec le chimpanzé ?", choices:["98,7 %","75 %","50 %","99,9 %"], correct:0, expl:"Nous partageons environ 98,7% de notre ADN avec le chimpanzé — notre plus proche parent biologique. C'est l'argument central de ceux qui réclament une protection juridique renforcée pour les grands singes." },
-  { q:"Quelle association française publie des images d'abattoirs pour dénoncer l'élevage industriel ?", choices:["L214","WWF","PETA","SPE"], correct:0, expl:"L214 est une association française de protection animale qui publie régulièrement des images tournées en caméra cachée dans les abattoirs et élevages. Son nom vient de l'article L214 du Code rural qui reconnaît les animaux comme êtres sensibles." },
-  { q:"Quelle est la citation de Schopenhauer sur les animaux ?", choices:["Celui qui est cruel envers les animaux ne peut être un homme bon","Jusqu'à ce qu'on ait aimé un animal, une partie de notre âme reste endormie","La question est : peuvent-ils souffrir ?","On peut juger le cœur d'un homme à la façon dont il traite les animaux"], correct:0, expl:"Schopenhauer affirmait que la compassion pour les animaux est liée à la bonté morale générale. La façon dont quelqu'un traite un être sans défense révèle son caractère profond." },
-  { q:"Quel roman de George Orwell utilise des animaux pour critiquer le stalinisme ?", choices:["La Ferme des animaux (1945)","Maus (1986)","Croc-Blanc (1906)","Le Livre de la Jungle (1894)"], correct:0, expl:"La Ferme des animaux (1945) d'Orwell raconte une révolution d'animaux qui renverse les fermiers humains, avant que les cochons n'instaurent un régime aussi tyrannique. C'est une satire du totalitarisme stalinien." },
-  { q:"Qui est Ganesh dans l'hindouisme ?", choices:["Dieu à tête d'éléphant, fils de Shiva","Dieu à tête de singe, compagnon de Rama","Dieu à tête de taureau, maître du tonnerre","Dieu à tête de serpent, gardien du cosmos"], correct:0, expl:"Ganesh est l'une des divinités les plus vénérées de l'hindouisme. Sa tête d'éléphant symbolise la sagesse, l'intelligence et le dépassement des obstacles. C'est un exemple d'animal élevé au rang du divin." },
-  { q:"Quelle est l'année de publication de 'La Ferme des animaux' d'Orwell ?", choices:["1945","1984","1948","1933"], correct:0, expl:"La Ferme des animaux a été publiée en 1945, à la fin de la Seconde Guerre mondiale. Orwell y critique le stalinisme soviétique à travers une fable animale. Le livre fut longtemps censuré dans les pays communistes." },
-  { q:"Aristote définit l'homme comme 'animal…' — complète.", choices:["politique (zôon politikon)","rationnel (zôon logikon)","social (zôon koinônikon)","conscient (zôon noêtikon)"], correct:0, expl:"Aristote définit l'homme comme 'zôon politikon' — animal politique — dans La Politique. Ce qui distingue l'homme des autres animaux est le logos (raison et langage), qui lui permet de distinguer le juste de l'injuste et de vivre en cité." },
-  { q:"Dans quelle grotte célèbre de la préhistoire a-t-on trouvé des peintures animales datant de -17 000 ans ?", choices:["Lascaux","Chauvet","Altamira","Cosquer"], correct:0, expl:"La grotte de Lascaux (Dordogne, France) date d'environ -17 000 ans. Elle est ornée de plus de 600 peintures et 1 500 gravures représentant principalement des animaux : chevaux, aurochs, cerfs, bisons. La grotte Chauvet est plus ancienne (-35 000)." },
+  // ── SECONDAIRES ──────────────────────────────────────────────────────────
+  { primary:false, q:"Qui est l'auteur de Maus ?", choices:["Art Spiegelman","George Orwell","Jack London","La Fontaine"], correct:0, expl:"Art Spiegelman a publié Maus en 1986 (tome 1) et 1992 (tome 2). Roman graphique représentant les Juifs en souris et les Nazis en chats pour raconter l'Holocauste." },
+  { primary:false, q:"Dans Maus, quel animal représente les Juifs ?", choices:["Des souris","Des cochons","Des lapins","Des rats"], correct:0, expl:"Les Juifs = souris, les Nazis = chats, les Polonais = cochons. Spiegelman reprend la rhétorique nazie qui déshumanisait les Juifs en les animalisant — pour mieux la dénoncer." },
+  { primary:false, q:"En quelle année a été signée la Déclaration de Cambridge sur la Conscience animale ?", choices:["2012","2015","2005","2000"], correct:0, expl:"En 2012, des neuroscientifiques de Cambridge ont affirmé que les mammifères, oiseaux et céphalopodes possèdent les substrats neurologiques de la conscience. Étape majeure dans la reconnaissance de la vie intérieure des animaux." },
+  { primary:false, q:"Qui a publié 'La Libération animale' en 1975 ?", choices:["Peter Singer","Tom Regan","Jane Goodall","Donna Haraway"], correct:0, expl:"Peter Singer, philosophe australien, a fondé le mouvement de libération animale avec ce livre. Il y développe le concept de 'spécisme' — une discrimination arbitraire fondée sur l'appartenance à une espèce." },
+  { primary:false, q:"Que représentent les Polonais dans Maus de Spiegelman ?", choices:["Des cochons","Des renards","Des chiens","Des lapins"], correct:0, expl:"Dans Maus, les Polonais sont représentés en cochons. Ce système de représentation animale reflète les hiérarchies raciales et les rapports de force de l'époque nazie." },
+  { primary:false, q:"Depuis quand existe l'éthologie comme science à part entière ?", choices:["Depuis 1920","Depuis 1850","Depuis 1970","Depuis 2000"], correct:0, expl:"L'éthologie — science du comportement animal — s'est structurée dans les années 1920-1930 avec Konrad Lorenz et Nikolaas Tinbergen (Prix Nobel 1973). Elle étudie les comportements dans leur milieu naturel." },
+  { primary:false, q:"Que signifient les '3R' dans l'expérimentation animale ?", choices:["Replace, Reduce, Refine","Rights, Rules, Reason","Research, Regulate, Respond","Rethink, Reform, Restrict"], correct:0, expl:"Les 3R encadrent l'expérimentation animale : remplacer l'animal par des alternatives quand c'est possible, réduire le nombre d'animaux, raffiner les procédures pour minimiser la souffrance." },
+  { primary:false, q:"Qui est l'auteur de Croc-Blanc (1906) ?", choices:["Jack London","George Orwell","Victor Hugo","Émile Zola"], correct:0, expl:"Jack London raconte la vie d'un loup-chien entre la sauvagerie du Grand Nord canadien et la domestication humaine. Ce roman narrativise la subjectivité animale avec une précision comportementale remarquable." },
+  { primary:false, q:"Qu'est-ce que le 'spécisme' ?", choices:["Discrimination fondée sur l'appartenance à une espèce","Respect de toutes les espèces","Étude scientifique des espèces","Protection des espèces menacées"], correct:0, expl:"Terme forgé par Peter Singer (1975) : discriminer arbitrairement la souffrance animale — la traiter comme moins importante que la souffrance humaine, sans justification rationnelle." },
+  { primary:false, q:"Selon la FAO (2013), quel pourcentage des émissions mondiales de GES représente l'élevage ?", choices:["14,5 %","5 %","30 %","2 %"], correct:0, expl:"Selon la FAO (2013), l'élevage représente 14,5 % des émissions mondiales de GES — davantage que tous les transports réunis. Un chiffre central dans le débat sur l'élevage industriel." },
+  { primary:false, q:"Qui a peint 'Le Lièvre' en 1502 ?", choices:["Albrecht Dürer","Léonard de Vinci","Michel-Ange","Rembrandt"], correct:0, expl:"Dürer (1471-1528) a peint ce lièvre aquarellé avec une précision quasi-scientifique. Chaque poil, chaque reflet dans l'œil — un hommage à la beauté de l'animal réel." },
+  { primary:false, q:"Qu'est-ce que la zoothérapie ?", choices:["Utilisation thérapeutique des animaux","Étude scientifique des animaux","Protection juridique des animaux","Élevage biologique des animaux"], correct:0, expl:"La zoothérapie utilise des animaux (chiens, chevaux, dauphins) dans des contextes thérapeutiques. Elle réduit le stress, l'anxiété et améliore le bien-être des personnes âgées, autistes ou dépressives." },
+  { primary:false, q:"Quel pourcentage d'ADN partageons-nous avec le chimpanzé ?", choices:["98,7 %","75 %","50 %","99,9 %"], correct:0, expl:"Nous partageons environ 98,7 % de notre ADN avec le chimpanzé — notre plus proche parent biologique. Argument central de ceux qui réclament une protection juridique renforcée pour les grands singes." },
+  { primary:false, q:"Quelle est la citation de Schopenhauer sur les animaux ?", choices:["Celui qui est cruel envers les animaux ne peut être un homme bon","Jusqu'à ce qu'on ait aimé un animal, une partie de notre âme reste endormie","La question est : peuvent-ils souffrir ?","On peut juger le cœur d'un homme à la façon dont il traite les animaux"], correct:0, expl:"Schopenhauer affirmait que la compassion pour les animaux révèle la bonté morale générale. La façon dont quelqu'un traite un être sans défense révèle son caractère profond." },
+  { primary:false, q:"Quel roman de George Orwell utilise des animaux pour critiquer le stalinisme ?", choices:["La Ferme des animaux (1945)","Maus (1986)","Croc-Blanc (1906)","Le Livre de la Jungle (1894)"], correct:0, expl:"La Ferme des animaux (1945) d'Orwell raconte une révolution d'animaux qui renverse les fermiers humains, avant que les cochons n'instaurent un régime aussi tyrannique. Satire du totalitarisme stalinien." },
+  { primary:false, q:"Qui est Ganesh dans l'hindouisme ?", choices:["Dieu à tête d'éléphant, fils de Shiva","Dieu à tête de singe, compagnon de Rama","Dieu à tête de taureau, maître du tonnerre","Dieu à tête de serpent, gardien du cosmos"], correct:0, expl:"Ganesh est l'une des divinités les plus vénérées de l'hindouisme. Sa tête d'éléphant symbolise la sagesse et le dépassement des obstacles — l'animal élevé au rang du divin." },
+  { primary:false, q:"Aristote définit l'homme comme 'animal…' — complète.", choices:["politique (zôon politikon)","rationnel (zôon logikon)","social (zôon koinônikon)","conscient (zôon noêtikon)"], correct:0, expl:"Aristote définit l'homme comme 'zôon politikon' dans La Politique. Ce qui distingue l'homme des autres animaux est le logos (raison et langage), permettant de vivre en cité et de distinguer le juste de l'injuste." },
+
+  // ── PRIMAIRES — 🔬 CONNAÎTRE L'ANIMAL ────────────────────────────────────
+  { primary:true, q:"Quel pourcentage des animaux utilisés en laboratoire sont des rongeurs (souris et rats) ?", choices:["Plus de 80 %","Environ 50 %","Environ 30 %","Moins de 10 %"], correct:0, expl:"Les souris et rats représentent plus de 80 % des animaux utilisés en expérimentation scientifique. Leur proximité génétique avec l'humain en fait des modèles biologiques privilégiés — mais cela pose la question éthique : peut-on connaître l'homme en étudiant l'animal ?" },
+  { primary:true, q:"Qui a publié 'De l'origine des espèces' en 1859 ?", choices:["Charles Darwin","Aristote","Descartes","Peter Singer"], correct:0, expl:"Darwin démontre que les espèces évoluent par sélection naturelle et que l'homme et les grands singes descendent d'un ancêtre commun. Comprendre l'animal, c'est dès lors se comprendre soi-même." },
+  { primary:true, q:"Quel médecin a théorisé la vivisection (opération sur animaux vivants sans anesthésie) dans un ouvrage de 1865 ?", choices:["Claude Bernard","Louis Pasteur","René Descartes","Charles Darwin"], correct:0, expl:"Claude Bernard (Introduction à l'étude de la médecine expérimentale, 1865) pratique et théorise la vivisection. Il considère l'animal comme un outil de connaissance, ce qui déclenche dès le XIXe siècle de vifs débats éthiques." },
+  { primary:true, q:"Quel était le nom du chimpanzé envoyé dans l'espace par la NASA le 31 janvier 1961 ?", choices:["Ham","Laïka","Albert","Pépi"], correct:0, expl:"Ham est le premier grand singe envoyé dans l'espace, avant les astronautes humains. Son vol précède celui d'Alan Shepard de quelques mois. L'animal est utilisé comme substitut humain pour tester les conditions spatiales." },
+  { primary:true, q:"Quelle découverte de Jane Goodall (1960) a remis en cause la frontière entre l'homme et l'animal ?", choices:["Les chimpanzés fabriquent et utilisent des outils","Les chimpanzés parlent une langue structurée","Les chimpanzés reconnaissent leur image dans un miroir","Les chimpanzés peuvent lire des symboles"], correct:0, expl:"Goodall observe en Tanzanie que les chimpanzés taillent des brindilles pour extraire des termites. Jusque-là, l'utilisation d'outils était considérée comme le propre de l'homme — une définition qui s'effondre." },
+  { primary:true, q:"Quel article du Code civil français (2015) reconnaît les animaux comme êtres sensibles ?", choices:["Art. 515-14","Art. L214","Art. 3R","Art. 999-1"], correct:0, expl:"L'article 515-14 du Code civil (loi du 16 février 2015) reconnaît les animaux comme 'êtres vivants doués de sensibilité'. Avant 2015, ils étaient des 'biens meubles'. L'association L214 tire son nom de l'art. L214 du Code rural qui interdit les mauvais traitements." },
+  { primary:true, q:"En quoi consiste la 'Boîte de Skinner' (années 1930) ?", choices:["Un animal appuie sur un levier pour obtenir de la nourriture — conditionnement opérant","Un animal est conditionné par des chocs électriques aléatoires","Un animal est privé de nourriture puis nourri à intervalles fixes","Un animal est exposé à des sons pour tester son audition"], correct:0, expl:"B.F. Skinner place un rat (ou pigeon) dans une boîte avec un levier. En appuyant dessus, l'animal reçoit de la nourriture. Cette expérience fonde le conditionnement opérant : apprentissage par récompense/punition — une influence majeure sur la psychologie." },
+  { primary:true, q:"À quoi travaille le Pr Grégoire Courtine dans ses recherches impliquant des animaux ?", choices:["Réparation de la moelle épinière par stimulation électrique, testée sur des rongeurs","Développement de vaccins à partir de cellules de primates","Étude du comportement social des loups en meute","Thérapie génique testée sur des chimpanzés"], correct:0, expl:"Le Pr Courtine travaille sur la réparation de la moelle épinière par implants électriques, d'abord testés sur des rongeurs paralysés, puis sur des humains. L'animal est le passage obligé avant l'application médicale." },
+  { primary:true, q:"Depuis quand l'Union européenne interdit-elle les tests de produits cosmétiques sur les animaux ?", choices:["2013","2005","2000","1999"], correct:0, expl:"L'UE a interdit en 2013 la vente de tout cosmétique testé sur les animaux. Ce tournant éthique marque la reconnaissance que faire souffrir un animal pour un rouge à lèvres est moralement injustifiable." },
+
+  // ── PRIMAIRES — 🎨 IMAGINER L'ANIMAL ─────────────────────────────────────
+  { primary:true, q:"Quelle est la date approximative des peintures de la grotte Chauvet ?", choices:["-35 000 av. J.-C.","-17 000 av. J.-C.","-5 000 av. J.-C.","5 000 av. J.-C."], correct:0, expl:"La grotte Chauvet (Ardèche) date d'environ -35 000 ans — l'un des plus anciens témoignages d'art humain. Les peintures représentent essentiellement des animaux : lions, rhinocéros, mammouths." },
+  { primary:true, q:"Dans quelle grotte de la préhistoire a-t-on trouvé des peintures datant de -17 000 ans ?", choices:["Lascaux","Chauvet","Altamira","Cosquer"], correct:0, expl:"Lascaux (Dordogne) date d'environ -17 000 ans. Plus de 600 peintures et 1 500 gravures représentant chevaux, aurochs, cerfs, bisons. La grotte Chauvet est plus ancienne (-35 000)." },
+  { primary:true, q:"En quelle année La Fontaine a-t-il publié ses premières Fables ?", choices:["1668","1789","1492","1848"], correct:0, expl:"Les Fables de La Fontaine (1668-1694) utilisent l'anthropomorphisme animal pour critiquer indirectement la cour de Louis XIV. L'animal devient un prétexte pour se comprendre soi-même." },
+  { primary:true, q:"Que représente un 'animal totem' dans les cultures amérindiennes ?", choices:["Un animal spirituel qui protège et définit un individu ou un clan","Un animal apprivoisé utilisé lors des cérémonies","Un animal chassé lors d'un rite de passage","Un animal représenté sur les monnaies tribales"], correct:0, expl:"Dans les cultures animistes et amérindiennes, chaque personne ou clan est lié à un animal totem qui le protège et le définit. L'animal est sacralisé, imaginé comme intermédiaire entre le monde humain et le monde spirituel." },
+  { primary:true, q:"Qui est Anubis dans la mythologie égyptienne ?", choices:["Dieu à tête de chacal, gardien des morts","Dieu à tête de chat, gardien du foyer","Dieu à tête d'ibis, dieu du savoir","Dieu à tête d'éléphant, dieu de la chance"], correct:0, expl:"Anubis, à tête de chacal, guide les âmes vers l'au-delà — c'est un animal psychopompe. Bastet (chat) protège le foyer, Thot (ibis) est le dieu du savoir." },
+  { primary:true, q:"Qu'est-ce qu'un animal psychopompe ?", choices:["Un animal qui guide les âmes vers l'au-delà","Un animal utilisé en zoothérapie","Un animal hybride mi-humain","Un animal totem en Afrique"], correct:0, expl:"Les animaux psychopompes (du grec 'guide d'âme') accompagnent les morts vers l'au-delà dans de nombreuses cultures : Anubis (chacal) en Égypte, Cerbère (chien à trois têtes) en Grèce, le cheval dans les traditions nordiques." },
+  { primary:true, q:"Quel est le nom du chien d'Ulysse dans l'Odyssée d'Homère ?", choices:["Argos","Cerbère","Achille","Priam"], correct:0, expl:"Argos reconnaît Ulysse après 20 ans d'absence — le seul à l'avoir reconnu — et meurt de joie aussitôt. L'un des symboles les plus puissants de la fidélité animale dans la littérature." },
+  { primary:true, q:"Pourquoi John Steinbeck a-t-il intitulé son roman 'Des souris et des hommes' (1937) ?", choices:["En référence à un poème de Robert Burns sur une souris dont le nid est détruit","En référence aux expériences de laboratoire sur les souris","En hommage à la souris comme symbole de rusticité américaine","En référence à une fable de La Fontaine"], correct:0, expl:"Le titre reprend un vers du poème 'To a Mouse' de Robert Burns (1785) : 'Les plans les mieux pensés des souris et des hommes tournent souvent mal.' L'animal symbolise la vulnérabilité face à un monde qui nous écrase." },
+  { primary:true, q:"Dans 'Sans famille' (1878) d'Hector Malot, quel rôle jouent les animaux auprès de Rémi ?", choices:["Ils sont ses seuls compagnons et sa famille de substitution","Ils sont des animaux sauvages qu'il apprivoise progressivement","Ils sont des outils de travail dans les mines de charbon","Ils symbolisent la menace de la nature sauvage"], correct:0, expl:"Rémi voyage avec la troupe d'animaux savants de Vitalis (le chien Capi, le singe Joli-Cœur). Abandonnés par les humains, les animaux deviennent sa vraie famille — solidarité interespèces qui comble le vide affectif." },
+  { primary:true, q:"Quel est le titre de la sculpture de Louise Bourgeois représentant une araignée géante (1999) ?", choices:["Maman","Croc-Blanc","Méduse","Totem"], correct:0, expl:"'Maman' (1999) est une araignée de bronze monumentale (~9 m). Elle réimagine l'araignée — souvent perçue comme effrayante — en figure protectrice, symbole de la mère tisseuse. Vision radicalement nouvelle de la bête." },
+  { primary:true, q:"Que symbolise l'œuvre 'Le dompteur de panthère' de Jean Velbert (musée des Beaux-Arts de Tours) ?", choices:["La fascination humaine pour la domination de l'animal sauvage","La cohabitation pacifique entre l'homme et le monde animal","La dénonciation de la cruauté des cirques","L'admiration pour la beauté naturelle des grands félins"], correct:0, expl:"Cette sculpture illustre la fascination humaine pour la maîtrise de l'animal sauvage. Dompter, c'est vouloir contrôler une nature qui nous dépasse — mais c'est aussi une violence symbolique sur le vivant." },
+  { primary:true, q:"Que dit la Genèse (Bible) sur la relation entre l'homme et l'animal ?", choices:["Dieu donne à l'homme la domination sur les animaux","L'homme et l'animal sont créés égaux par Dieu","L'animal est sacré et ne peut être tué","L'homme descend des animaux selon la Bible"], correct:0, expl:"Dans la Genèse (1:28), Dieu donne à l'homme la 'domination' sur les animaux. Cette vision a profondément structuré le rapport occidental. L'Arche de Noé montre cependant une responsabilité de l'homme envers toutes les espèces." },
+  { primary:true, q:"Quel animal vivait avec le poète anarchiste Léo Ferré ?", choices:["Un chimpanzé nommé Pépi","Un loup nommé Noir","Un corbeau nommé Edgar","Un perroquet nommé Rimbaud"], correct:0, expl:"Léo Ferré vivait avec Pépi, un chimpanzé qu'il considérait comme un membre de sa famille. Pour ce chanteur anarchiste, refuser toute hiérarchie — même entre espèces — était cohérent avec sa philosophie." },
+
+  // ── PRIMAIRES — 🤔 COMPRENDRE L'ANIMAL ───────────────────────────────────
+  { primary:true, q:"Quelle est la thèse centrale de Descartes sur les animaux ?", choices:["L'animal est une machine sans âme","L'animal est conscient comme l'homme","L'animal mérite des droits","L'animal est supérieur à l'homme"], correct:0, expl:"Dans le Discours de la méthode (1637), Descartes soutient que les animaux sont de simples automates sans âme ni pensée. Leurs cris de douleur ne sont que des mécanismes, comme le bruit d'une horloge brisée." },
+  { primary:true, q:"Qui a dit : 'La grandeur d'une nation se juge à la façon dont elle traite ses animaux' ?", choices:["Gandhi","Kant","Schopenhauer","Anatole France"], correct:0, expl:"Cette citation de Gandhi place le traitement des animaux au cœur de la morale collective. Une société qui maltraite les animaux révèle quelque chose d'inquiétant sur ses valeurs profondes." },
+  { primary:true, q:"Pourquoi les scientifiques étudient-ils le mécanisme d'hibernation de l'ours ?", choices:["Pour comprendre comment il conserve sa masse musculaire sans bouger pendant des mois","Pour analyser sa résistance au froid extrême","Pour étudier son système immunitaire en hiver","Pour comprendre comment il se nourrit sans manger"], correct:0, expl:"L'ours dort plusieurs mois sans perdre sa masse musculaire. Les scientifiques étudient ce mécanisme pour soigner les patients alités longtemps ou les astronautes en apesanteur — du biomimétisme médical." },
+  { primary:true, q:"Qui a formalisé le concept de 'biomimétisme' en 1997 ?", choices:["Janine Benyus","Charles Darwin","Jane Goodall","Claude Bernard"], correct:0, expl:"Janine Benyus (1997) : s'inspirer des solutions du vivant au fil de l'évolution. Exemples : le Velcro (crochet de bardane), les façades imitant la peau de requin, les drones inspirés des oiseaux. Comprendre l'animal = 3,8 milliards d'années d'ingénierie naturelle." },
+  { primary:true, q:"Que sont les 'NAC' et que révèlent-ils sur notre rapport à l'animal ?", choices:["Des animaux exotiques comme l'iguane ou le crocodile, témoignant d'une fascination pour le sauvage","Des animaux virtuels (jeux vidéo) qui remplacent les animaux réels","Des races créées par sélection génétique","Des robots animaux utilisés en zoothérapie"], correct:0, expl:"Les NAC (iguanes, crocodiles, serpents...) sont des animaux sauvages élevés comme animaux de compagnie. Ce phénomène révèle nos projections et désirs plus que notre compréhension réelle du vivant." },
+  { primary:true, q:"Pourquoi la pêche au chalut est-elle critiquée comme emblème d'un rapport utilitaire à l'animal ?", choices:["Elle dévaste les fonds marins et capture des espèces non ciblées","Elle épuise les réserves de plancton nécessaires aux baleines","Elle utilise des substances chimiques nocives pour les poissons","Elle détruit les récifs coralliens par les ancres des bateaux"], correct:0, expl:"Le chalutage de fond détruit les écosystèmes benthiques et capture massivement des espèces non ciblées (dauphins, tortues, requins). Emblème d'un rapport purement utilitaire à l'animal marin, sans considération pour l'équilibre des espèces." },
+  { primary:true, q:"Qu'est-ce qui distingue principalement l'élevage écologique de l'élevage industriel ?", choices:["Il respecte les comportements naturels de l'animal : espace, alimentation saine, socialisation","Il utilise uniquement des bâtiments en bois","Il pratique uniquement l'élevage de bovins","Il interdit toute forme d'abattage de l'animal"], correct:0, expl:"L'élevage écologique part du principe que comprendre les besoins naturels de l'animal améliore son bien-être et la qualité des produits. Réconciliation entre utilité économique et respect du vivant." },
+  { primary:true, q:"Quelle association française publie des images d'abattoirs pour dénoncer l'élevage industriel ?", choices:["L214","WWF","PETA","SPE"], correct:0, expl:"L214 publie régulièrement des images de caméra cachée dans les abattoirs et élevages. Son nom vient de l'article L214 du Code rural qui reconnaît les animaux comme êtres sensibles." },
 ];
+
+// ── Données "Qu'est-ce que cache ce sujet ?" ─────────────────────────────
+// primary:true = référence de la liste des 28 prioritaires
 
 const CACHE_SUJETS = [
   {
     sujet: "Pensez-vous que l'animal puisse être considéré comme un véritable ami pour l'homme ?",
     refs: [
-      { ref:"Argos, le chien d'Ulysse (Odyssée, Homère)", correct:true, why:"Symbole de la fidélité absolue — l'animal qui reconnaît son maître après 20 ans." },
-      { ref:"Déclaration de Cambridge sur la Conscience (2012)", correct:true, why:"Base scientifique : les animaux ont une conscience émotionnelle, donc un lien affectif réel est possible." },
-      { ref:"Zoothérapie — chiens et chevaux thérapeutiques", correct:true, why:"Prouve le soutien affectif concret de l'animal — qualité amicale mesurable." },
-      { ref:"Jack London, Croc-Blanc (1906)", correct:true, why:"Illustre la construction progressive d'un lien entre l'homme et le loup — vers la confiance mutuelle." },
-      { ref:"Grotte Chauvet (-35 000 av. J.-C.)", correct:false, why:"L'art rupestre parle du rapport à l'animal sacré, pas du lien d'amitié. Hors sujet ici." },
-      { ref:"FAO (2013) — 14,5% des GES liés à l'élevage", correct:false, why:"Concerne l'impact environnemental de l'élevage, pas la relation affective." },
-      { ref:"Aristote — 3 types d'amitié (Éthique à Nicomaque)", correct:true, why:"Définit l'amitié — indispensable pour questionner si l'animal peut l'atteindre." },
-      { ref:"Donna Haraway, When Species Meet (2008)", correct:true, why:"Propose une 'éthique du care' inter-espèces — un modèle de lien homme-animal." },
+      { primary:true,  ref:"Argos, le chien d'Ulysse (Odyssée, Homère, ~VIIIe s. av. J.-C.)", correct:true, why:"Symbole de la fidélité absolue — l'animal qui reconnaît son maître après 20 ans." },
+      { primary:false, ref:"Déclaration de Cambridge sur la Conscience (2012)", correct:true, why:"Base scientifique : les animaux ont une conscience émotionnelle, donc un lien affectif réel est possible." },
+      { primary:false, ref:"Zoothérapie — chiens et chevaux thérapeutiques", correct:true, why:"Prouve le soutien affectif concret de l'animal — qualité amicale mesurable." },
+      { primary:false, ref:"Jack London, Croc-Blanc (1906)", correct:true, why:"Illustre la construction progressive d'un lien entre l'homme et le loup — vers la confiance mutuelle." },
+      { primary:true,  ref:"Peintures rupestres — Grotte Chauvet (-35 000 av. J.-C.)", correct:false, why:"L'art rupestre parle du rapport à l'animal sacré, pas d'un lien d'amitié. Hors sujet ici." },
+      { primary:false, ref:"FAO (2013) — 14,5 % des GES liés à l'élevage", correct:false, why:"Concerne l'impact environnemental de l'élevage, pas la relation affective." },
+      { primary:false, ref:"Aristote — 3 types d'amitié (Éthique à Nicomaque)", correct:true, why:"Définit l'amitié — indispensable pour questionner si l'animal peut l'atteindre." },
+      { primary:false, ref:"Donna Haraway, When Species Meet (2008)", correct:true, why:"Propose une 'éthique du care' inter-espèces — un modèle de lien homme-animal." },
     ]
   },
   {
     sujet: "Faut-il interdire l'élevage industriel ?",
     refs: [
-      { ref:"FAO (2013) — l'élevage représente 14,5% des GES mondiaux", correct:true, why:"Argument environnemental central — chiffre frappant pour une accroche." },
-      { ref:"Peter Singer, La Libération animale (1975)", correct:true, why:"La sensibilité des animaux d'élevage rend leur souffrance moralement inacceptable." },
-      { ref:"L214 — images d'abattoirs français", correct:true, why:"Preuve documentaire des conditions réelles de l'élevage industriel en France." },
-      { ref:"Règle des 3R (Replace, Reduce, Refine)", correct:true, why:"Alternative à l'interdiction totale : réformer progressivement les pratiques." },
-      { ref:"Argos, le chien d'Ulysse (Odyssée)", correct:false, why:"Concerne la relation affective, pas l'industrie alimentaire." },
-      { ref:"Maus (Spiegelman, 1986)", correct:false, why:"Animalisation des Juifs par les nazis — hors sujet pour l'élevage." },
-      { ref:"Déclaration de Cambridge (2012)", correct:true, why:"Les animaux d'élevage sont conscients et sensibles — fondement du débat moral." },
-      { ref:"Viande cellulaire — 1er burger in vitro (2013)", correct:true, why:"Alternative technologique qui pourrait résoudre le problème sans interdiction." },
+      { primary:false, ref:"FAO (2013) — l'élevage représente 14,5 % des GES mondiaux", correct:true, why:"Argument environnemental central — chiffre frappant pour une accroche." },
+      { primary:false, ref:"Peter Singer, La Libération animale (1975)", correct:true, why:"La sensibilité des animaux d'élevage rend leur souffrance moralement inacceptable." },
+      { primary:true,  ref:"L214 — images d'abattoirs français", correct:true, why:"Preuve documentaire des conditions réelles de l'élevage industriel en France." },
+      { primary:false, ref:"Règle des 3R (Replace, Reduce, Refine)", correct:true, why:"Alternative à l'interdiction totale : réformer progressivement les pratiques." },
+      { primary:true,  ref:"Argos, le chien d'Ulysse (Odyssée)", correct:false, why:"Concerne la relation affective, pas l'industrie alimentaire." },
+      { primary:false, ref:"Maus (Spiegelman, 1986)", correct:false, why:"Animalisation des Juifs par les nazis — hors sujet pour l'élevage." },
+      { primary:false, ref:"Déclaration de Cambridge (2012)", correct:true, why:"Les animaux d'élevage sont conscients et sensibles — fondement du débat moral." },
+      { primary:true,  ref:"Élevage écologique — plein air, sans antibiotiques", correct:true, why:"Alternative concrète à l'élevage industriel — compromis entre économie et éthique." },
     ]
   },
   {
     sujet: "Les animaux ont-ils des droits ?",
     refs: [
-      { ref:"Code civil, art. 515-14 (France, 2015)", correct:true, why:"La France reconnaît les animaux comme êtres sensibles — premier pas vers des droits." },
-      { ref:"Peter Singer — le spécisme (La Libération animale, 1975)", correct:true, why:"Argument philosophique central : discriminer les animaux est aussi injustifiable que le racisme." },
-      { ref:"Tom Regan, The Case for Animal Rights (1983)", correct:true, why:"Les animaux sont 'sujets d'une vie' — ils méritent des droits pour eux-mêmes." },
-      { ref:"Règle des 3R — expérimentation animale", correct:true, why:"Protection pratique existante — forme de droit déjà accordé aux animaux de laboratoire." },
-      { ref:"Grotte Chauvet (-35 000)", correct:false, why:"L'art préhistorique témoigne d'un rapport sacré à l'animal, pas de droits juridiques." },
-      { ref:"La Fontaine, Fables (1668)", correct:false, why:"L'anthropomorphisme moral ne concerne pas directement les droits juridiques des animaux." },
-      { ref:"Déclaration de Cambridge (2012)", correct:true, why:"La conscience prouvée fonde la légitimité d'une protection — base scientifique des droits." },
-      { ref:"Bentham : 'peuvent-ils souffrir ?'", correct:true, why:"La souffrance — et non la raison — comme critère du droit à la protection." },
+      { primary:true,  ref:"Art. 515-14 du Code civil (France, 2015) — animaux êtres sensibles", correct:true, why:"La France reconnaît les animaux comme êtres sensibles — premier pas vers des droits." },
+      { primary:false, ref:"Peter Singer — le spécisme (La Libération animale, 1975)", correct:true, why:"Argument philosophique central : discriminer les animaux est aussi injustifiable que le racisme." },
+      { primary:false, ref:"Tom Regan, The Case for Animal Rights (1983)", correct:true, why:"Les animaux sont 'sujets d'une vie' — ils méritent des droits pour eux-mêmes." },
+      { primary:false, ref:"Règle des 3R — expérimentation animale", correct:true, why:"Protection pratique existante — forme de droit déjà accordé aux animaux de laboratoire." },
+      { primary:true,  ref:"Peintures rupestres — Grotte Chauvet (-35 000)", correct:false, why:"L'art préhistorique témoigne d'un rapport sacré à l'animal, pas de droits juridiques." },
+      { primary:true,  ref:"Fables de La Fontaine (1668)", correct:false, why:"L'anthropomorphisme moral ne concerne pas directement les droits juridiques des animaux." },
+      { primary:false, ref:"Déclaration de Cambridge (2012)", correct:true, why:"La conscience prouvée fonde la légitimité d'une protection — base scientifique des droits." },
+      { primary:false, ref:"Bentham : 'peuvent-ils souffrir ?'", correct:true, why:"La souffrance — et non la raison — comme critère du droit à la protection." },
     ]
   },
   {
     sujet: "L'art permet-il de mieux comprendre notre rapport aux animaux ?",
     refs: [
-      { ref:"Grotte Chauvet (-35 000 av. J.-C.)", correct:true, why:"Les premières traces d'art humain sont des animaux — preuve que l'art et l'animal sont liés dès les origines." },
-      { ref:"Albrecht Dürer, Le Lièvre (1502)", correct:true, why:"Observation minutieuse = art comme moyen de voir l'animal tel qu'il est vraiment." },
-      { ref:"La Fontaine, Fables (1668)", correct:true, why:"L'anthropomorphisme littéraire révèle nos projections sur les animaux — critique morale via l'animal." },
-      { ref:"Art Spiegelman, Maus (1986)", correct:true, why:"L'animalisation utilisée pour dénoncer la déshumanisation — l'art critique nos comportements envers l'animal." },
-      { ref:"Jack London, Croc-Blanc (1906)", correct:true, why:"Le roman donne accès à la subjectivité animale — empathie littéraire = compréhension du rapport à l'animal." },
-      { ref:"FAO (2013) — élevage et GES", correct:false, why:"Chiffre économique/environnemental — pas directement lié à la question du rapport via l'art." },
-      { ref:"Louise Bourgeois, Maman (1999)", correct:true, why:"L'araignée monumentale trouble nos frontières affectives envers l'animal — art et rapport émotionnel." },
-      { ref:"Blackfish (documentaire, 2013)", correct:true, why:"Cinéma documentaire qui a changé le regard public sur les orques en captivité — art = prise de conscience." },
+      { primary:true,  ref:"Peintures rupestres — Grotte Chauvet (-35 000 av. J.-C.)", correct:true, why:"Les premières traces d'art humain sont des animaux — preuve que l'art et l'animal sont liés dès les origines." },
+      { primary:false, ref:"Albrecht Dürer, Le Lièvre (1502)", correct:true, why:"Observation minutieuse = art comme moyen de voir l'animal tel qu'il est vraiment." },
+      { primary:true,  ref:"Fables de La Fontaine (1668)", correct:true, why:"L'anthropomorphisme littéraire révèle nos projections sur les animaux — critique morale via l'animal." },
+      { primary:false, ref:"Art Spiegelman, Maus (1986)", correct:true, why:"L'animalisation utilisée pour dénoncer la déshumanisation — l'art critique nos comportements envers l'animal." },
+      { primary:false, ref:"Jack London, Croc-Blanc (1906)", correct:true, why:"Le roman donne accès à la subjectivité animale — empathie littéraire = compréhension du rapport à l'animal." },
+      { primary:false, ref:"FAO (2013) — élevage et GES", correct:false, why:"Chiffre économique/environnemental — pas directement lié à la question du rapport via l'art." },
+      { primary:true,  ref:"Louise Bourgeois, Maman (1999)", correct:true, why:"L'araignée monumentale trouble nos frontières affectives envers l'animal — art et rapport émotionnel." },
+      { primary:false, ref:"Blackfish (documentaire, 2013)", correct:true, why:"Cinéma documentaire qui a changé le regard public sur les orques en captivité — art = prise de conscience." },
     ]
   },
   {
     sujet: "Manger de la viande est-il un acte moralement neutre ?",
     refs: [
-      { ref:"Peter Singer — le spécisme (1975)", correct:true, why:"Consommer un être sensible dont on reconnaît la souffrance est moralement chargé." },
-      { ref:"FAO (2013) — l'élevage représente 14,5% des GES", correct:true, why:"L'impact environnemental de l'acte alimentaire individuel — responsabilité collective." },
-      { ref:"L214 — conditions d'élevage en France", correct:true, why:"Acheter un produit d'élevage intensif = financer ces pratiques — engagement moral indirect." },
-      { ref:"Déclaration de Cambridge (2012)", correct:true, why:"Si les animaux souffrent consciemment, leur tuer sans nécessité engage une responsabilité." },
-      { ref:"Grotte Chauvet — traces de chasse préhistorique", correct:true, why:"L'homme est omnivore depuis -35 000 ans — argument pour la 'naturalité' de l'acte." },
-      { ref:"Maus (Spiegelman)", correct:false, why:"Animalisation politique — sans lien direct avec la consommation alimentaire." },
-      { ref:"Aristote — types d'amitié", correct:false, why:"Hors sujet — concerne la relation affective, pas l'alimentation." },
-      { ref:"Viande cellulaire — 1er burger in vitro (2013)", correct:true, why:"Alternative technologique qui pourrait rendre l'acte moralement neutre à l'avenir." },
+      { primary:false, ref:"Peter Singer — le spécisme (1975)", correct:true, why:"Consommer un être sensible dont on reconnaît la souffrance est moralement chargé." },
+      { primary:false, ref:"FAO (2013) — l'élevage représente 14,5 % des GES", correct:true, why:"L'impact environnemental de l'acte alimentaire individuel — responsabilité collective." },
+      { primary:true,  ref:"L214 — conditions d'élevage en France", correct:true, why:"Acheter un produit d'élevage intensif = financer ces pratiques — engagement moral indirect." },
+      { primary:false, ref:"Déclaration de Cambridge (2012)", correct:true, why:"Si les animaux souffrent consciemment, leur tuer sans nécessité engage une responsabilité." },
+      { primary:true,  ref:"Peintures rupestres Chauvet — traces de chasse préhistorique", correct:true, why:"L'homme est omnivore depuis -35 000 ans — argument pour la 'naturalité' de l'acte." },
+      { primary:false, ref:"Maus (Spiegelman)", correct:false, why:"Animalisation politique — sans lien direct avec la consommation alimentaire." },
+      { primary:false, ref:"Aristote — types d'amitié", correct:false, why:"Hors sujet — concerne la relation affective, pas l'alimentation." },
+      { primary:false, ref:"Viande cellulaire — 1er burger in vitro (2013)", correct:true, why:"Alternative technologique qui pourrait rendre l'acte moralement neutre à l'avenir." },
+    ]
+  },
+  {
+    sujet: "L'expérimentation animale est-elle moralement justifiable ?",
+    refs: [
+      { primary:true,  ref:"Claude Bernard — vivisection (1865)", correct:true, why:"Père de l'expérimentation in vivo : l'animal comme outil indispensable de la connaissance médicale." },
+      { primary:true,  ref:"Les rongeurs — plus de 80 % des animaux de labo", correct:true, why:"Données concrètes sur l'ampleur du phénomène — argument pour un débat éthique ancré dans la réalité." },
+      { primary:true,  ref:"Ham, chimpanzé de la NASA (1961)", correct:true, why:"L'animal utilisé comme substitut humain pour tester l'intolérable — quelle différence de statut moral ?" },
+      { primary:true,  ref:"Pr Courtine — stimulation électrique, moelle épinière", correct:true, why:"Cas concret : l'expérimentation animale a permis à des paraplégiques de remarcher." },
+      { primary:true,  ref:"Interdit tests cosmétiques sur animaux (UE, 2013)", correct:true, why:"La société trace une limite : toute expérimentation n'est pas justifiable moralement." },
+      { primary:true,  ref:"Boîte de Skinner — conditionnement opérant (années 1930)", correct:true, why:"L'expérience fondatrice de la psychologie comportementale — outil de connaissance majeur." },
+      { primary:true,  ref:"Fables de La Fontaine (1668)", correct:false, why:"L'anthropomorphisme littéraire n'a pas de lien direct avec l'expérimentation scientifique." },
+      { primary:true,  ref:"Animal totem — cultures amérindiennes", correct:false, why:"Vision spirituelle de l'animal — hors du cadre de l'expérimentation scientifique." },
+    ]
+  },
+  {
+    sujet: "Peut-on apprendre de l'animal ?",
+    refs: [
+      { primary:true,  ref:"Jane Goodall — chimpanzés et outils (1960)", correct:true, why:"L'observation de l'animal dans son milieu révèle des capacités insoupçonnées — l'animal nous apprend sur nous-mêmes." },
+      { primary:true,  ref:"Biomimétisme — Janine Benyus (1997)", correct:true, why:"L'ingénierie s'inspire du vivant : le Velcro, les façades anti-frottement, les drones. L'animal = modèle technique." },
+      { primary:true,  ref:"Ours en hibernation — bio-inspiration médicale", correct:true, why:"Conserver la masse musculaire sans bouger inspire la médecine pour les patients alités." },
+      { primary:true,  ref:"Darwin — sélection naturelle (1859)", correct:true, why:"Comprendre l'évolution animale, c'est comprendre les mécanismes du vivant — y compris humain." },
+      { primary:true,  ref:"Boîte de Skinner — conditionnement opérant", correct:true, why:"L'étude du comportement animal a fondé toute la psychologie de l'apprentissage humain." },
+      { primary:true,  ref:"Léo Ferré et Pépi le chimpanzé", correct:false, why:"Relation affective et philosophique — pas directement un apprentissage technique ou scientifique." },
+      { primary:true,  ref:"Descartes — animal-machine (1637)", correct:false, why:"Si l'animal est une machine sans conscience, il n'y a rien à apprendre de lui — argument contraire." },
+      { primary:true,  ref:"NAC — Nouveaux Animaux de Compagnie", correct:false, why:"Phénomène de mode révélant nos projections — l'inverse d'un vrai apprentissage de l'animal." },
     ]
   },
 ];
 
+// ── Points de méthodologie — ce qui ne s'improvise pas ───────────────────
+
+const METHODO_POINTS = [
+  {
+    id: 1,
+    icon: "❓",
+    titre: "La problématique",
+    soustitre: "Transformer le sujet en vraie question philosophique",
+    danger: "Réciter des exemples sans poser de vraie question philosophique",
+    piege: "« Je vais parler de l'homme et de l'animal... »",
+    solution: "Transformer le sujet en une question tendue qui force à prendre position. Cherche la contradiction cachée dans le sujet.",
+    astuce: "Formule : « En quoi [tension] implique-t-elle [enjeu profond] ? »",
+    exemple: {
+      sujet: "L'homme peut-il vivre sans l'animal ?",
+      mauvais: "Comment l'homme se rapporte-t-il à l'animal dans sa vie quotidienne ?",
+      bon: "En quoi notre dépendance à l'animal — pratique, affective, symbolique — révèle-t-elle l'impossibilité pour l'homme de se définir sans lui ?"
+    },
+    refs: ["Descartes (domination) ↔ Goodall (interdépendance)", "Genèse (domination) ↔ Loi 2015 (être sensible)"]
+  },
+  {
+    id: 2,
+    icon: "📋",
+    titre: "Le plan structuré",
+    soustitre: "Chaque partie répond à la problématique, pas juste liste des refs",
+    danger: "Lister des références les unes après les autres sans logique argumentative",
+    piege: "« I. Darwin / II. La Fontaine / III. Jane Goodall »",
+    solution: "Chaque partie = une réponse partielle à la problématique. Les références illustrent l'argument — pas l'inverse.",
+    astuce: "Teste chaque titre de partie : est-ce une réponse à ta problématique ? Oui → OK. Non → à retravailler.",
+    exemple: {
+      sujet: "L'animal est-il un outil ou un sujet ?",
+      mauvais: "I. Darwin / II. Claude Bernard / III. Jane Goodall",
+      bon: "I. L'animal comme outil de la connaissance humaine → II. La reconnaissance d'une sensibilité animale → III. Vers un statut moral et juridique de l'animal"
+    },
+    refs: ["I. Rongeurs, Claude Bernard, Ham → II. Décl. Cambridge, Loi 2015, Interdit cosmétiques → III. Biomimétisme, Gandhi, Élevage éco"]
+  },
+  {
+    id: 3,
+    icon: "🔍",
+    titre: "L'analyse",
+    soustitre: "Référence → implication → lien avec la problématique",
+    danger: "Citer une référence sans expliquer ce qu'elle implique pour le sujet",
+    piege: "« Jane Goodall a étudié les chimpanzés en Tanzanie. »",
+    solution: "Toujours enchaîner : fait → ce que ça implique → lien avec la problématique.",
+    astuce: "Formule AER : Argument (référence) + Explication (implication) + Reformulation (lien problématique).",
+    exemple: {
+      sujet: null,
+      mauvais: "Jane Goodall a observé que les chimpanzés utilisaient des outils.",
+      bon: "Jane Goodall (1960) découvre que les chimpanzés fabriquent des outils → cela remet en cause la définition de l'homme comme seul être rationnel → si l'animal pense et crée, comment justifier qu'on le traite comme un simple objet ?"
+    },
+    refs: ["Boîte de Skinner → l'animal apprend comme l'homme → le libre-arbitre est-il proprement humain ?", "Ham (1961) → l'animal subit avant l'homme → quelle différence de statut moral ?"]
+  },
+  {
+    id: 4,
+    icon: "⚖️",
+    titre: "La nuance",
+    soustitre: "Confronter des points de vue opposés — la marque d'une pensée mature",
+    danger: "Soutenir un seul point de vue sans confronter les opposés",
+    piege: "« L'animal souffre donc il faut le protéger. Toutes mes références le prouvent. »",
+    solution: "Pour chaque affirmation forte, cherche la contre-affirmation. Deux positions contradictoires peuvent chacune avoir de la valeur.",
+    astuce: "Utilise « Certes... / Mais... / Il faut cependant... » pour structurer la nuance sans t'y perdre.",
+    exemple: {
+      sujet: null,
+      mauvais: "L'animal souffre, donc toute expérimentation est injuste.",
+      bon: "Descartes (1637) considère l'animal comme une machine sans souffrance réelle — vision qui a longtemps justifié l'expérimentation. Mais Goodall (1960) et la Déclaration de Cambridge (2012) prouvent une intelligence et une sensibilité animales. Faut-il interdire toute expérimentation, ou la réguler — comme le font les 3R ?"
+    },
+    refs: ["Descartes (animal-machine) ↔ Goodall (intelligence)", "Claude Bernard (l'animal outil) ↔ Interdit cosmétiques UE 2013", "Genèse (domination) ↔ Gandhi (baromètre moral)"]
+  },
+  {
+    id: 5,
+    icon: "🎯",
+    titre: "La conclusion",
+    soustitre: "Réponse personnelle + ouverture — pas juste un résumé",
+    danger: "Résumer sans apporter de réponse personnelle ni nuancée",
+    piege: "« En conclusion, il y a des avantages et des inconvénients dans notre rapport à l'animal. »",
+    solution: "Résoudre la tension de la problématique. Prendre position — de façon nuancée, mais ferme. Ouvrir sur une question plus large.",
+    astuce: "Structure : bilan (réponse à la problématique) + position nuancée + ouverture sur un enjeu plus vaste.",
+    exemple: {
+      sujet: null,
+      mauvais: "En conclusion, notre rapport à l'animal est complexe et évolue avec le temps.",
+      bon: "Notre rapport à l'animal est le miroir de notre rapport à l'altérité : reconnaître aujourd'hui la sensibilité animale — via la loi de 2015, Goodall ou l'interdiction des tests cosmétiques — c'est définir un humanisme fondé sur la responsabilité, non la domination. Ouverture : cette évolution concernera-t-elle demain les intelligences artificielles ?"
+    },
+    refs: ["Loi 2015 + Goodall + Interdit cosmétiques → progression historique", "Gandhi comme fil rouge moral de la conclusion", "Biomimétisme comme modèle de relation non-dominante"]
+  },
+];
+
+// ── Vue principale ────────────────────────────────────────────────────────
+
 function CultureQuizView({ state, updateState, back }) {
-  const [subMode, setSubMode] = React.useState(null); // 'qcm' | 'cache'
+  const [subMode, setSubMode] = React.useState(null); // 'qcm' | 'cache' | 'methodo'
 
   if (!subMode) return <CultureMenu back={back} setSubMode={setSubMode} />;
   if (subMode === 'qcm') return <QuizQCM back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'cache') return <QuizCache back={() => setSubMode(null)} state={state} updateState={updateState} />;
+  if (subMode === 'methodo') return <MethodoReview back={() => setSubMode(null)} />;
   return null;
 }
 
 function CultureMenu({ back, setSubMode }) {
+  const nPrimary = CULTURE_QCM.filter(q => q.primary).length;
+  const nSecondary = CULTURE_QCM.filter(q => !q.primary).length;
+
   return (
-    <div style={{ maxWidth:760, margin:'0 auto', padding:'24px 20px 80px' }}>
+    <div style={{ maxWidth:800, margin:'0 auto', padding:'24px 20px 80px' }}>
       <TopNav back={back} title="Connaissances culturelles" />
 
-      <PaperCard style={{ padding:24, marginBottom:20, background:'linear-gradient(135deg, oklch(0.96 0.04 30), oklch(0.94 0.06 50))',
+      <PaperCard style={{ padding:24, marginBottom:20,
+        background:'linear-gradient(135deg, oklch(0.96 0.04 30), oklch(0.94 0.06 50))',
         border:'1.5px solid oklch(0.86 0.10 45)' }}>
         <div style={{ fontFamily:'var(--font-display)', fontSize:22, fontWeight:700,
           color:'oklch(0.22 0.08 30)', marginBottom:8 }}>
-          Apprends les références par cœur
+          Prépare tes références par cœur
         </div>
-        <div style={{ fontSize:14, color:'oklch(0.35 0.05 30)', lineHeight:1.6 }}>
-          Deux jeux pour ancrer les connaissances culturelles essentielles au brevet.<br />
-          Chaque référence que tu connais = un argument que tu peux mobiliser dans un essai.
+        <div style={{ fontSize:13.5, color:'oklch(0.35 0.05 30)', lineHeight:1.6 }}>
+          <span style={{ display:'inline-block', background:'oklch(0.93 0.12 75)',
+            border:'1px solid oklch(0.80 0.14 75)', borderRadius:6, padding:'2px 8px',
+            fontSize:12, fontWeight:700, color:'oklch(0.40 0.12 75)', marginRight:6 }}>
+            ★ {nPrimary} prioritaires
+          </span>
+          à maîtriser absolument ·{' '}
+          <span style={{ display:'inline-block', background:'oklch(0.93 0.01 280)',
+            border:'1px solid oklch(0.84 0.005 280)', borderRadius:6, padding:'2px 8px',
+            fontSize:12, fontWeight:700, color:'oklch(0.50 0.02 280)', marginRight:6 }}>
+            {nSecondary} secondaires
+          </span>
+          pour enrichir ta culture générale.
         </div>
       </PaperCard>
 
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:16 }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:16 }}>
         <ModeCard
           icon="🎯"
           title="QCM — Connaissances"
-          desc="30 questions sur les auteurs, œuvres, dates et concepts clés du cours. 4 réponses proposées."
+          desc={`${CULTURE_QCM.length} questions sur les auteurs, œuvres, dates et concepts. Filtre par type : prioritaires ou secondaires.`}
           color="oklch(0.55 0.13 200)"
           onClick={() => setSubMode('qcm')}
         />
         <ModeCard
           icon="🔍"
           title="Qu'est-ce que cache ce sujet ?"
-          desc="Un sujet d'essai s'affiche. Tu identifies quelles références culturelles sont pertinentes — et lesquelles sont des pièges."
+          desc="Un sujet d'essai s'affiche. Identifie les références pertinentes — et les pièges. Les refs prioritaires sont signalées."
           color="oklch(0.52 0.14 300)"
           onClick={() => setSubMode('cache')}
+        />
+        <ModeCard
+          icon="📝"
+          title="Méthodologie de l'essai"
+          desc="5 erreurs fatales à ne pas commettre : problématique, plan, analyse, nuance, conclusion. Exemples concrets inclus."
+          color="oklch(0.50 0.16 45)"
+          onClick={() => setSubMode('methodo')}
         />
       </div>
     </div>
@@ -154,9 +317,9 @@ function ModeCard({ icon, title, desc, color, onClick }) {
       border:`1.5px solid color-mix(in oklch, ${color} 20%, white)`,
     }}>
       <div style={{ fontSize:36, marginBottom:12 }}>{icon}</div>
-      <div style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:18,
+      <div style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:17,
         color:'oklch(0.22 0.02 280)', marginBottom:8 }}>{title}</div>
-      <div style={{ fontSize:13.5, color:'oklch(0.45 0.02 280)', lineHeight:1.55, marginBottom:16 }}>{desc}</div>
+      <div style={{ fontSize:13, color:'oklch(0.45 0.02 280)', lineHeight:1.55, marginBottom:16 }}>{desc}</div>
       <Btn variant="solid" color={color} onClick={onClick}>Commencer →</Btn>
     </PaperCard>
   );
@@ -164,8 +327,79 @@ function ModeCard({ icon, title, desc, color, onClick }) {
 
 // ── QCM Mode ──────────────────────────────────────────────────────────────
 
+const QCM_FILTERS = [
+  { key:'all',       label:'Toutes',        count: CULTURE_QCM.length },
+  { key:'primary',   label:'★ Prioritaires', count: CULTURE_QCM.filter(q=>q.primary).length },
+  { key:'secondary', label:'Secondaires',    count: CULTURE_QCM.filter(q=>!q.primary).length },
+];
+
 function QuizQCM({ back, state, updateState }) {
-  const questions = React.useMemo(() => shuffle([...CULTURE_QCM]), []);
+  const [filter, setFilter] = React.useState('all');
+  const [started, setStarted] = React.useState(false);
+
+  if (!started) {
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="QCM — Connaissances" />
+        <PaperCard style={{ padding:28, marginBottom:20,
+          background:'linear-gradient(135deg, oklch(0.97 0.02 200), oklch(0.95 0.04 220))',
+          border:'1.5px solid oklch(0.85 0.08 200)' }}>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
+            color:'oklch(0.22 0.06 200)', marginBottom:16 }}>
+            Choisis le type de questions
+          </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+            {QCM_FILTERS.map(f => (
+              <button key={f.key} onClick={() => setFilter(f.key)} style={{
+                padding:'14px 18px', borderRadius:12, textAlign:'left',
+                border: filter === f.key ? '2px solid oklch(0.55 0.13 200)' : '2px solid oklch(0.88 0.005 280)',
+                background: filter === f.key ? 'oklch(0.93 0.06 200)' : 'white',
+                cursor:'pointer', display:'flex', alignItems:'center', gap:12,
+                fontFamily:'var(--font-ui)', transition:'all .15s ease',
+              }}>
+                <span style={{
+                  width:20, height:20, borderRadius:'50%', flexShrink:0,
+                  border: filter === f.key ? '6px solid oklch(0.55 0.13 200)' : '2px solid oklch(0.75 0.01 280)',
+                  background: 'white',
+                }} />
+                <div>
+                  <div style={{ fontWeight:700, fontSize:14,
+                    color: filter === f.key ? 'oklch(0.28 0.09 200)' : 'oklch(0.28 0.02 280)' }}>
+                    {f.label}
+                    {f.key === 'primary' && (
+                      <span style={{ marginLeft:8, fontSize:11, fontWeight:600,
+                        background:'oklch(0.93 0.12 75)', color:'oklch(0.40 0.12 75)',
+                        padding:'2px 6px', borderRadius:4 }}>
+                        À maîtriser absolument
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ fontSize:12, color:'oklch(0.50 0.02 280)', marginTop:2 }}>
+                    {f.count} question{f.count > 1 ? 's' : ''}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </PaperCard>
+        <Btn variant="solid" color="oklch(0.55 0.13 200)" onClick={() => setStarted(true)}>
+          Commencer →
+        </Btn>
+      </div>
+    );
+  }
+
+  return <QuizQCMGame back={back} state={state} updateState={updateState} filter={filter} />;
+}
+
+function QuizQCMGame({ back, state, updateState, filter }) {
+  const questions = React.useMemo(() => {
+    const pool = filter === 'primary' ? CULTURE_QCM.filter(q => q.primary)
+               : filter === 'secondary' ? CULTURE_QCM.filter(q => !q.primary)
+               : CULTURE_QCM;
+    return shuffle([...pool]);
+  }, [filter]);
+
   const [qi, setQi] = React.useState(0);
   const [selected, setSelected] = React.useState(null);
   const [score, setScore] = React.useState(0);
@@ -174,8 +408,7 @@ function QuizQCM({ back, state, updateState }) {
   function choose(i) {
     if (selected !== null) return;
     setSelected(i);
-    const correct = i === questions[qi].correct;
-    if (correct) setScore(s => s + 1);
+    if (i === questions[qi].correct) setScore(s => s + 1);
   }
 
   function next() {
@@ -200,8 +433,8 @@ function QuizQCM({ back, state, updateState }) {
           color:'oklch(0.30 0.10 60)', marginBottom:8 }}>
           {score} / {questions.length}
         </div>
-        <div style={{ fontSize:15, color:'oklch(0.40 0.07 60)', marginBottom:8 }}>
-          {score >= questions.length * 0.8 ? 'Excellent ! Tu maîtrises les références.' :
+        <div style={{ fontSize:15, color:'oklch(0.40 0.07 60)', marginBottom:16 }}>
+          {score >= questions.length * 0.8 ? 'Excellent ! Tu maîtrises ces références.' :
            score >= questions.length * 0.5 ? 'Bien ! Quelques lacunes à combler.' :
            'Continue d\'apprendre — ces références sont essentielles.'}
         </div>
@@ -224,7 +457,15 @@ function QuizQCM({ back, state, updateState }) {
         </div>
       </div>
 
-      <PaperCard style={{ padding:28, marginBottom:16, background:'oklch(0.975 0.01 280)' }}>
+      <PaperCard style={{ padding:24, marginBottom:16, background:'oklch(0.975 0.01 280)' }}>
+        {q.primary && (
+          <div style={{ display:'inline-flex', alignItems:'center', gap:4,
+            background:'oklch(0.93 0.12 75)', border:'1px solid oklch(0.80 0.14 75)',
+            borderRadius:6, padding:'2px 8px', fontSize:11, fontWeight:700,
+            color:'oklch(0.40 0.12 75)', marginBottom:10 }}>
+            ★ Référence prioritaire
+          </div>
+        )}
         <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
           lineHeight:1.3, color:'oklch(0.22 0.04 280)', textWrap:'balance' }}>
           {q.q}
@@ -302,7 +543,6 @@ function QuizCache({ back, state, updateState }) {
   function validate() {
     const correct = refs.filter((r, i) => selected.has(i) && r.correct).length;
     const wrong = refs.filter((r, i) => selected.has(i) && !r.correct).length;
-    const missed = refs.filter((r, i) => !selected.has(i) && r.correct).length;
     const pts = Math.max(0, correct - wrong);
     setScore(s => s + pts);
     setRevealed(true);
@@ -338,15 +578,23 @@ function QuizCache({ back, state, updateState }) {
   );
 
   return (
-    <div style={{ maxWidth:760, margin:'0 auto', padding:'24px 20px 80px' }}>
+    <div style={{ maxWidth:780, margin:'0 auto', padding:'24px 20px 80px' }}>
       <TopNav back={back} title="Qu'est-ce que cache ce sujet ?" />
-      <div style={{ marginBottom:12 }}>
+
+      <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:10 }}>
         <ProgressBar value={qi + 1} max={items.length} color="oklch(0.52 0.14 300)" />
-        <div style={{ display:'flex', justifyContent:'space-between', marginTop:5,
-          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
-          <span>Sujet {qi + 1} / {items.length}</span>
-          <span>Score : {score}</span>
-        </div>
+      </div>
+      <div style={{ display:'flex', justifyContent:'space-between', marginBottom:12,
+        fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+        <span>Sujet {qi + 1} / {items.length}</span>
+        <span>Score : {score}</span>
+      </div>
+
+      <div style={{ display:'flex', gap:8, marginBottom:12 }}>
+        <span style={{ fontSize:11, fontWeight:700, padding:'3px 8px', borderRadius:5,
+          background:'oklch(0.93 0.12 75)', color:'oklch(0.40 0.12 75)',
+          border:'1px solid oklch(0.80 0.14 75)' }}>★ Prioritaire</span>
+        <span style={{ fontSize:11, color:'oklch(0.40 0.02 280)' }}>= dans tes 28 références à maîtriser absolument</span>
       </div>
 
       <PaperCard style={{ padding:22, marginBottom:14,
@@ -391,11 +639,17 @@ function QuizCache({ back, state, updateState }) {
                 {isSelected ? '✓' : ''}
               </span>
               <div style={{ flex:1 }}>
-                <div style={{ fontWeight:600, color:'oklch(0.22 0.04 280)', marginBottom: revealed ? 4 : 0 }}>
+                <div style={{ fontWeight:600, color:'oklch(0.22 0.04 280)', marginBottom:2,
+                  display:'flex', alignItems:'center', gap:6, flexWrap:'wrap' }}>
                   {r.ref}
+                  {r.primary && (
+                    <span style={{ fontSize:10, fontWeight:700, padding:'1px 5px', borderRadius:4,
+                      background:'oklch(0.93 0.12 75)', color:'oklch(0.40 0.12 75)',
+                      border:'1px solid oklch(0.80 0.14 75)', flexShrink:0 }}>★</span>
+                  )}
                 </div>
                 {revealed && (
-                  <div style={{ fontSize:12.5, lineHeight:1.5,
+                  <div style={{ fontSize:12.5, lineHeight:1.5, marginTop:2,
                     color: r.correct ? 'oklch(0.30 0.08 145)' : 'oklch(0.40 0.06 25)' }}>
                     {r.why}
                   </div>
@@ -424,6 +678,212 @@ function QuizCache({ back, state, updateState }) {
           {qi + 1 >= items.length ? 'Voir mon score →' : 'Sujet suivant →'}
         </Btn>
       )}
+    </div>
+  );
+}
+
+// ── Méthodologie de l'essai ────────────────────────────────────────────────
+
+function MethodoReview({ back }) {
+  const [current, setCurrent] = React.useState(0); // index dans METHODO_POINTS
+  const [revealed, setRevealed] = React.useState(false);
+  const [scores, setScores] = React.useState({}); // id → 'ok' | 'review'
+  const [done, setDone] = React.useState(false);
+
+  const point = METHODO_POINTS[current];
+  const isLast = current === METHODO_POINTS.length - 1;
+
+  function handleAssess(val) {
+    const newScores = { ...scores, [point.id]: val };
+    setScores(newScores);
+    if (isLast) {
+      setDone(true);
+    } else {
+      setCurrent(c => c + 1);
+      setRevealed(false);
+    }
+  }
+
+  if (done) {
+    const toReview = METHODO_POINTS.filter(p => scores[p.id] === 'review');
+    const mastered = METHODO_POINTS.filter(p => scores[p.id] === 'ok');
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="Méthodologie de l'essai" />
+        <PaperCard style={{ padding:32,
+          background:'linear-gradient(135deg, oklch(0.96 0.05 45), oklch(0.94 0.08 35))',
+          border:'1.5px solid oklch(0.84 0.10 45)' }}>
+          <div style={{ fontSize:40, marginBottom:12 }}>📊</div>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:22, fontWeight:700,
+            color:'oklch(0.25 0.10 40)', marginBottom:16 }}>
+            Bilan méthodologie
+          </div>
+          {mastered.length > 0 && (
+            <div style={{ marginBottom:16 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:'oklch(0.30 0.12 145)',
+                marginBottom:8 }}>Maîtrisé ✓</div>
+              {mastered.map(p => (
+                <div key={p.id} style={{ display:'flex', alignItems:'center', gap:8,
+                  padding:'8px 12px', borderRadius:8, background:'oklch(0.95 0.05 145)',
+                  marginBottom:6, fontSize:13.5, fontWeight:600, color:'oklch(0.28 0.10 145)' }}>
+                  {p.icon} {p.titre}
+                </div>
+              ))}
+            </div>
+          )}
+          {toReview.length > 0 && (
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:'oklch(0.35 0.12 25)',
+                marginBottom:8 }}>À retravailler ↺</div>
+              {toReview.map(p => (
+                <div key={p.id} style={{ display:'flex', alignItems:'center', gap:8,
+                  padding:'8px 12px', borderRadius:8, background:'oklch(0.95 0.05 25)',
+                  marginBottom:6, fontSize:13.5, fontWeight:600, color:'oklch(0.32 0.10 25)' }}>
+                  {p.icon} {p.titre}
+                  <span style={{ fontSize:12, color:'oklch(0.42 0.08 25)' }}>— {p.soustitre}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+            <Btn variant="solid" color="oklch(0.50 0.16 45)" onClick={() => {
+              setCurrent(0); setRevealed(false); setScores({}); setDone(false);
+            }}>Recommencer →</Btn>
+            <Btn variant="ghost" color="oklch(0.50 0.16 45)" onClick={back}>Retour au menu</Btn>
+          </div>
+        </PaperCard>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth:720, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Méthodologie de l'essai" />
+
+      <div style={{ marginBottom:16 }}>
+        <ProgressBar value={current + 1} max={METHODO_POINTS.length} color="oklch(0.50 0.16 45)" />
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:5,
+          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+          <span>Point {current + 1} / {METHODO_POINTS.length}</span>
+          <span>{METHODO_POINTS.filter(p => scores[p.id]).length} évalués</span>
+        </div>
+      </div>
+
+      {/* Carte principale */}
+      <PaperCard style={{ padding:28, marginBottom:16,
+        background:'linear-gradient(135deg, oklch(0.97 0.03 45), oklch(0.95 0.05 35))',
+        border:'1.5px solid oklch(0.84 0.10 45)' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:16 }}>
+          <span style={{ fontSize:32 }}>{point.icon}</span>
+          <div>
+            <div style={{ fontFamily:'var(--font-display)', fontSize:20, fontWeight:700,
+              color:'oklch(0.25 0.10 40)' }}>
+              {point.id}. {point.titre}
+            </div>
+            <div style={{ fontSize:13, color:'oklch(0.42 0.08 40)', marginTop:2 }}>
+              {point.soustitre}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ padding:'12px 16px', borderRadius:10, background:'oklch(0.93 0.07 25)',
+          border:'1px solid oklch(0.80 0.12 25)', marginBottom:14 }}>
+          <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.45 0.12 25)',
+            textTransform:'uppercase', letterSpacing:1, marginBottom:6 }}>Erreur fréquente</div>
+          <div style={{ fontSize:13.5, fontWeight:600, color:'oklch(0.30 0.10 25)', marginBottom:4 }}>
+            {point.danger}
+          </div>
+          <div style={{ fontSize:12.5, color:'oklch(0.40 0.08 25)', fontStyle:'italic' }}>
+            Ex. : {point.piege}
+          </div>
+        </div>
+
+        {!revealed ? (
+          <Btn variant="solid" color="oklch(0.50 0.16 45)" onClick={() => setRevealed(true)}>
+            Voir la solution et les exemples →
+          </Btn>
+        ) : (
+          <div>
+            <div style={{ padding:'14px 16px', borderRadius:10, background:'oklch(0.93 0.06 145)',
+              border:'1px solid oklch(0.75 0.12 145)', marginBottom:14 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.35 0.12 145)',
+                textTransform:'uppercase', letterSpacing:1, marginBottom:6 }}>Ce qu'il faut faire</div>
+              <div style={{ fontSize:13.5, fontWeight:600, color:'oklch(0.25 0.10 145)',
+                lineHeight:1.55, marginBottom:8 }}>
+                {point.solution}
+              </div>
+              <div style={{ fontSize:12.5, color:'oklch(0.30 0.08 145)', background:'oklch(0.88 0.08 145)',
+                padding:'8px 12px', borderRadius:7, fontFamily:'var(--font-mono)' }}>
+                💡 {point.astuce}
+              </div>
+            </div>
+
+            {/* Exemple comparatif */}
+            <div style={{ marginBottom:14 }}>
+              {point.exemple.sujet && (
+                <div style={{ fontSize:12, fontWeight:600, color:'oklch(0.45 0.06 280)',
+                  marginBottom:8, fontStyle:'italic' }}>
+                  Sujet : « {point.exemple.sujet} »
+                </div>
+              )}
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10 }}>
+                <div style={{ padding:'12px 14px', borderRadius:10, background:'oklch(0.95 0.04 25)',
+                  border:'1px solid oklch(0.82 0.09 25)' }}>
+                  <div style={{ fontSize:10, fontWeight:700, color:'oklch(0.50 0.10 25)',
+                    textTransform:'uppercase', letterSpacing:0.8, marginBottom:6 }}>✗ À éviter</div>
+                  <div style={{ fontSize:12.5, color:'oklch(0.35 0.08 25)', lineHeight:1.5, fontStyle:'italic' }}>
+                    « {point.exemple.mauvais} »
+                  </div>
+                </div>
+                <div style={{ padding:'12px 14px', borderRadius:10, background:'oklch(0.94 0.05 145)',
+                  border:'1px solid oklch(0.78 0.12 145)' }}>
+                  <div style={{ fontSize:10, fontWeight:700, color:'oklch(0.38 0.12 145)',
+                    textTransform:'uppercase', letterSpacing:0.8, marginBottom:6 }}>✓ À faire</div>
+                  <div style={{ fontSize:12.5, color:'oklch(0.28 0.10 145)', lineHeight:1.5 }}>
+                    « {point.exemple.bon} »
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Références à mobiliser */}
+            <div style={{ marginBottom:16 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.45 0.02 280)',
+                textTransform:'uppercase', letterSpacing:1, marginBottom:8 }}>
+                Références à mobiliser pour illustrer
+              </div>
+              {point.refs.map((r, i) => (
+                <div key={i} style={{ display:'flex', alignItems:'flex-start', gap:8,
+                  padding:'7px 12px', borderRadius:8, background:'oklch(0.96 0.01 280)',
+                  border:'1px solid oklch(0.89 0.005 280)', marginBottom:6,
+                  fontSize:12.5, color:'oklch(0.30 0.04 280)' }}>
+                  <span style={{ color:'oklch(0.55 0.13 200)', fontWeight:700, marginTop:1 }}>→</span>
+                  <span>{r}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Auto-évaluation */}
+            <div style={{ borderTop:'1px solid oklch(0.88 0.01 280)', paddingTop:16 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:'oklch(0.40 0.04 280)', marginBottom:10 }}>
+                Honnêtement, est-ce que tu maîtrises ce point ?
+              </div>
+              <div style={{ display:'flex', gap:10 }}>
+                <button onClick={() => handleAssess('ok')} style={{
+                  flex:1, padding:'12px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.15 145)',
+                  background:'oklch(0.93 0.07 145)', color:'oklch(0.25 0.12 145)',
+                  fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+                }}>Oui, je maîtrise ✓</button>
+                <button onClick={() => handleAssess('review')} style={{
+                  flex:1, padding:'12px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.12 25)',
+                  background:'oklch(0.93 0.06 25)', color:'oklch(0.28 0.10 25)',
+                  fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+                }}>À retravailler ↺</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </PaperCard>
     </div>
   );
 }
