@@ -58,6 +58,33 @@ const CULTURE_QCM = [
   { primary:true, q:"Quelle association française publie des images d'abattoirs pour dénoncer l'élevage industriel ?", choices:["L214","WWF","PETA","SPE"], correct:0, expl:"L214 publie régulièrement des images de caméra cachée dans les abattoirs et élevages. Son nom vient de l'article L214 du Code rural qui reconnaît les animaux comme êtres sensibles." },
 ];
 
+// ── Quiz Auteurs & Œuvres ─────────────────────────────────────────────────
+// sens: 'auteur→oeuvre' | 'oeuvre→auteur'
+
+const AUTEUR_OEUVRE_QCM = [
+  { sens:'oeuvre→auteur', q:"Qui a publié 'La Libération animale' en 1975 ?", choices:["Peter Singer","Tom Regan","Jane Goodall","Donna Haraway"], correct:0, expl:"Peter Singer, philosophe australien, fonde le mouvement de libération animale. Il y forge le concept de spécisme et défend que toute souffrance animale inutile est moralement injustifiable." },
+  { sens:'auteur→oeuvre', q:"Quelle œuvre Charles Darwin a-t-il publiée en 1859 ?", choices:["De l'origine des espèces","La Libération animale","Introduction à la médecine expérimentale","La Ferme des animaux"], correct:0, expl:"De l'origine des espèces (1859) révolutionne la biologie en démontrant l'évolution par sélection naturelle et la descendance commune de l'homme et des grands singes." },
+  { sens:'oeuvre→auteur', q:"Qui a créé la bande dessinée 'Maus' (1986) ?", choices:["Art Spiegelman","George Orwell","Jack London","La Fontaine"], correct:0, expl:"Art Spiegelman raconte l'Holocauste via une métaphore animale : les Juifs = souris, les Nazis = chats, les Polonais = cochons. Prix Pulitzer 1992." },
+  { sens:'auteur→oeuvre', q:"Quel roman Jack London a-t-il écrit sur un loup-chien en 1906 ?", choices:["Croc-Blanc","La Ferme des animaux","La Libération animale","Sans famille"], correct:0, expl:"Croc-Blanc (1906) narre le monde du point de vue d'un loup-chien entre la sauvagerie du Grand Nord et la domestication — narration à hauteur d'animal, précision comportementale remarquable." },
+  { sens:'auteur→oeuvre', q:"George Orwell a écrit une satire du stalinisme avec des animaux en 1945. Laquelle ?", choices:["La Ferme des animaux","Maus","Croc-Blanc","La Libération animale"], correct:0, expl:"La Ferme des animaux (1945) : des cochons s'emparent du pouvoir après avoir chassé les humains, avant de devenir aussi tyranniques qu'eux. Satire glaçante du totalitarisme stalinien." },
+  { sens:'oeuvre→auteur', q:"Qui a écrit 'Sans famille' (1878) ?", choices:["Hector Malot","Victor Hugo","Charles Dickens","Émile Zola"], correct:0, expl:"Hector Malot raconte Rémi, orphelin voyageant avec les animaux savants de Vitalis (chien Capi, singe Joli-Cœur). Les animaux deviennent sa famille de substitution — solidarité inter-espèces." },
+  { sens:'auteur→oeuvre', q:"Quelle sculpture monumentale Louise Bourgeois a-t-elle réalisée en 1999 ?", choices:["Maman (araignée géante)","La Victoire de Samothrace","Le Penseur","Le Dompteur de panthère"], correct:0, expl:"'Maman' (1999) est une araignée de bronze d'environ 9 m. L'araignée — souvent perçue comme effrayante — devient figure protectrice. Vision radicalement nouvelle de la bête." },
+  { sens:'oeuvre→auteur', q:"Qui a peint 'Le Lièvre' avec une précision quasi-scientifique en 1502 ?", choices:["Albrecht Dürer","Léonard de Vinci","Michel-Ange","Rembrandt"], correct:0, expl:"Dürer (1471-1528) réalise cette aquarelle avec une minutie scientifique — chaque poil, chaque reflet dans l'œil. Un hommage à la beauté et à la réalité de l'animal." },
+  { sens:'auteur→oeuvre', q:"En quelle année La Fontaine a-t-il publié ses premières Fables ?", choices:["1668","1789","1492","1848"], correct:0, expl:"Les Fables de La Fontaine (1668-1694) utilisent l'anthropomorphisme animal pour critiquer indirectement la cour de Louis XIV. L'animal devient un miroir moral de l'homme." },
+  { sens:'oeuvre→auteur', q:"'Introduction à l'étude de la médecine expérimentale' (1865) est l'œuvre de ?", choices:["Claude Bernard","Louis Pasteur","René Descartes","Pierre Curie"], correct:0, expl:"Claude Bernard théorise et pratique la vivisection. Il considère l'animal comme un outil de connaissance indispensable — déclenchant des débats éthiques dès le XIXe siècle." },
+  { sens:'auteur→oeuvre', q:"Dans quel ouvrage Descartes (1637) soutient-il que les animaux sont de simples automates ?", choices:["Discours de la méthode","Critique de la raison pure","L'Éthique","Les Méditations métaphysiques"], correct:0, expl:"Dans le Discours de la méthode (1637), Descartes défend la thèse de l'animal-machine : les cris de douleur ne sont que des mécanismes, comme le bruit d'une horloge brisée." },
+  { sens:'oeuvre→auteur', q:"'The Case for Animal Rights' (1983) est l'œuvre de ?", choices:["Tom Regan","Peter Singer","Donna Haraway","Jane Goodall"], correct:0, expl:"Tom Regan (1983) : les animaux sont des 'sujets d'une vie' avec croyances, désirs, mémoire — ils ont une valeur inhérente et méritent des droits propres, indépendamment de leur utilité." },
+  { sens:'oeuvre→auteur', q:"Le concept de 'biomimétisme' (1997) a été formalisé par ?", choices:["Janine Benyus","Charles Darwin","Jane Goodall","Claude Bernard"], correct:0, expl:"Janine Benyus formalise le biomimétisme en 1997 : s'inspirer des solutions du vivant. Velcro = bardane, façades = peau de requin. L'animal = 3,8 milliards d'années d'ingénierie naturelle." },
+  { sens:'oeuvre→auteur', q:"'When Species Meet' (2008) a été écrit par ?", choices:["Donna Haraway","Peter Singer","Tom Regan","Jane Goodall"], correct:0, expl:"Donna Haraway propose une éthique du 'care' inter-espèces — un modèle de relation homme-animal fondé sur la co-évolution et la responsabilité mutuelle." },
+  { sens:'oeuvre→auteur', q:"Qui a écrit 'Le Livre de la Jungle' (1894) ?", choices:["Rudyard Kipling","Jack London","Jules Verne","Alexandre Dumas"], correct:0, expl:"Le Livre de la Jungle (1894) de Kipling met en scène Mowgli, enfant élevé par des loups. L'animal y est éducateur et tuteur — inversion de la hiérarchie habituelle homme-animal." },
+  { sens:'auteur→oeuvre', q:"Quelle découverte Jane Goodall a-t-elle faite en observant les chimpanzés de Gombe (1960) ?", choices:["L'utilisation d'outils","Le langage des signes","La reconnaissance dans un miroir","La transmission culturelle intergénérationnelle"], correct:0, expl:"Goodall observe que les chimpanzés taillent des brindilles pour extraire des termites. L'utilisation d'outils, jusqu'alors considérée comme proprement humaine, s'effondre comme frontière absolue." },
+  { sens:'oeuvre→auteur', q:"Le documentaire 'Blackfish' (2013) sur les orques captives a été réalisé par ?", choices:["Gabriela Cowperthwaite","Michael Moore","Werner Herzog","Nicolas Philibert"], correct:0, expl:"Blackfish (Cowperthwaite, 2013) révèle les conditions de vie des orques chez SeaWorld et a déclenché un mouvement mondial contre la captivité des cétacés — l'art documentaire change les lois." },
+  { sens:'oeuvre→auteur', q:"'La Filiation de l'homme' (1871), suite de De l'origine des espèces, est l'œuvre de ?", choices:["Charles Darwin","Alfred Russel Wallace","Thomas Huxley","Claude Bernard"], correct:0, expl:"Darwin (1871) y examine spécifiquement l'origine humaine et les facultés mentales des animaux. Il ne nie pas les spécificités humaines : il les inscrit dans une continuité, pas une rupture absolue." },
+  { sens:'auteur→oeuvre', q:"Peter Singer et Paola Cavalieri ont lancé en 1993 ?", choices:["Le Projet Grand Singe","La Déclaration de Cambridge","La règle des 3R","La Libération animale"], correct:0, expl:"Le Projet Grand Singe (1993) réclame des droits fondamentaux pour chimpanzés, gorilles, orangs-outans et bonobos : droit à la vie, à la liberté, à ne pas être torturé." },
+  { sens:'oeuvre→auteur', q:"'Maman', l'araignée géante de bronze (~9 m), est une sculpture de ?", choices:["Louise Bourgeois","Camille Claudel","Niki de Saint-Phalle","Damien Hirst"], correct:0, expl:"Louise Bourgeois (1911-2010) réimagine l'araignée — souvent perçue comme effrayante — en figure protectrice et maternelle. Vision radicalement nouvelle de la bête dans l'art contemporain." },
+  { sens:'auteur→oeuvre', q:"Dans quel poème (1785) Robert Burns évoque-t-il une souris dont le nid est détruit, inspirant Steinbeck ?", choices:["To a Mouse","The Raven","Ode to a Nightingale","La Jeune Captive"], correct:0, expl:"'To a Mouse' (Burns, 1785) : 'Les plans les mieux pensés des souris et des hommes tournent souvent mal.' Ce vers inspire le titre Des souris et des hommes (Steinbeck, 1937)." },
+];
+
 // ── Données "Qu'est-ce que cache ce sujet ?" ─────────────────────────────
 // primary:true = référence de la liste des 28 prioritaires
 
@@ -249,6 +276,7 @@ function CultureQuizView({ state, updateState, back }) {
   if (subMode === 'qcm') return <QuizQCM back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'cache') return <QuizCache back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'methodo') return <MethodoReview back={() => setSubMode(null)} />;
+  if (subMode === 'auteur') return <QuizAuteurOeuvre back={() => setSubMode(null)} state={state} updateState={updateState} />;
   return null;
 }
 
@@ -304,6 +332,13 @@ function CultureMenu({ back, setSubMode }) {
           desc="5 erreurs fatales à ne pas commettre : problématique, plan, analyse, nuance, conclusion. Exemples concrets inclus."
           color="oklch(0.50 0.16 45)"
           onClick={() => setSubMode('methodo')}
+        />
+        <ModeCard
+          icon="📚"
+          title="Auteurs & Œuvres"
+          desc={`${AUTEUR_OEUVRE_QCM.length} questions dans les deux sens : qui a écrit quelle œuvre ? Quelle œuvre pour quel auteur ? Dates incluses.`}
+          color="oklch(0.52 0.14 280)"
+          onClick={() => setSubMode('auteur')}
         />
       </div>
     </div>
@@ -884,6 +919,130 @@ function MethodoReview({ back }) {
           </div>
         )}
       </PaperCard>
+    </div>
+  );
+}
+
+// ── Quiz Auteurs & Œuvres ─────────────────────────────────────────────────
+
+function QuizAuteurOeuvre({ back, state, updateState }) {
+  const questions = React.useMemo(() => shuffle([...AUTEUR_OEUVRE_QCM]), []);
+  const [qi, setQi] = React.useState(0);
+  const [selected, setSelected] = React.useState(null);
+  const [score, setScore] = React.useState(0);
+  const [done, setDone] = React.useState(false);
+
+  function choose(i) {
+    if (selected !== null) return;
+    setSelected(i);
+    if (i === questions[qi].correct) setScore(s => s + 1);
+  }
+
+  function next() {
+    setSelected(null);
+    if (qi + 1 >= questions.length) {
+      const xp = Math.round((score / questions.length) * 15);
+      const ns = { ...state, xp: state.xp + xp };
+      updateState(window.RevStore.bumpStreak(ns), `+${xp} XP — Auteurs & Œuvres terminé !`);
+      setDone(true);
+    } else {
+      setQi(q => q + 1);
+    }
+  }
+
+  if (done) return (
+    <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Auteurs & Œuvres" />
+      <PaperCard style={{ padding:40, textAlign:'center',
+        background:'linear-gradient(135deg, oklch(0.96 0.06 280), oklch(0.94 0.09 300))' }}>
+        <div style={{ fontSize:48, marginBottom:8 }}>📚</div>
+        <div style={{ fontFamily:'var(--font-display)', fontSize:28, fontWeight:700,
+          color:'oklch(0.28 0.12 280)', marginBottom:8 }}>
+          {score} / {questions.length}
+        </div>
+        <div style={{ fontSize:15, color:'oklch(0.40 0.08 280)', marginBottom:16 }}>
+          {score >= questions.length * 0.8 ? 'Parfait ! Tu maîtrises tes références.' :
+           score >= questions.length * 0.5 ? 'Bien ! Continue à mémoriser auteurs et dates.' :
+           'Relis la bibliothèque — auteurs, titres et dates sont essentiels à l\'oral et à l\'écrit.'}
+        </div>
+        <Btn variant="solid" color="oklch(0.52 0.14 280)" onClick={back}>Retour →</Btn>
+      </PaperCard>
+    </div>
+  );
+
+  const q = questions[qi];
+  const DIRECTION_LABEL = {
+    'auteur→oeuvre': '✍ Auteur → Œuvre',
+    'oeuvre→auteur': '📖 Œuvre → Auteur',
+  };
+
+  return (
+    <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Auteurs & Œuvres" />
+      <div style={{ marginBottom:16 }}>
+        <ProgressBar value={qi + 1} max={questions.length} color="oklch(0.52 0.14 280)" />
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:6,
+          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+          <span>{qi + 1} / {questions.length}</span>
+          <span>Score : {score}</span>
+        </div>
+      </div>
+
+      <PaperCard style={{ padding:24, marginBottom:16, background:'oklch(0.975 0.01 280)' }}>
+        <div style={{ display:'inline-flex', alignItems:'center',
+          background:'oklch(0.93 0.06 280)', border:'1px solid oklch(0.82 0.10 280)',
+          borderRadius:6, padding:'2px 10px', fontSize:11, fontWeight:700,
+          color:'oklch(0.38 0.12 280)', marginBottom:10 }}>
+          {DIRECTION_LABEL[q.sens] || 'Question'}
+        </div>
+        <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
+          lineHeight:1.3, color:'oklch(0.22 0.04 280)', textWrap:'balance' }}>
+          {q.q}
+        </div>
+      </PaperCard>
+
+      <div style={{ display:'flex', flexDirection:'column', gap:10, marginBottom:16 }}>
+        {q.choices.map((c, i) => {
+          const isSelected = selected === i;
+          const isCorrect = i === q.correct;
+          let bg = 'white', border = 'oklch(0.88 0.005 280)', color = 'oklch(0.25 0.02 280)';
+          if (selected !== null) {
+            if (isCorrect) { bg = 'oklch(0.93 0.06 145)'; border = 'oklch(0.65 0.15 145)'; color = 'oklch(0.25 0.10 145)'; }
+            else if (isSelected) { bg = 'oklch(0.93 0.06 25)'; border = 'oklch(0.65 0.15 25)'; color = 'oklch(0.30 0.10 25)'; }
+          }
+          return (
+            <button key={i} onClick={() => choose(i)} disabled={selected !== null} style={{
+              padding:'13px 18px', borderRadius:12, border:`2px solid ${border}`,
+              background:bg, color, fontFamily:'var(--font-ui)', fontSize:14,
+              textAlign:'left', cursor: selected !== null ? 'default' : 'pointer',
+              display:'flex', alignItems:'center', gap:10, transition:'all .15s ease',
+            }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:12,
+                color: selected !== null && isCorrect ? 'oklch(0.40 0.12 145)' : 'oklch(0.55 0.02 280)',
+                flexShrink:0 }}>{['A','B','C','D'][i]}</span>
+              <span style={{ fontWeight: (selected !== null && isCorrect) ? 700 : 400 }}>{c}</span>
+              {selected !== null && isCorrect && <span style={{ marginLeft:'auto' }}>✓</span>}
+              {selected !== null && isSelected && !isCorrect && <span style={{ marginLeft:'auto' }}>✗</span>}
+            </button>
+          );
+        })}
+      </div>
+
+      {selected !== null && (
+        <div>
+          <div style={{ padding:'14px 18px', borderRadius:12,
+            background: selected === q.correct ? 'oklch(0.95 0.05 145)' : 'oklch(0.96 0.04 25)',
+            border:`1.5px solid ${selected === q.correct ? 'oklch(0.75 0.12 145)' : 'oklch(0.75 0.12 25)'}`,
+            marginBottom:12, fontSize:13.5, lineHeight:1.6,
+            color: selected === q.correct ? 'oklch(0.25 0.10 145)' : 'oklch(0.28 0.08 25)' }}>
+            <strong>{selected === q.correct ? '✓ Correct !' : '✗ Raté.'}</strong><br />
+            {q.expl}
+          </div>
+          <Btn variant="solid" color="oklch(0.52 0.14 280)" onClick={next}>
+            {qi + 1 >= questions.length ? 'Voir le score →' : 'Question suivante →'}
+          </Btn>
+        </div>
+      )}
     </div>
   );
 }

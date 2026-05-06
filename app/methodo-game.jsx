@@ -63,6 +63,21 @@ const VRAI_FAUX = [
   { affirm:"On peut faire un plan en 2 parties (I et II) au lieu de 3.", correct:true, expl:"Un plan en 2 parties est tout à fait acceptable en CGE si les deux parties sont bien équilibrées et couvrent bien le sujet. L'essentiel est la cohérence du propos, pas le nombre de parties." },
 ];
 
+const VRAI_FAUX_SYNTHESE = [
+  { affirm:"En synthèse de documents, on peut exprimer son opinion personnelle.", correct:false, expl:"La synthèse est un exercice objectif : on reformule les idées des documents sans prendre parti. L'opinion personnelle est réservée à la 2ème partie (essai). Tout 'je pense que...' est une faute." },
+  { affirm:"En synthèse, on organise les idées par document (doc 1 puis doc 2 puis doc 3).", correct:false, expl:"On organise les idées par thème, pas par document. Le plan thématique est la règle absolue : regrouper dans une même partie toutes les idées des différents docs qui traitent du même sujet." },
+  { affirm:"Reformuler signifie reprendre les idées d'un document avec ses propres mots.", correct:true, expl:"La reformulation est le cœur de la synthèse : s'approprier l'idée et la reconstruire dans sa propre langue. Le copier-coller déguisé (paraphrase) prouve qu'on n'a pas vraiment compris — il est sanctionné." },
+  { affirm:"On doit indiquer la source de chaque idée dans la synthèse (Doc. 1, Doc. 2...).", correct:true, expl:"Chaque idée doit être attribuée à sa source : 'Selon le document 1...', 'D'après le document 3...' ou '(Doc. 1)' en fin de phrase. C'est une exigence formelle incontournable." },
+  { affirm:"L'introduction de la synthèse contient une accroche littéraire, comme dans l'essai.", correct:false, expl:"Non — l'introduction de synthèse présente le corpus (nombre de docs, nature, thème commun) puis annonce le plan thématique. Pas d'accroche poétique : c'est neutre, factuel, structuré." },
+  { affirm:"La synthèse doit se terminer par une conclusion avec ouverture personnelle.", correct:false, expl:"La synthèse ne comporte pas de conclusion personnelle. Elle se termine avec le développement — ou par une très brève phrase de clôture neutre et objective. Pas d'avis, pas d'ouverture 'je'." },
+  { affirm:"Le nombre de mots de la synthèse est libre.", correct:false, expl:"La synthèse respecte un nombre de mots imposé — généralement 200-250 mots par document (4 documents = 800-1 000 mots). Le dépassement et le sous-dépassement sont pénalisés." },
+  { affirm:"On peut citer textuellement une phrase du document à condition de la mettre entre guillemets.", correct:true, expl:"Les citations courtes sont autorisées si elles sont entre guillemets et attribuées à leur source. Mais elles ne remplacent pas la reformulation — elles la complètent ponctuellement." },
+  { affirm:"La paraphrase (recopier les phrases du doc en changeant quelques mots) est équivalente à la reformulation.", correct:false, expl:"Non : la paraphrase est une faute grave. Reformuler = comprendre l'idée et la reconstruire. Paraphraser = copier-coller déguisé. Le correcteur le repère immédiatement et le sanctionne." },
+  { affirm:"La synthèse doit intégrer des idées de tous les documents fournis.", correct:true, expl:"Un document non exploité est une faute grave. Chaque document du corpus doit être représenté dans le développement — même un document plus difficile doit être mentionné au moins partiellement." },
+  { affirm:"On peut utiliser 'je' dans une synthèse de documents.", correct:false, expl:"La synthèse est impersonnelle — on utilise 'on', 'les auteurs montrent que...', des tournures passives. Le 'je' introduit une subjectivité incompatible avec la neutralité requise." },
+  { affirm:"Un plan en 2 parties thématiques est acceptable pour une synthèse.", correct:true, expl:"Un plan en 2 parties est tout à fait valide si les deux axes couvrent bien les idées du corpus. L'essentiel : chaque partie doit mobiliser plusieurs documents, pas un seul." },
+];
+
 // ── Composant principal ───────────────────────────────────────────────────
 
 function MethodoGameView({ state, updateState, back }) {
@@ -72,6 +87,7 @@ function MethodoGameView({ state, updateState, back }) {
   if (subMode === 'ordre') return <GameOrdre back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'identifie') return <GameIdentifie back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'vraifaux') return <GameVraiFaux back={() => setSubMode(null)} state={state} updateState={updateState} />;
+  if (subMode === 'synthese') return <GameVraiFauxSynthese back={() => setSubMode(null)} state={state} updateState={updateState} />;
   return null;
 }
 
@@ -79,7 +95,8 @@ function MethodoMenu({ back, setSubMode }) {
   const modes = [
     { key:'ordre', icon:'🔢', title:'Reconstitue l\'introduction', desc:'4 blocs mélangés à remettre dans le bon ordre en cliquant : Accroche, Sujet reformulé, Reformulation, Annonce du plan.', color:'oklch(0.55 0.13 200)' },
     { key:'identifie', icon:'🔎', title:'Identifie le passage', desc:'Un extrait s\'affiche. Tu dois dire si c\'est une accroche, une reformulation, un argument, une transition ou une conclusion.', color:'oklch(0.55 0.13 165)' },
-    { key:'vraifaux', icon:'✓✗', title:'Vrai ou Faux — Méthodologie', desc:'12 affirmations sur les règles de l\'essai. Vrai ou faux ? Chaque erreur te coûte tes points — donc réfléchis bien !', color:'oklch(0.50 0.13 30)' },
+    { key:'vraifaux', icon:'✓✗', title:'Vrai ou Faux — Essai (2ème partie)', desc:'12 affirmations sur les règles de l\'essai CGE : problématique, plan, AER, conclusion. Vrai ou faux ?', color:'oklch(0.50 0.13 30)' },
+    { key:'synthese', icon:'📄', title:'Vrai ou Faux — Synthèse (1ère partie)', desc:'12 affirmations sur les règles de la synthèse de documents : objectivité, plan thématique, reformulation, sources. Vrai ou faux ?', color:'oklch(0.52 0.13 165)' },
   ];
   return (
     <div style={{ maxWidth:760, margin:'0 auto', padding:'24px 20px 80px' }}>
@@ -479,6 +496,118 @@ function GameVraiFaux({ back, state, updateState }) {
             {q.expl}
           </div>
           <Btn variant="solid" color="oklch(0.50 0.13 30)" onClick={next}>
+            {qi + 1 >= questions.length ? 'Voir mon score →' : 'Affirmation suivante →'}
+          </Btn>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Game 4 : Vrai ou Faux — Synthèse (1ère partie) ───────────────────────
+
+function GameVraiFauxSynthese({ back, state, updateState }) {
+  const questions = React.useMemo(() => shuffleArr([...VRAI_FAUX_SYNTHESE]), []);
+  const [qi, setQi] = React.useState(0);
+  const [chosen, setChosen] = React.useState(null);
+  const [score, setScore] = React.useState(0);
+  const [done, setDone] = React.useState(false);
+
+  const q = questions[qi];
+
+  function choose(val) {
+    if (chosen !== null) return;
+    if (val === q.correct) setScore(s => s + 1);
+    setChosen(val);
+  }
+
+  function next() {
+    setChosen(null);
+    if (qi + 1 >= questions.length) {
+      const xp = Math.round((score / questions.length) * 10);
+      const ns = { ...state, xp: state.xp + xp };
+      updateState(window.RevStore.bumpStreak(ns), `+${xp} XP — Synthèse Vrai/Faux terminé !`);
+      setDone(true);
+    } else {
+      setQi(i => i + 1);
+    }
+  }
+
+  if (done) return (
+    <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Synthèse — Vrai ou Faux" />
+      <ScoreCard score={score} max={questions.length} back={back} color="oklch(0.52 0.13 165)" />
+    </div>
+  );
+
+  return (
+    <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Synthèse (1ère partie) — Vrai ou Faux" />
+
+      <PaperCard style={{ padding:'12px 18px', marginBottom:14,
+        background:'linear-gradient(135deg, oklch(0.96 0.03 165), oklch(0.94 0.05 145))',
+        border:'1.5px solid oklch(0.84 0.08 155)' }}>
+        <div style={{ fontSize:12.5, color:'oklch(0.32 0.08 155)', lineHeight:1.55 }}>
+          <strong>1ère partie — Synthèse de documents :</strong> objectivité, plan thématique, reformulation, attribution des sources, contrainte de mots.
+        </div>
+      </PaperCard>
+
+      <div style={{ marginBottom:12 }}>
+        <ProgressBar value={qi + 1} max={questions.length} color="oklch(0.52 0.13 165)" />
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:5,
+          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+          <span>{qi + 1} / {questions.length}</span>
+          <span>Score : {score}</span>
+        </div>
+      </div>
+
+      <PaperCard style={{ padding:28, marginBottom:20, background:'oklch(0.975 0.01 280)',
+        minHeight:120, display:'flex', alignItems:'center' }}>
+        <div style={{ fontFamily:'var(--font-display)', fontSize:19, fontWeight:700,
+          lineHeight:1.35, color:'oklch(0.22 0.04 280)', textWrap:'balance' }}>
+          {q.affirm}
+        </div>
+      </PaperCard>
+
+      <div style={{ display:'flex', gap:14, marginBottom:16 }}>
+        {[true, false].map(val => {
+          const isChosen = chosen === val;
+          const isCorrect = val === q.correct;
+          let bg, border, color;
+          if (chosen !== null) {
+            if (isCorrect) { bg = 'oklch(0.92 0.07 145)'; border = 'oklch(0.62 0.14 145)'; color = 'oklch(0.22 0.12 145)'; }
+            else if (isChosen) { bg = 'oklch(0.92 0.06 25)'; border = 'oklch(0.62 0.14 25)'; color = 'oklch(0.25 0.10 25)'; }
+            else { bg = 'oklch(0.97 0.005 280)'; border = 'oklch(0.88 0.005 280)'; color = 'oklch(0.55 0.02 280)'; }
+          } else {
+            bg = val ? 'oklch(0.97 0.03 145)' : 'oklch(0.97 0.03 25)';
+            border = val ? 'oklch(0.80 0.10 145)' : 'oklch(0.80 0.10 25)';
+            color = val ? 'oklch(0.35 0.12 145)' : 'oklch(0.35 0.10 25)';
+          }
+          return (
+            <button key={String(val)} onClick={() => choose(val)} disabled={chosen !== null} style={{
+              flex:1, padding:'20px 14px', borderRadius:14, border:`2px solid ${border}`, background:bg,
+              color, fontFamily:'var(--font-display)', fontSize:22, fontWeight:800,
+              cursor: chosen !== null ? 'default' : 'pointer', transition:'all .15s ease',
+              display:'flex', flexDirection:'column', alignItems:'center', gap:4,
+            }}>
+              <span style={{ fontSize:32 }}>{val ? '✓' : '✗'}</span>
+              <span>{val ? 'VRAI' : 'FAUX'}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {chosen !== null && (
+        <div>
+          <div style={{ padding:'14px 18px', borderRadius:12,
+            background: chosen === q.correct ? 'oklch(0.95 0.05 145)' : 'oklch(0.96 0.04 25)',
+            border:`1.5px solid ${chosen === q.correct ? 'oklch(0.72 0.12 145)' : 'oklch(0.72 0.12 25)'}`,
+            marginBottom:12, fontSize:13.5, lineHeight:1.6,
+            color: chosen === q.correct ? 'oklch(0.25 0.10 145)' : 'oklch(0.28 0.08 25)' }}>
+            <strong>{chosen === q.correct ? '✓ Correct !' : `✗ Faux — c'est ${q.correct ? 'VRAI' : 'FAUX'}.`}</strong><br />
+            {q.expl}
+          </div>
+          <Btn variant="solid" color="oklch(0.52 0.13 165)" onClick={next}>
             {qi + 1 >= questions.length ? 'Voir mon score →' : 'Affirmation suivante →'}
           </Btn>
         </div>
