@@ -182,6 +182,160 @@ const CACHE_SUJETS = [
   },
 ];
 
+// ── Questions ouvertes — jeu de cours (PDF cugex) ────────────────────────
+
+const QUESTIONS_OUVERTES = [
+  // ── 🔬 CONNAÎTRE L'ANIMAL ─────────────────────────────────────────────────
+  { cat:'science', tag:"Jane Goodall, 1960",
+    q:"Nommez l'éthologue anglaise qui découvrit en 1960, en Tanzanie, que les chimpanzés fabriquaient et utilisaient des outils.",
+    r:"Jane Goodall — en observant les chimpanzés de Gombe, elle voit des individus tailler des brindilles pour extraire des termites. L'utilisation d'outils, jusque-là considérée comme le propre de l'homme, s'effondre comme frontière absolue." },
+  { cat:'science', tag:"Boîte de Skinner, 1930",
+    q:"Quelle expérience des années 1930 réalisée par B.F. Skinner montra que les rats apprennent par récompense — et fonda toute la psychologie comportementale ?",
+    r:"La boîte de Skinner — un rat (ou pigeon) apprend à appuyer sur un levier pour obtenir de la nourriture. Cela fonde le conditionnement opérant : apprentissage par renforcement positif ou négatif." },
+  { cat:'science', tag:"Ham, NASA, 1961",
+    q:"Comment s'appelle le chimpanzé envoyé dans l'espace par les Américains le 31 janvier 1961, avant les astronautes humains ?",
+    r:"Ham — premier grand singe dans l'espace, quelques mois avant Alan Shepard. Il sert de substitut humain pour tester les conditions spatiales. L'animal utilisé avant l'homme : quelle différence de statut moral cela implique-t-il ?" },
+  { cat:'science', tag:"Laïka, 1957",
+    q:"Qui est le premier être vivant envoyé dans l'espace, en 1957, et quel fut son destin tragique ?",
+    r:"Laïka, une chienne soviétique à bord de Spoutnik 2. Elle mourut dans l'espace quelques heures après le lancement — sans aucune possibilité de retour prévue dès le départ." },
+  { cat:'science', tag:"Darwin, 1859",
+    q:"Quel scientifique anglais du XIXe siècle théorisa l'évolution par sélection naturelle et démontra la descendance commune de l'homme et des grands singes ?",
+    r:"Charles Darwin — De l'origine des espèces (1859). La frontière absolue entre l'homme et l'animal s'effondre : si nous descendons d'un ancêtre commun, comprendre l'animal c'est se comprendre soi-même." },
+  { cat:'science', tag:"Descartes, animal-machine, 1637",
+    q:"Quelle conception du XVIIe siècle assimile l'animal à une machine sans âme ni conscience, dont les cris ne sont que des mécanismes ?",
+    r:"L'animal-machine de Descartes (Discours de la méthode, 1637). Les animaux sont comparés à des horloges brisées : leurs cris de douleur ne sont que du bruit mécanique, sans souffrance réelle." },
+  { cat:'science', tag:"Règle des 3R",
+    q:"Expliquez la règle des 3R qui encadre l'expérimentation animale.",
+    r:"Replace : remplacer l'animal par des alternatives si possible. Reduce : réduire le nombre d'animaux utilisés. Refine : raffiner les procédures pour minimiser la souffrance. Ces 3R guident aujourd'hui toute recherche éthique." },
+  { cat:'science', tag:"In vivo / in vitro / in silico",
+    q:"Expliquez la différence entre la recherche in vivo, in vitro et in silico dans le contexte de l'expérimentation. Par quoi la science peut-elle remplacer l'animal ?",
+    r:"In vivo = sur un organisme vivant. In vitro = en éprouvette (cultures cellulaires, organoïdes). In silico = simulation informatique. Ces deux dernières permettent de réduire l'expérimentation animale." },
+  { cat:'science', tag:"Claude Bernard, vivisection, 1865",
+    q:"Pourquoi les expériences du médecin français Claude Bernard sur des animaux vivants sans anesthésie (1865) nous paraissent-elles aujourd'hui monstrueuses ?",
+    r:"Bernard pratiquait la vivisection : il prélevait le foie d'animaux vivants sans anesthésie pour étudier la glycémie. La théorie cartésienne de l'animal-machine légitimait alors ces pratiques — mais la Déclaration de Cambridge (2012) a depuis prouvé une sensibilité animale réelle." },
+  { cat:'science', tag:"Rongeurs, >80 % des animaux de labo",
+    q:"Quels animaux représentent plus de 80 % de ceux utilisés en laboratoire, et pourquoi sont-ils choisis ?",
+    r:"Les souris et les rats, en raison de leur proximité génétique avec l'homme (~85 % des gènes codants partagés). Ce fait illustre l'utilisation de l'animal comme outil de la connaissance humaine." },
+  { cat:'science', tag:"L214, Code Rural",
+    q:"Qu'est-ce que l'article L214 du Code Rural dans le droit français, et pourquoi une association en a-t-elle tiré son nom ?",
+    r:"L'art. L214 du Code Rural reconnaît les animaux comme « êtres sensibles ». L'association L214 s'en inspire pour dénoncer l'élevage industriel. En 2015, l'art. 515-14 du Code civil a renforcé cette reconnaissance." },
+  { cat:'science', tag:"Pr Courtine, moelle épinière",
+    q:"Pourquoi le Pr Courtine, chercheur suisse, a-t-il provoqué des lésions à la colonne vertébrale de souris ?",
+    r:"Pour tester des implants électriques capables de rétablir la marche chez des rongeurs paralysés, avant de l'appliquer sur des patients humains paraplégiques. L'animal est le passage obligé avant l'application médicale." },
+  { cat:'science', tag:"Élevage écologique",
+    q:"Donnez 3 caractéristiques d'un élevage écologique qui le distinguent de l'élevage industriel.",
+    r:"1) Espace suffisant (plein air, densité réduite). 2) Alimentation naturelle et saine (sans OGM ni antibiotiques préventifs). 3) Respect des comportements naturels (socialisation, accès à l'extérieur)." },
+  { cat:'science', tag:"Biomimétisme, Benyus, 1997",
+    q:"Expliquez la différence entre bio-inspiration et biomimétisme. Donnez un exemple concret.",
+    r:"Bio-inspiration = s'inspirer d'un principe du vivant pour innover. Biomimétisme = reproduire exactement le mécanisme biologique. Ex : le Velcro imite les crochets de la bardane (biomimétisme). Janine Benyus a formalisé ce concept en 1997." },
+  { cat:'science', tag:"Loi, industrie pharmaceutique, animaux",
+    q:"À quoi la loi contraint-elle l'industrie pharmaceutique avant la mise sur le marché d'un nouveau médicament, en lien avec les animaux ?",
+    r:"Des tests précliniques sur des animaux sont légalement obligatoires (règle des 3R) pour s'assurer de l'innocuité du produit avant les essais sur l'homme. La tension entre nécessité médicale et souffrance animale y est maximale." },
+
+  // ── 🎨 IMAGINER L'ANIMAL ──────────────────────────────────────────────────
+  { cat:'art', tag:"Peintures rupestres, Chauvet, Lascaux",
+    q:"Expliquez ce qu'est une peinture rupestre et citez deux sites préhistoriques emblématiques.",
+    r:"Peinture réalisée sur la paroi d'une grotte préhistorique, représentant essentiellement des animaux. Sites : grotte Chauvet (Ardèche, -35 000 ans) et Lascaux (Dordogne, -17 000 ans). Ces œuvres témoignent d'un rapport sacré à l'animal dès l'origine de l'art humain." },
+  { cat:'art', tag:"La Fontaine, Fables, 1668",
+    q:"Citez une fable de La Fontaine, son sens moral, et expliquez comment l'animal y sert à parler de l'homme.",
+    r:"Ex : « Le Corbeau et le Renard » (Fables, 1668) — le corbeau perd son fromage par vanité. La Fontaine utilise l'anthropomorphisme animal pour critiquer indirectement la cour de Louis XIV. L'animal est un miroir moral de l'homme." },
+  { cat:'art', tag:"Sans famille, Malot, 1878",
+    q:"Présentez le roman Sans famille d'Hector Malot (1878) et le rôle que jouent les animaux pour le personnage de Rémi.",
+    r:"Rémi, orphelin vagabond, voyage avec la troupe d'animaux savants de Vitalis : le chien Capi et le singe Joli-Cœur. Abandonnés par les humains, ces animaux deviennent sa vraie famille de substitution — solidarité inter-espèces qui comble le vide affectif." },
+  { cat:'art', tag:"Germinal, Zola, chevaux de mine",
+    q:"Quel rôle jouent les animaux dans Germinal d'Émile Zola (1885) et que symbolisent-ils ?",
+    r:"Les chevaux de mine (comme Bataille) ne remontent jamais à la surface, enfermés comme les mineurs. Condamnés au même enfer souterrain, ils symbolisent l'exploitation de tout être vivant par le capitalisme industriel." },
+  { cat:'art', tag:"Steinbeck, Des souris et des hommes, 1937",
+    q:"Dans quel roman américain le personnage de Curley révèle-t-il son attachement à son chien, et que préfigure l'abattage de ce chien ?",
+    r:"Des souris et des hommes, John Steinbeck (1937). Le chien de Candy est abattu malgré les protestations de son maître — ce sort préfigure celui de Lennie. L'animal révèle ce que l'homme a de plus vulnérable face à un monde qui écrase les faibles." },
+  { cat:'art', tag:"Léo Ferré, Pépi",
+    q:"Quel chanteur français anarchiste vivait avec une femelle chimpanzé qu'il considérait comme un membre de sa famille ?",
+    r:"Léo Ferré — il vivait avec Pépi, cohérent avec sa philosophie anarchiste qui refuse toute hiérarchie, même entre espèces. Ce choix de vie illustre un effacement radical de la frontière homme-animal." },
+  { cat:'art', tag:"Argos, Ulysse, Odyssée",
+    q:"Comment s'appelle le chien d'Ulysse dans l'Odyssée d'Homère, et que se passe-t-il lors du retour de son maître ?",
+    r:"Argos — il reconnaît Ulysse après 20 ans d'absence et meurt de joie aussitôt. Seul être à l'avoir reconnu, il incarne la fidélité animale absolue. L'un des symboles les plus puissants du lien homme-animal dans la littérature." },
+  { cat:'art', tag:"Actéon, Diane/Artémis",
+    q:"Quel héros de la mythologie gréco-romaine est métamorphosé en cerf et dévoré par ses propres chiens ? Par quel ordre et pour quelle raison ?",
+    r:"Actéon — puni par Diane/Artémis pour avoir surpris la déesse nue au bain. Sa métamorphose en cerf illustre la frontière fragile entre homme et animal dans la mythologie : la transgression du regard sur le divin se paye de sa nature humaine." },
+  { cat:'art', tag:"Anubis, dieux égyptiens hybrides",
+    q:"Citez un dieu égyptien hybride mi-homme mi-animal, expliquez son rôle et ce que cette hybridité symbolise.",
+    r:"Anubis (tête de chacal) guide les âmes vers l'au-delà — animal psychopompe. Horus (tête de faucon) est le dieu du ciel ; Bastet (tête de chat) protège le foyer. Ces hybrides révèlent que l'animal est sacré : intermédiaire entre le divin et l'humain." },
+  { cat:'art', tag:"Évangélistes, tétramorphes",
+    q:"Chez les chrétiens, 3 des 4 évangélistes sont représentés par un animal (les tétramorphes). Donnez 1 exemple avec son symbole.",
+    r:"Saint Marc = le lion (courage, résurrection), Saint Luc = le taureau (sacrifice), Saint Jean = l'aigle (contemplation divine). Ces symboles viennent d'une vision du prophète Ézéchiel — l'animal porte une signification spirituelle profonde." },
+  { cat:'art', tag:"Animal totem, cultures animistes",
+    q:"Qu'est-ce qu'un animal totem dans les cultures animistes et amérindiennes ?",
+    r:"Animal spirituel qui protège et définit un individu ou un clan. Sacralisé, il est perçu comme intermédiaire entre le monde humain et le monde spirituel. Chaque individu lui est lié dès la naissance — rapport radicalement différent de la domination occidentale." },
+  { cat:'art', tag:"Louise Bourgeois, Maman, 1999",
+    q:"Que représente la sculpture « Maman » de Louise Bourgeois (1999) et pourquoi renverse-t-elle notre rapport à l'animal ?",
+    r:"Une araignée géante de bronze (~9 m), réinterprétée comme figure maternelle protectrice — tisseuse de liens, à la fois imposante et douce. L'animal habituellement effrayant devient symbole de tendresse et de protection : vision radicalement nouvelle de la bête." },
+  { cat:'art', tag:"Jean Véber, dompteuse de panthère",
+    q:"Décrivez le tableau « La dompteuse de panthère » de Jean Véber (Musée des Beaux-Arts de Tours) et expliquez son sens.",
+    r:"Une dompteuse de cirque maîtrise une panthère sauvage. Cette scène illustre la fascination humaine pour la domination de l'animal sauvage — mais aussi la violence symbolique exercée sur le vivant, maintenu par la force hors de son milieu naturel." },
+  { cat:'art', tag:"Brunette, Jules Renard",
+    q:"Citez une vache personnage de Jules Renard et expliquez ce qui lui arrive.",
+    r:"Brunette, dans les Histoires naturelles de Jules Renard. Elle est vendue/abattue par son maître, mettant fin au lien affectif qui s'était noué. La dépendance économique détruit la relation — l'animal est toujours subordonné à l'utilité." },
+  { cat:'art', tag:"Mayas, création de l'homme",
+    q:"Quel récit les Mayas faisaient-ils de la création de l'homme par les dieux, et que dit-il de notre rapport à l'animal ?",
+    r:"Les dieux ont créé l'homme à partir du maïs, après avoir échoué avec la boue (trop mou) et le bois (sans mémoire). L'homme n'est pas fait d'un matériau animal — il est d'une nature distincte, liée à la végétation." },
+  { cat:'art', tag:"Genèse, Bible, domination",
+    q:"Quelle place la Bible, à travers la Genèse, accorde-t-elle à l'homme par rapport aux animaux ?",
+    r:"Dieu donne à l'homme la domination sur toutes les espèces (Genèse 1:28). Adam nomme les animaux, leur donnant une identité. L'Arche de Noé illustre cependant une responsabilité de l'homme envers la vie animale." },
+  { cat:'art', tag:"Animaux dans l'Odyssée, classification",
+    q:"Proposez une classification des différents types d'animaux présents dans l'Odyssée d'Homère.",
+    r:"On distingue : (1) animaux domestiques et fidèles (Argos, troupeaux de Télémaque) ; (2) animaux sauvages ou monstrueux (Scylla, les sirènes-oiseaux) ; (3) animaux liés aux dieux ou à la métamorphose (Circé transforme les hommes en cochons). L'animal est à la frontière de l'humain et du divin." },
+  { cat:'art', tag:"Tableau avec animaux (Dürer, Véber...)",
+    q:"Citez un tableau qui met en scène des animaux et expliquez ce qu'il révèle sur notre regard.",
+    r:"Ex : Le Lièvre d'Albrecht Dürer (1502) — aquarelle d'une précision quasi-scientifique, chaque poil, chaque reflet dans l'œil. L'art comme moyen de voir l'animal tel qu'il est vraiment, sans projection. Ou La dompteuse de panthère de Jean Véber — fascination pour la domination du sauvage." },
+
+  // ── 🤔 COMPRENDRE L'ANIMAL ────────────────────────────────────────────────
+  { cat:'societe', tag:"Domestique vs animal de compagnie",
+    q:"Expliquez la différence entre un animal domestique et un animal de compagnie.",
+    r:"Animal domestique = espèce sélectionnée génétiquement sur des générations pour vivre avec l'homme (chien, chat, vache). Animal de compagnie = choix individuel de garder un animal chez soi, domestique ou non (y compris les NAC). Le premier est le résultat d'une co-évolution ; le second est un rapport affectif ou de mode." },
+  { cat:'societe', tag:"Gandhi",
+    q:"Qui a dit : « On reconnaît la grandeur d'une nation à la manière dont elle traite ses animaux » ?",
+    r:"Gandhi — cette citation place le traitement des animaux au cœur de la morale collective. Une société qui maltraite les animaux révèle quelque chose d'inquiétant sur ses valeurs profondes." },
+  { cat:'societe', tag:"NAC, Nouveaux Animaux de Compagnie",
+    q:"Qu'est-ce qu'un NAC ? Donnez un exemple et expliquez ce que ce phénomène révèle sur notre rapport à l'animal.",
+    r:"NAC = Nouvel Animal de Compagnie — animal exotique ou sauvage élevé comme compagnie : iguane, varan, serpent, crocodile. Ce phénomène révèle une fascination pour le sauvage et une méconnaissance des besoins réels de l'animal." },
+  { cat:'societe', tag:"Obésité des chiens, USA",
+    q:"Aux États-Unis, environ 59 % des chiens sont obèses. VRAI ou FAUX ? Que révèle ce chiffre sur notre rapport à l'animal ?",
+    r:"VRAI. Ce chiffre illustre une suranthropomorphisation de l'animal de compagnie : on lui prête nos habitudes alimentaires et nos comportements humains, au détriment de ses besoins naturels. L'animal devient un reflet de nos propres excès." },
+  { cat:'societe', tag:"Funérailles animaux, Chine/USA",
+    q:"D'après le Courrier International, quelle pratique se développe en Chine et aux États-Unis après la mort d'un animal domestique ?",
+    r:"Des funérailles avec cérémonie, embaumement, crémation rituelle — parfois dans des espaces dédiés comme pour les humains. Signe d'une humanisation croissante de l'animal de compagnie : l'animal entre dans l'espace du deuil." },
+  { cat:'societe', tag:"Poussettes pour animaux, Corée du Sud",
+    q:"En Corée du Sud, quel objet destiné à l'origine aux bébés est vendu à 58 % pour des animaux de compagnie ?",
+    r:"Des poussettes — signe de l'anthropomorphisation extrême des animaux de compagnie, traités comme des enfants. Ce phénomène illustre la dissolution de la frontière entre l'humain et l'animal dans les sociétés contemporaines." },
+  { cat:'societe', tag:"Associations de protection animale",
+    q:"Quel point commun entre « 30 millions d'amis », le WWF, « Animal Testing » et L214 ?",
+    r:"Ce sont des associations ou organismes de protection des animaux, avec des approches différentes : affective (30 millions d'amis), environnementale (WWF), éthique contre les tests cosmétiques (Animal Testing), militante et documentaire (L214)." },
+  { cat:'societe', tag:"Industrie animaux de compagnie, +45 % en 2030",
+    q:"Donnez 5 exemples relevant de l'industrie mondiale des animaux de compagnie, secteur en croissance de +45 % d'ici 2030.",
+    r:"Alimentation spécialisée (bio, sans gluten), vêtements et accessoires, soins médicaux (vétérinaires, assurances santé), garderies et hôtels pour animaux, salons de toilettage — une industrie qui traite l'animal de compagnie comme un consommateur à part entière." },
+  { cat:'societe', tag:"Viande, réchauffement climatique",
+    q:"Citez 3 problèmes que la surconsommation de viande pose pour le réchauffement climatique.",
+    r:"1) Déforestation pour les pâturages et cultures fourragères (soja). 2) Émissions de méthane par les ruminants (l'élevage = 14,5 % des GES mondiaux, FAO 2013). 3) Pollution des nappes phréatiques par les nitrates d'élevage." },
+  { cat:'societe', tag:"Alternatives à la viande",
+    q:"Citez 2 alternatives à la consommation de viande et expliquez leur intérêt.",
+    r:"1) Protéines végétales (légumineuses, tofu) — faible empreinte carbone, accessibles. 2) Insectes comestibles — riches en protéines, 12× moins de GES que le bœuf. 3) Viande in vitro — cultivée en laboratoire sans abattage (encore émergente à l'échelle industrielle)." },
+  { cat:'societe', tag:"Santé, élevage industriel",
+    q:"Pourquoi est-il meilleur pour la santé d'éviter la viande provenant d'élevage industriel ?",
+    r:"Présence d'antibiotiques et d'hormones (risque de résistance bactérienne), alimentation non naturelle des animaux (OGM, farines), stress de l'animal qui dégrade la qualité de la viande (cortisol), risque bactérien accru (salmonelles, E. coli)." },
+  { cat:'societe', tag:"Surpêche, océans vides 2050",
+    q:"Pourquoi certains chercheurs avancent-ils le risque d'océans vides de poissons à l'horizon 2050 ?",
+    r:"La surpêche industrielle (chalutage de fond qui détruit les écosystèmes benthiques et capture des espèces non ciblées) et la pollution des océans menacent l'équilibre des espèces marines — un effondrement possible de la chaîne alimentaire océanique." },
+  { cat:'societe', tag:"Petit Paysan, 2017, épizootie",
+    q:"Que raconte le film Petit Paysan (2017) d'Hubert Charuel et quel lien fait-il avec le thème ?",
+    r:"Un jeune éleveur breton confronté à une épizootie (épidémie animale contagieuse) préfère dissimuler la maladie plutôt qu'abattre ses vaches. Son attachement dépasse la logique économique — l'animal de production devient un lien affectif existentiel." },
+  { cat:'societe', tag:"Animal psychopompe",
+    q:"Qu'est-ce qu'un animal psychopompe ? Donnez deux exemples dans des mythologies différentes.",
+    r:"Animal qui guide les âmes vers l'au-delà dans les mythologies. Ex : Anubis (chacal) en Égypte, Cerbère (chien à trois têtes) en Grèce, le cheval dans les traditions nordiques. Ces animaux sacrent l'animal comme médiateur entre le monde des vivants et celui des morts." },
+  { cat:'societe', tag:"Suisse, tests cosmétiques interdits",
+    q:"Qu'est-ce qui est interdit en Suisse (avant la généralisation à toute l'UE en 2013) pour l'industrie cosmétique ?",
+    r:"Les tests sur les animaux pour tout produit cosmétique. Ce tournant éthique illustre que la société a tracé une limite morale : faire souffrir un être sensible pour un rouge à lèvres est jugé injustifiable." },
+];
+
 // ── Points de méthodologie — ce qui ne s'improvise pas ───────────────────
 
 const METHODO_POINTS = [
@@ -277,6 +431,7 @@ function CultureQuizView({ state, updateState, back }) {
   if (subMode === 'cache') return <QuizCache back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'methodo') return <MethodoReview back={() => setSubMode(null)} />;
   if (subMode === 'auteur') return <QuizAuteurOeuvre back={() => setSubMode(null)} state={state} updateState={updateState} />;
+  if (subMode === 'ouvert') return <QuizOuvert back={() => setSubMode(null)} state={state} updateState={updateState} />;
   return null;
 }
 
@@ -339,6 +494,13 @@ function CultureMenu({ back, setSubMode }) {
           desc={`${AUTEUR_OEUVRE_QCM.length} questions dans les deux sens : qui a écrit quelle œuvre ? Quelle œuvre pour quel auteur ? Dates incluses.`}
           color="oklch(0.52 0.14 280)"
           onClick={() => setSubMode('auteur')}
+        />
+        <ModeCard
+          icon="💬"
+          title="Questions de cours"
+          desc={`${QUESTIONS_OUVERTES.length} questions ouvertes — lis la question, réponds à voix haute, révèle la réponse modèle et auto-évalue-toi.`}
+          color="oklch(0.50 0.12 240)"
+          onClick={() => setSubMode('ouvert')}
         />
       </div>
     </div>
@@ -1041,6 +1203,212 @@ function QuizAuteurOeuvre({ back, state, updateState }) {
           <Btn variant="solid" color="oklch(0.52 0.14 280)" onClick={next}>
             {qi + 1 >= questions.length ? 'Voir le score →' : 'Question suivante →'}
           </Btn>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Questions ouvertes — composants ──────────────────────────────────────
+
+const QO_CATS = [
+  { key:'all',     label:'Toutes les questions',    icon:'📋',
+    color:'oklch(0.50 0.12 240)' },
+  { key:'science', label:'🔬 Connaître l\'animal',  icon:'🔬',
+    color:'oklch(0.50 0.14 200)' },
+  { key:'art',     label:'🎨 Imaginer l\'animal',   icon:'🎨',
+    color:'oklch(0.50 0.14 300)' },
+  { key:'societe', label:'🤔 Comprendre l\'animal', icon:'🤔',
+    color:'oklch(0.50 0.16 45)' },
+];
+
+function QuizOuvert({ back, state, updateState }) {
+  const [filter, setFilter] = React.useState(null);
+
+  if (!filter) {
+    const counts = {
+      all:     QUESTIONS_OUVERTES.length,
+      science: QUESTIONS_OUVERTES.filter(q => q.cat === 'science').length,
+      art:     QUESTIONS_OUVERTES.filter(q => q.cat === 'art').length,
+      societe: QUESTIONS_OUVERTES.filter(q => q.cat === 'societe').length,
+    };
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="Questions de cours" />
+        <PaperCard style={{ padding:22, marginBottom:20,
+          background:'linear-gradient(135deg, oklch(0.97 0.02 240), oklch(0.95 0.04 220))',
+          border:'1.5px solid oklch(0.85 0.08 240)' }}>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:17, fontWeight:700,
+            color:'oklch(0.22 0.06 240)', marginBottom:6 }}>
+            Révision à voix haute
+          </div>
+          <div style={{ fontSize:13, color:'oklch(0.40 0.04 240)', lineHeight:1.6 }}>
+            Lis la question, formule ta réponse à voix haute, puis révèle la réponse modèle. Auto-évalue-toi honnêtement.
+          </div>
+        </PaperCard>
+        <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+          {QO_CATS.map(cat => (
+            <button key={cat.key} onClick={() => setFilter(cat.key)} style={{
+              padding:'16px 20px', borderRadius:12, textAlign:'left',
+              border:'2px solid oklch(0.88 0.005 280)', background:'white',
+              cursor:'pointer', fontFamily:'var(--font-ui)',
+            }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                <div style={{ fontWeight:700, fontSize:15, color:'oklch(0.22 0.04 280)' }}>
+                  {cat.label}
+                </div>
+                <span style={{ fontSize:12, fontFamily:'var(--font-mono)',
+                  background:'oklch(0.93 0.02 280)', padding:'2px 8px', borderRadius:5,
+                  color:'oklch(0.45 0.03 280)' }}>
+                  {counts[cat.key]} questions
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return <QuizOuvertGame back={back} state={state} updateState={updateState} filter={filter} />;
+}
+
+function QuizOuvertGame({ back, state, updateState, filter }) {
+  const questions = React.useMemo(() => {
+    const pool = filter === 'all'
+      ? [...QUESTIONS_OUVERTES]
+      : QUESTIONS_OUVERTES.filter(q => q.cat === filter);
+    return shuffle(pool);
+  }, [filter]);
+
+  const catColor = { science:'oklch(0.50 0.14 200)', art:'oklch(0.50 0.14 300)', societe:'oklch(0.50 0.16 45)', all:'oklch(0.50 0.12 240)' };
+  const catBg   = { science:'oklch(0.93 0.06 200)', art:'oklch(0.92 0.05 300)', societe:'oklch(0.93 0.07 45)' };
+  const catInk  = { science:'oklch(0.28 0.10 200)', art:'oklch(0.28 0.10 300)', societe:'oklch(0.28 0.12 45)' };
+  const catBorder={ science:'oklch(0.78 0.10 200)', art:'oklch(0.78 0.10 300)', societe:'oklch(0.78 0.14 45)' };
+  const catLabel = { science:'🔬 Connaître', art:'🎨 Imaginer', societe:'🤔 Comprendre' };
+  const color = catColor[filter] || 'oklch(0.50 0.12 240)';
+
+  const [qi, setQi] = React.useState(0);
+  const [revealed, setRevealed] = React.useState(false);
+  const [results, setResults] = React.useState([]);
+  const [done, setDone] = React.useState(false);
+
+  function assess(val) {
+    const newResults = [...results, val];
+    setResults(newResults);
+    if (qi + 1 >= questions.length) {
+      const known = newResults.filter(r => r === 'ok').length;
+      const xp = Math.round((known / questions.length) * 15);
+      const ns = { ...state, xp: state.xp + xp };
+      updateState(window.RevStore.bumpStreak(ns), `+${xp} XP — Questions terminées !`);
+      setDone(true);
+    } else {
+      setQi(q => q + 1);
+      setRevealed(false);
+    }
+  }
+
+  if (done) {
+    const known = results.filter(r => r === 'ok').length;
+    const toReview = questions.filter((q, i) => results[i] === 'review');
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="Questions de cours" />
+        <PaperCard style={{ padding:32,
+          background:'linear-gradient(135deg, oklch(0.96 0.05 240), oklch(0.94 0.08 220))',
+          border:'1.5px solid oklch(0.84 0.10 240)' }}>
+          <div style={{ fontSize:40, marginBottom:12 }}>📊</div>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:22, fontWeight:700,
+            color:'oklch(0.25 0.10 240)', marginBottom:6 }}>
+            {known} / {questions.length} maîtrisées
+          </div>
+          <div style={{ fontSize:14, color:'oklch(0.40 0.06 240)', marginBottom:20 }}>
+            {known >= questions.length * 0.8 ? 'Excellent ! Tu maîtrises bien ces connaissances.' :
+             known >= questions.length * 0.5 ? 'Bien ! Quelques questions à retravailler.' :
+             'Continue à réviser — ces questions sont au cœur du sujet.'}
+          </div>
+          {toReview.length > 0 && (
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:12, fontWeight:700, color:'oklch(0.40 0.08 25)',
+                textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>
+                À revoir ({toReview.length})
+              </div>
+              {toReview.map((q, i) => (
+                <div key={i} style={{ padding:'8px 12px', borderRadius:8,
+                  background:'oklch(0.95 0.04 25)', border:'1px solid oklch(0.82 0.08 25)',
+                  marginBottom:6, fontSize:13, color:'oklch(0.30 0.08 25)' }}>
+                  <strong>{q.tag}</strong>
+                </div>
+              ))}
+            </div>
+          )}
+          <Btn variant="solid" color={color} onClick={back}>Retour au menu</Btn>
+        </PaperCard>
+      </div>
+    );
+  }
+
+  const q = questions[qi];
+
+  return (
+    <div style={{ maxWidth:720, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Questions de cours" />
+
+      <div style={{ marginBottom:16 }}>
+        <ProgressBar value={qi + 1} max={questions.length} color={color} />
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:5,
+          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+          <span>Question {qi + 1} / {questions.length}</span>
+          <span>{results.filter(r => r === 'ok').length} connues · {results.filter(r => r === 'review').length} à revoir</span>
+        </div>
+      </div>
+
+      <PaperCard style={{ padding:28, marginBottom:16, background:'oklch(0.975 0.01 280)' }}>
+        {q.cat !== 'all' && (
+          <div style={{ marginBottom:14 }}>
+            <span style={{ fontSize:11, fontWeight:700, padding:'3px 8px', borderRadius:5,
+              background: catBg[q.cat] || 'oklch(0.92 0.02 280)',
+              color: catInk[q.cat] || 'oklch(0.30 0.02 280)',
+              border: `1px solid ${catBorder[q.cat] || 'oklch(0.80 0.01 280)'}` }}>
+              {catLabel[q.cat] || q.cat}
+            </span>
+          </div>
+        )}
+        <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
+          lineHeight:1.35, color:'oklch(0.22 0.04 280)', textWrap:'balance' }}>
+          {q.q}
+        </div>
+      </PaperCard>
+
+      {!revealed ? (
+        <Btn variant="solid" color={color} onClick={() => setRevealed(true)}>
+          Voir la réponse →
+        </Btn>
+      ) : (
+        <div>
+          <div style={{ padding:'18px 20px', borderRadius:12, marginBottom:14,
+            background:'oklch(0.96 0.03 145)', border:'1.5px solid oklch(0.78 0.10 145)' }}>
+            <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.35 0.10 145)',
+              textTransform:'uppercase', letterSpacing:1, marginBottom:8 }}>Réponse</div>
+            <div style={{ fontSize:14, lineHeight:1.65, color:'oklch(0.22 0.06 145)' }}>
+              {q.r}
+            </div>
+          </div>
+          <div style={{ fontSize:13, fontWeight:700, color:'oklch(0.40 0.04 280)', marginBottom:10 }}>
+            Est-ce que tu avais les éléments essentiels ?
+          </div>
+          <div style={{ display:'flex', gap:10 }}>
+            <button onClick={() => assess('ok')} style={{
+              flex:1, padding:'13px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.15 145)',
+              background:'oklch(0.93 0.07 145)', color:'oklch(0.25 0.12 145)',
+              fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+            }}>Je savais ✓</button>
+            <button onClick={() => assess('review')} style={{
+              flex:1, padding:'13px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.12 25)',
+              background:'oklch(0.93 0.06 25)', color:'oklch(0.28 0.10 25)',
+              fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+            }}>À revoir ✗</button>
+          </div>
         </div>
       )}
     </div>

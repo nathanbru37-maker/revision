@@ -17,7 +17,12 @@
       "Bash(Test-Path *)",
       "WebFetch(domain:cours-ndrc.fr)",
       "Bash(node -e ' *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(python *)",
+      "Bash(py *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Add-Type -AssemblyName \"Microsoft.Office.Interop.Word\" 2>&1; Write-Host \"Word available\")",
+      "PowerShell($word = New-Object -ComObject Word.Application; $word.Visible = $false; $doc = $word.Documents.Open\\(\"C:\\\\Users\\\\natha\\\\Downloads\\\\cugex\\\\Fichier \\(19\\).pdf\"\\); $text = $doc.Content.Text; $doc.Close\\($false\\); $word.Quit\\(\\); $text)"
     ]
   }
 }
