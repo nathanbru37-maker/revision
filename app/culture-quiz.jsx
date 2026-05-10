@@ -20,6 +20,8 @@ const CULTURE_QCM = [
   { primary:false, q:"Quel roman de George Orwell utilise des animaux pour critiquer le stalinisme ?", choices:["La Ferme des animaux (1945)","Maus (1986)","Croc-Blanc (1906)","Le Livre de la Jungle (1894)"], correct:0, expl:"La Ferme des animaux (1945) d'Orwell raconte une révolution d'animaux qui renverse les fermiers humains, avant que les cochons n'instaurent un régime aussi tyrannique. Satire du totalitarisme stalinien." },
   { primary:false, q:"Qui est Ganesh dans l'hindouisme ?", choices:["Dieu à tête d'éléphant, fils de Shiva","Dieu à tête de singe, compagnon de Rama","Dieu à tête de taureau, maître du tonnerre","Dieu à tête de serpent, gardien du cosmos"], correct:0, expl:"Ganesh est l'une des divinités les plus vénérées de l'hindouisme. Sa tête d'éléphant symbolise la sagesse et le dépassement des obstacles — l'animal élevé au rang du divin." },
   { primary:false, q:"Aristote définit l'homme comme 'animal…' — complète.", choices:["politique (zôon politikon)","rationnel (zôon logikon)","social (zôon koinônikon)","conscient (zôon noêtikon)"], correct:0, expl:"Aristote définit l'homme comme 'zôon politikon' dans La Politique. Ce qui distingue l'homme des autres animaux est le logos (raison et langage), permettant de vivre en cité et de distinguer le juste de l'injuste." },
+  { primary:false, q:"Quelle expérience Harry Harlow réalisa-t-il dans les années 1950 sur des singes rhésus ?", choices:["Des bébés singes préféraient une mère en tissu (sans nourriture) à une mère en fil de fer (avec biberon)","Des bébés singes apprenaient par imitation, sans récompense alimentaire","Des singes rhésus reconnaissaient leur propre image dans un miroir","Des singes utilisaient des outils en métal pour résoudre des problèmes"], correct:0, expl:"Harry Harlow (Université du Wisconsin, 1958) installe deux mères artificielles : l'une en fil de fer avec biberon, l'autre en tissu doux sans nourriture. Les bébés singes passent 17h/24 avec la mère en tissu. Résultat révolutionnaire : le besoin d'attachement affectif (contact comfort) prime sur la nourriture. L'animal révèle une vérité universelle sur l'amour." },
+  { primary:false, q:"Quel concept psychologique les expériences de Harry Harlow sur les singes rhésus ont-elles contribué à fonder ?", choices:["La théorie de l'attachement (le besoin affectif prime sur la nourriture)","Le conditionnement opérant (apprentissage par récompense)","L'empreinte comportementale (suivre le premier être vu)","La mémoire épisodique chez les primates"], correct:0, expl:"Les résultats de Harlow ont directement inspiré la théorie de l'attachement de John Bowlby : l'enfant (humain ou animal) a besoin de sécurité affective plus encore que de nourriture. Ses expériences d'isolation (pit of despair) montrent aussi les ravages du manque d'affection — chez l'animal comme chez l'homme." },
 
   // ── PRIMAIRES — 🔬 CONNAÎTRE L'ANIMAL ────────────────────────────────────
   { primary:true, q:"Quel pourcentage des animaux utilisés en laboratoire sont des rongeurs (souris et rats) ?", choices:["Plus de 80 %","Environ 50 %","Environ 30 %","Moins de 10 %"], correct:0, expl:"Les souris et rats représentent plus de 80 % des animaux utilisés en expérimentation scientifique. Leur proximité génétique avec l'humain en fait des modèles biologiques privilégiés — mais cela pose la question éthique : peut-on connaître l'homme en étudiant l'animal ?" },
@@ -83,6 +85,7 @@ const AUTEUR_OEUVRE_QCM = [
   { sens:'auteur→oeuvre', q:"Peter Singer et Paola Cavalieri ont lancé en 1993 ?", choices:["Le Projet Grand Singe","La Déclaration de Cambridge","La règle des 3R","La Libération animale"], correct:0, expl:"Le Projet Grand Singe (1993) réclame des droits fondamentaux pour chimpanzés, gorilles, orangs-outans et bonobos : droit à la vie, à la liberté, à ne pas être torturé." },
   { sens:'oeuvre→auteur', q:"'Maman', l'araignée géante de bronze (~9 m), est une sculpture de ?", choices:["Louise Bourgeois","Camille Claudel","Niki de Saint-Phalle","Damien Hirst"], correct:0, expl:"Louise Bourgeois (1911-2010) réimagine l'araignée — souvent perçue comme effrayante — en figure protectrice et maternelle. Vision radicalement nouvelle de la bête dans l'art contemporain." },
   { sens:'auteur→oeuvre', q:"Dans quel poème (1785) Robert Burns évoque-t-il une souris dont le nid est détruit, inspirant Steinbeck ?", choices:["To a Mouse","The Raven","Ode to a Nightingale","La Jeune Captive"], correct:0, expl:"'To a Mouse' (Burns, 1785) : 'Les plans les mieux pensés des souris et des hommes tournent souvent mal.' Ce vers inspire le titre Des souris et des hommes (Steinbeck, 1937)." },
+  { sens:'oeuvre→auteur', q:"L'article 'The Nature of Love' (1958) — démontrant que les bébés singes préfèrent une mère en tissu sans nourriture à une mère en fil de fer avec biberon — est l'œuvre de ?", choices:["Harry Harlow","B.F. Skinner","Konrad Lorenz","Frans de Waal"], correct:0, expl:"Harry Harlow (1958) prouve que l'attachement affectif (contact comfort) prime sur la nourriture chez les singes rhésus. Ce résultat fonde la théorie de l'attachement (Bowlby) et montre que la vie émotionnelle des primates est aussi fondamentale que leur biologie — contre la thèse cartésienne de l'animal-machine." },
 ];
 
 // ── Données "Qu'est-ce que cache ce sujet ?" ─────────────────────────────
@@ -163,6 +166,7 @@ const CACHE_SUJETS = [
       { primary:true,  ref:"Pr Courtine — stimulation électrique, moelle épinière", correct:true, why:"Cas concret : l'expérimentation animale a permis à des paraplégiques de remarcher." },
       { primary:true,  ref:"Interdit tests cosmétiques sur animaux (UE, 2013)", correct:true, why:"La société trace une limite : toute expérimentation n'est pas justifiable moralement." },
       { primary:true,  ref:"Boîte de Skinner — conditionnement opérant (années 1930)", correct:true, why:"L'expérience fondatrice de la psychologie comportementale — outil de connaissance majeur." },
+      { primary:false, ref:"Harry Harlow — mère en fil de fer vs mère en tissu (1958)", correct:true, why:"Parmi les expériences les plus controversées éthiquement : des bébés singes rhésus délibérément séparés de leur mère pour tester les limites du besoin affectif — un trauma psychologique assumé au nom de la science." },
       { primary:true,  ref:"Fables de La Fontaine (1668)", correct:false, why:"L'anthropomorphisme littéraire n'a pas de lien direct avec l'expérimentation scientifique." },
       { primary:true,  ref:"Animal totem — cultures amérindiennes", correct:false, why:"Vision spirituelle de l'animal — hors du cadre de l'expérimentation scientifique." },
     ]
@@ -175,6 +179,7 @@ const CACHE_SUJETS = [
       { primary:true,  ref:"Ours en hibernation — bio-inspiration médicale", correct:true, why:"Conserver la masse musculaire sans bouger inspire la médecine pour les patients alités." },
       { primary:true,  ref:"Darwin — sélection naturelle (1859)", correct:true, why:"Comprendre l'évolution animale, c'est comprendre les mécanismes du vivant — y compris humain." },
       { primary:true,  ref:"Boîte de Skinner — conditionnement opérant", correct:true, why:"L'étude du comportement animal a fondé toute la psychologie de l'apprentissage humain." },
+      { primary:false, ref:"Harry Harlow — attachement affectif chez les singes rhésus (1958)", correct:true, why:"En étudiant des primates, Harlow découvre une loi universelle sur l'amour : le besoin d'attachement prime sur la nourriture. Ce que l'animal révèle sur lui-même nous révèle sur nous-mêmes." },
       { primary:true,  ref:"Léo Ferré et Pépi le chimpanzé", correct:false, why:"Relation affective et philosophique — pas directement un apprentissage technique ou scientifique." },
       { primary:true,  ref:"Descartes — animal-machine (1637)", correct:false, why:"Si l'animal est une machine sans conscience, il n'y a rien à apprendre de lui — argument contraire." },
       { primary:true,  ref:"NAC — Nouveaux Animaux de Compagnie", correct:false, why:"Phénomène de mode révélant nos projections — l'inverse d'un vrai apprentissage de l'animal." },
@@ -231,6 +236,9 @@ const QUESTIONS_OUVERTES = [
   { cat:'science', tag:"Loi, industrie pharmaceutique, animaux",
     q:"À quoi la loi contraint-elle l'industrie pharmaceutique avant la mise sur le marché d'un nouveau médicament, en lien avec les animaux ?",
     r:"Des tests précliniques sur des animaux sont légalement obligatoires (règle des 3R) pour s'assurer de l'innocuité du produit avant les essais sur l'homme. La tension entre nécessité médicale et souffrance animale y est maximale." },
+  { cat:'science', tag:"Harry Harlow, mère fil de fer vs tissu, 1958",
+    q:"Quelles expériences Harry Harlow mena-t-il sur des singes rhésus dans les années 1950-60, et que révèlent-elles sur le rapport entre l'homme et l'animal ?",
+    r:"Harlow (Université du Wisconsin) place des bébés singes face à deux mères artificielles : l'une en fil de fer avec biberon, l'autre en tissu doux sans nourriture. Les bébés passent 17h/24 avec la mère en tissu : le besoin d'attachement affectif (contact comfort) prime sur la nourriture. Ces résultats fondent la théorie de l'attachement (Bowlby) et prouvent que les primates ont une vie émotionnelle complexe — contre la thèse cartésienne de l'animal-machine. Éthiquement, ses expériences d'isolation (pit of despair) comptent parmi les plus controversées de l'histoire de la psychologie : l'animal délibérément traumatisé pour comprendre l'homme." },
 
   // ── 🎨 IMAGINER L'ANIMAL ──────────────────────────────────────────────────
   { cat:'art', tag:"Peintures rupestres, Chauvet, Lascaux",
@@ -424,7 +432,7 @@ const METHODO_POINTS = [
 // ── Vue principale ────────────────────────────────────────────────────────
 
 function CultureQuizView({ state, updateState, back }) {
-  const [subMode, setSubMode] = React.useState(null); // 'qcm' | 'cache' | 'methodo'
+  const [subMode, setSubMode] = React.useState(null);
 
   if (!subMode) return <CultureMenu back={back} setSubMode={setSubMode} />;
   if (subMode === 'qcm') return <QuizQCM back={() => setSubMode(null)} state={state} updateState={updateState} />;
@@ -432,6 +440,7 @@ function CultureQuizView({ state, updateState, back }) {
   if (subMode === 'methodo') return <MethodoReview back={() => setSubMode(null)} />;
   if (subMode === 'auteur') return <QuizAuteurOeuvre back={() => setSubMode(null)} state={state} updateState={updateState} />;
   if (subMode === 'ouvert') return <QuizOuvert back={() => setSubMode(null)} state={state} updateState={updateState} />;
+  if (subMode === 'ecrire') return <QuizEcrire back={() => setSubMode(null)} state={state} updateState={updateState} />;
   return null;
 }
 
@@ -501,6 +510,13 @@ function CultureMenu({ back, setSubMode }) {
           desc={`${QUESTIONS_OUVERTES.length} questions ouvertes — lis la question, réponds à voix haute, révèle la réponse modèle et auto-évalue-toi.`}
           color="oklch(0.50 0.12 240)"
           onClick={() => setSubMode('ouvert')}
+        />
+        <ModeCard
+          icon="✍️"
+          title="Mode Écriture"
+          desc={`${CULTURE_QCM.length + AUTEUR_OEUVRE_QCM.length} questions sans choix multiples — rédige ta réponse librement, puis révèle la correction et auto-évalue-toi.`}
+          color="oklch(0.48 0.16 160)"
+          onClick={() => setSubMode('ecrire')}
         />
       </div>
     </div>
@@ -594,7 +610,7 @@ function QuizQCMGame({ back, state, updateState, filter }) {
     const pool = filter === 'primary' ? CULTURE_QCM.filter(q => q.primary)
                : filter === 'secondary' ? CULTURE_QCM.filter(q => !q.primary)
                : CULTURE_QCM;
-    return shuffle([...pool]);
+    return shuffle([...pool]).map(shuffleChoices);
   }, [filter]);
 
   const [qi, setQi] = React.useState(0);
@@ -1088,7 +1104,7 @@ function MethodoReview({ back }) {
 // ── Quiz Auteurs & Œuvres ─────────────────────────────────────────────────
 
 function QuizAuteurOeuvre({ back, state, updateState }) {
-  const questions = React.useMemo(() => shuffle([...AUTEUR_OEUVRE_QCM]), []);
+  const questions = React.useMemo(() => shuffle([...AUTEUR_OEUVRE_QCM]).map(shuffleChoices), []);
   const [qi, setQi] = React.useState(0);
   const [selected, setSelected] = React.useState(null);
   const [score, setScore] = React.useState(0);
@@ -1415,12 +1431,265 @@ function QuizOuvertGame({ back, state, updateState, filter }) {
   );
 }
 
+// ── Mode Écriture ─────────────────────────────────────────────────────────
+
+const ECRIRE_FILTERS = [
+  { key:'all',     label:'Tout mélanger',          desc:'QCM connaissances + Auteurs & Œuvres',  count: CULTURE_QCM.length + AUTEUR_OEUVRE_QCM.length },
+  { key:'primary', label:'★ Prioritaires',          desc:'Les 28 références à maîtriser absolument', count: CULTURE_QCM.filter(q=>q.primary).length },
+  { key:'ao',      label:'Auteurs & Œuvres',        desc:'Qui a écrit quoi ? Dates incluses',      count: AUTEUR_OEUVRE_QCM.length },
+];
+
+function QuizEcrire({ back, state, updateState }) {
+  const [filter, setFilter] = React.useState('all');
+  const [started, setStarted] = React.useState(false);
+
+  if (!started) {
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="Mode Écriture" />
+        <PaperCard style={{ padding:28, marginBottom:20,
+          background:'linear-gradient(135deg, oklch(0.97 0.02 160), oklch(0.95 0.04 150))',
+          border:'1.5px solid oklch(0.85 0.08 160)' }}>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
+            color:'oklch(0.22 0.08 160)', marginBottom:8 }}>
+            Réponds sans filet
+          </div>
+          <div style={{ fontSize:13, color:'oklch(0.38 0.06 160)', lineHeight:1.6 }}>
+            Aucun choix multiple. Rédige ta réponse dans le champ, puis révèle la correction et auto-évalue-toi honnêtement.
+          </div>
+        </PaperCard>
+        <div style={{ display:'flex', flexDirection:'column', gap:10, marginBottom:20 }}>
+          {ECRIRE_FILTERS.map(f => (
+            <button key={f.key} onClick={() => setFilter(f.key)} style={{
+              padding:'14px 18px', borderRadius:12, textAlign:'left',
+              border: filter === f.key ? '2px solid oklch(0.48 0.16 160)' : '2px solid oklch(0.88 0.005 280)',
+              background: filter === f.key ? 'oklch(0.93 0.06 160)' : 'white',
+              cursor:'pointer', display:'flex', alignItems:'center', gap:12,
+              fontFamily:'var(--font-ui)', transition:'all .15s ease',
+            }}>
+              <span style={{
+                width:20, height:20, borderRadius:'50%', flexShrink:0,
+                border: filter === f.key ? '6px solid oklch(0.48 0.16 160)' : '2px solid oklch(0.75 0.01 280)',
+                background:'white',
+              }} />
+              <div>
+                <div style={{ fontWeight:700, fontSize:14,
+                  color: filter === f.key ? 'oklch(0.26 0.10 160)' : 'oklch(0.28 0.02 280)' }}>
+                  {f.label}
+                </div>
+                <div style={{ fontSize:12, color:'oklch(0.50 0.02 280)', marginTop:2 }}>
+                  {f.desc} · {f.count} questions
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+        <Btn variant="solid" color="oklch(0.48 0.16 160)" onClick={() => setStarted(true)}>
+          Commencer →
+        </Btn>
+      </div>
+    );
+  }
+
+  return <QuizEcrireGame back={back} state={state} updateState={updateState} filter={filter} />;
+}
+
+function QuizEcrireGame({ back, state, updateState, filter }) {
+  const color = 'oklch(0.48 0.16 160)';
+
+  const questions = React.useMemo(() => {
+    let pool;
+    if (filter === 'primary') {
+      pool = CULTURE_QCM.filter(q => q.primary).map(q => ({ ...q, _src:'qcm' }));
+    } else if (filter === 'ao') {
+      pool = AUTEUR_OEUVRE_QCM.map(q => ({ ...q, _src:'ao' }));
+    } else {
+      pool = [
+        ...CULTURE_QCM.map(q => ({ ...q, _src:'qcm' })),
+        ...AUTEUR_OEUVRE_QCM.map(q => ({ ...q, _src:'ao' })),
+      ];
+    }
+    return shuffle(pool);
+  }, [filter]);
+
+  const [qi, setQi] = React.useState(0);
+  const [input, setInput] = React.useState('');
+  const [revealed, setRevealed] = React.useState(false);
+  const [results, setResults] = React.useState([]);
+  const [done, setDone] = React.useState(false);
+
+  function assess(val) {
+    const nr = [...results, val];
+    setResults(nr);
+    if (qi + 1 >= questions.length) {
+      const known = nr.filter(r => r === 'ok').length;
+      const xp = Math.round((known / questions.length) * 15);
+      const ns = { ...state, xp: state.xp + xp };
+      updateState(window.RevStore.bumpStreak(ns), `+${xp} XP — Mode Écriture terminé !`);
+      setDone(true);
+    } else {
+      setQi(q => q + 1);
+      setInput('');
+      setRevealed(false);
+    }
+  }
+
+  if (done) {
+    const known = results.filter(r => r === 'ok').length;
+    const toReview = questions.filter((_, i) => results[i] === 'review');
+    return (
+      <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+        <TopNav back={back} title="Mode Écriture" />
+        <PaperCard style={{ padding:32,
+          background:'linear-gradient(135deg, oklch(0.96 0.05 160), oklch(0.94 0.08 150))',
+          border:'1.5px solid oklch(0.84 0.10 160)' }}>
+          <div style={{ fontSize:40, marginBottom:12 }}>✍️</div>
+          <div style={{ fontFamily:'var(--font-display)', fontSize:22, fontWeight:700,
+            color:'oklch(0.25 0.10 160)', marginBottom:6 }}>
+            {known} / {questions.length} maîtrisées
+          </div>
+          <div style={{ fontSize:14, color:'oklch(0.40 0.06 160)', marginBottom:20 }}>
+            {known >= questions.length * 0.8 ? 'Excellent ! Tu maîtrises ces références.' :
+             known >= questions.length * 0.5 ? 'Bien ! Quelques lacunes à combler.' :
+             'Continue à retravailler — l\'écrit sans aide, c\'est l\'objectif.'}
+          </div>
+          {toReview.length > 0 && (
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:12, fontWeight:700, color:'oklch(0.40 0.08 25)',
+                textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>
+                À revoir ({toReview.length})
+              </div>
+              {toReview.map((q, i) => (
+                <div key={i} style={{ padding:'8px 12px', borderRadius:8,
+                  background:'oklch(0.95 0.04 25)', border:'1px solid oklch(0.82 0.08 25)',
+                  marginBottom:6, fontSize:13, color:'oklch(0.30 0.08 25)' }}>
+                  {q.q.length > 80 ? q.q.slice(0, 80) + '…' : q.q}
+                </div>
+              ))}
+            </div>
+          )}
+          <Btn variant="solid" color={color} onClick={back}>Retour au menu</Btn>
+        </PaperCard>
+      </div>
+    );
+  }
+
+  const q = questions[qi];
+  const correctText = q.choices[q.correct];
+
+  return (
+    <div style={{ maxWidth:700, margin:'0 auto', padding:'24px 20px 80px' }}>
+      <TopNav back={back} title="Mode Écriture" />
+
+      <div style={{ marginBottom:16 }}>
+        <ProgressBar value={qi + 1} max={questions.length} color={color} />
+        <div style={{ display:'flex', justifyContent:'space-between', marginTop:5,
+          fontSize:12, color:'oklch(0.50 0.02 280)', fontFamily:'var(--font-mono)' }}>
+          <span>{qi + 1} / {questions.length}</span>
+          <span>{results.filter(r => r === 'ok').length} connues · {results.filter(r => r === 'review').length} à revoir</span>
+        </div>
+      </div>
+
+      <PaperCard style={{ padding:24, marginBottom:16, background:'oklch(0.975 0.01 280)' }}>
+        {q.primary && (
+          <div style={{ display:'inline-flex', alignItems:'center', gap:4,
+            background:'oklch(0.93 0.12 75)', border:'1px solid oklch(0.80 0.14 75)',
+            borderRadius:6, padding:'2px 8px', fontSize:11, fontWeight:700,
+            color:'oklch(0.40 0.12 75)', marginBottom:10 }}>
+            ★ Référence prioritaire
+          </div>
+        )}
+        {q._src === 'ao' && (
+          <div style={{ display:'inline-flex', alignItems:'center',
+            background:'oklch(0.93 0.06 280)', border:'1px solid oklch(0.82 0.10 280)',
+            borderRadius:6, padding:'2px 10px', fontSize:11, fontWeight:700,
+            color:'oklch(0.38 0.12 280)', marginBottom:10 }}>
+            {q.sens === 'auteur→oeuvre' ? '✍ Auteur → Œuvre' : '📖 Œuvre → Auteur'}
+          </div>
+        )}
+        <div style={{ fontFamily:'var(--font-display)', fontSize:18, fontWeight:700,
+          lineHeight:1.35, color:'oklch(0.22 0.04 280)', textWrap:'balance' }}>
+          {q.q}
+        </div>
+      </PaperCard>
+
+      {!revealed ? (
+        <div>
+          <textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="Écris ta réponse ici…"
+            style={{ width:'100%', minHeight:90, padding:'14px 16px', borderRadius:12,
+              border:'2px solid oklch(0.82 0.08 160)', fontSize:14,
+              fontFamily:'var(--font-ui)', lineHeight:1.55, resize:'vertical',
+              outline:'none', boxSizing:'border-box', background:'oklch(0.975 0.02 160)',
+              color:'oklch(0.22 0.04 280)', transition:'border .15s' }}
+          />
+          <div style={{ marginTop:12 }}>
+            <Btn variant="solid" color={color} onClick={() => setRevealed(true)}>
+              Révéler la réponse →
+            </Btn>
+          </div>
+        </div>
+      ) : (
+        <div>
+          {input.trim() && (
+            <div style={{ padding:'14px 18px', borderRadius:12, marginBottom:12,
+              background:'oklch(0.97 0.01 280)', border:'1.5px solid oklch(0.86 0.005 280)',
+              fontSize:13.5, lineHeight:1.6 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.48 0.02 280)',
+                textTransform:'uppercase', letterSpacing:1, marginBottom:6 }}>Ta réponse</div>
+              <div style={{ color:'oklch(0.28 0.02 280)' }}>{input}</div>
+            </div>
+          )}
+          <div style={{ padding:'16px 18px', borderRadius:12, marginBottom:14,
+            background:'oklch(0.95 0.05 145)', border:'1.5px solid oklch(0.75 0.12 145)',
+            fontSize:13.5, lineHeight:1.65, color:'oklch(0.22 0.08 145)' }}>
+            <div style={{ fontSize:11, fontWeight:700, color:'oklch(0.35 0.12 145)',
+              textTransform:'uppercase', letterSpacing:1, marginBottom:8 }}>Réponse attendue</div>
+            <div style={{ fontWeight:700, marginBottom:6 }}>{correctText}</div>
+            <div>{q.expl}</div>
+          </div>
+          <div style={{ fontSize:13, fontWeight:700, color:'oklch(0.40 0.04 280)', marginBottom:10 }}>
+            Est-ce que tu avais les éléments essentiels ?
+          </div>
+          <div style={{ display:'flex', gap:10 }}>
+            <button onClick={() => assess('ok')} style={{
+              flex:1, padding:'13px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.15 145)',
+              background:'oklch(0.93 0.07 145)', color:'oklch(0.25 0.12 145)',
+              fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+            }}>Je savais ✓</button>
+            <button onClick={() => assess('review')} style={{
+              flex:1, padding:'13px 16px', borderRadius:10, border:'2px solid oklch(0.65 0.12 25)',
+              background:'oklch(0.93 0.06 25)', color:'oklch(0.28 0.10 25)',
+              fontFamily:'var(--font-ui)', fontWeight:700, fontSize:14, cursor:'pointer',
+            }}>À revoir ✗</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function shuffleChoices(q) {
+  const pairs = q.choices.map((text, i) => ({ text, i }));
+  shuffle(pairs);
+  return {
+    ...q,
+    choices: pairs.map(p => p.text),
+    correct: pairs.findIndex(p => p.i === q.correct),
+    correctText: q.choices[q.correct],
+  };
 }
 
 window.CultureQuizView = CultureQuizView;

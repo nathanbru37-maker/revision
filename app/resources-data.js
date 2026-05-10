@@ -180,6 +180,13 @@ window.RESOURCES = [
     why: "Source scientifique récente (Psychologie Magazine, septembre 2025) qui valide l'intuition courante. À citer pour défendre la valeur de l'animal de compagnie.",
     useFor: ["Bienfaits animal de compagnie", "Médiation animale", "Enfance"]
   },
+  { id: 'harlow', cat: 'Sciences', icon: '🔬', title: 'Harry Harlow', subtitle: "Psychologue — expériences d'attachement sur les singes rhésus", date: '1905-1981',
+    color: 'azure',
+    summary: "Place des bébés singes rhésus face à deux mères artificielles : l'une en fil de fer avec biberon, l'autre en tissu doux sans nourriture. Les bébés passent 17h/24 avec la mère en tissu — prouvant que le besoin d'attachement affectif prime sur la nourriture. Ses expériences d'isolation (pit of despair) montrent les ravages du manque d'affection sur le développement psychologique.",
+    why: "Révolutionne la psychologie de l'attachement (théorie de Bowlby). Prouve que les primates ont une vie émotionnelle complexe — contre la thèse cartésienne de l'animal-machine. Ses expériences sont aussi parmi les plus controversées éthiquement : des bébés animaux délibérément traumatisés au nom de la science.",
+    quote: "« The Nature of Love » (1958) — l'amour ne se réduit pas à la nourriture : c'est contact, chaleur, sécurité.",
+    useFor: ["Expérimentation animale (éthique)", "Vie émotionnelle des primates", "Théorie de l'attachement"]
+  },
 
   // ========== DROIT & PHILOSOPHIE ==========
   { id: 'singer', cat: 'Philosophie', icon: '💭', title: 'Peter Singer — La Libération animale', subtitle: "Essai philosophique", date: '1975',
