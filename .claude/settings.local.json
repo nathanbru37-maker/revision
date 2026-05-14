@@ -22,7 +22,8 @@
       "Bash(py *)",
       "PowerShell(Get-Command *)",
       "PowerShell(Add-Type -AssemblyName \"Microsoft.Office.Interop.Word\" 2>&1; Write-Host \"Word available\")",
-      "PowerShell($word = New-Object -ComObject Word.Application; $word.Visible = $false; $doc = $word.Documents.Open\\(\"C:\\\\Users\\\\natha\\\\Downloads\\\\cugex\\\\Fichier \\(19\\).pdf\"\\); $text = $doc.Content.Text; $doc.Close\\($false\\); $word.Quit\\(\\); $text)"
+      "PowerShell($word = New-Object -ComObject Word.Application; $word.Visible = $false; $doc = $word.Documents.Open\\(\"C:\\\\Users\\\\natha\\\\Downloads\\\\cugex\\\\Fichier \\(19\\).pdf\"\\); $text = $doc.Content.Text; $doc.Close\\($false\\); $word.Quit\\(\\); $text)",
+      "PowerShell(node -e \"require\\('./app/cejm-data.js'\\); console.log\\('OK — T:', CEJM_THEMES.length, '| Flash:', CEJM_FLASH.length, '| Fill:', CEJM_FILL.length, '| Match:', CEJM_MATCH.length, '| Essai:', CEJM_ESSAI.length\\)\")"
     ]
   }
 }
